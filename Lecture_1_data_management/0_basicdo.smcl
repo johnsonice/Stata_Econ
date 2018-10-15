@@ -1,0 +1,963 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\CHuang\Box Sync\IMF_Training_Courses\Stata\Lecture_1\0_basicdo.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Oct 2018, 14:27:48
+{txt}
+{com}. 
+.         *************************************************
+.         *** basic command for loading packages and data**
+.         *************************************************
+.         * Basic commands for using and get data info
+.         sysuse uslifeexp
+{txt}(U.S. life expectancy, 1900-1999)
+
+{com}.         describe
+
+{txt}Contains data from {res}C:\Program Files (x86)\Stata15\ado\base/u/uslifeexp.dta
+{txt}  obs:{res}           100                          U.S. life expectancy, 1900-1999
+{txt} vars:{res}            10                          30 Mar 2016 04:31
+{txt} size:{res}         3,800                          (_dta has notes)
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:year           }{txt}{bind: int     }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Year{p_end}
+{p 0 48}{bind:le             }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}life expectancy{p_end}
+{p 0 48}{bind:le_male        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Life expectancy, males{p_end}
+{p 0 48}{bind:le_female      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Life expectancy, females{p_end}
+{p 0 48}{bind:le_w           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Life expectancy, whites{p_end}
+{p 0 48}{bind:le_wmale       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Life expectancy, white males{p_end}
+{p 0 48}{bind:le_wfemale     }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Life expectancy, white females{p_end}
+{p 0 48}{bind:le_b           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Life expectancy, blacks{p_end}
+{p 0 48}{bind:le_bmale       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Life expectancy, black males{p_end}
+{p 0 48}{bind:le_bfemale     }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Life expectancy, black females{p_end}
+{txt}{hline}
+Sorted by: {res}year
+{txt}
+{com}.         summarize
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}year {c |}{res}        100      1949.5    29.01149       1900       1999
+{txt}{space 10}le {c |}{res}        100      64.829    9.158628       39.1       76.7
+{txt}{space 5}le_male {c |}{res}        100      62.302    8.436369       36.6       73.9
+{txt}{space 3}le_female {c |}{res}        100       67.51    9.834987       42.2       79.5
+{txt}{space 8}le_w {c |}{res}        100      65.688    9.171269       39.8       77.3
+{txt}{hline 13}{c +}{hline 57}
+{space 4}le_wmale {c |}{res}        100      63.143    8.503954       37.1       74.6
+{txt}{space 2}le_wfemale {c |}{res}        100      68.434    9.797167       43.2         80
+{txt}{space 8}le_b {c |}{res}        100      56.033    12.48937       30.8       71.4
+{txt}{space 4}le_bmale {c |}{res}        100      53.589     11.4569       29.1       67.8
+{txt}{space 2}le_bfemale {c |}{res}        100      58.567     13.5409       32.5       74.8
+{txt}
+{com}.         notes
+{res}
+_dta:
+{txt}{p 2 6}
+1.
+National Vital Statistics Report, Vol. 50 No. 6, 21mar2000
+{p_end}
+{p 2 6}
+2.
+Source: http://www.cdc.gov/nchs/fastats/pdf/nvsr50_06tb12.pdf
+{p_end}
+{p 2 6}
+3.
+Table 12. Estimated life expectancy at birth in years, by race and sex.
+{p_end}
+{p 2 6}
+4.
+For selected years, life table values shown are estimates.
+{p_end}
+
+{com}. 
+.         // average life expectancy, 1900-1949
+.         summarize le if year<1950
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 10}le {c |}{res}         50       57.22    6.650426       39.1         68
+{txt}
+{com}. 
+.         // look at adopath, where stata will look for packages
+.         adopath
+{txt}  [1]  (BASE)      "{res}C:\Program Files (x86)\Stata15\ado\base/{txt}"
+  [2]  (SITE)      "{res}C:\Program Files (x86)\Stata15\ado\site/{txt}"
+  [3]              "{res}.{txt}"
+  [4]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
+  [5]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [6]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}.         
+.         // use ssc to download and install packages 
+.         //search mvsumm
+.         ssc install mvsumm
+{txt}checking {hilite:mvsumm} consistency and verifying not already installed...
+all files already exist and are up to date.
+
+{com}.         ssc install bcuse  // bcuse if for downloading some specific data for this course
+{txt}checking {hilite:bcuse} consistency and verifying not already installed...
+all files already exist and are up to date.
+
+{com}.         
+.         // other ssc functions
+.         ssc new // newly listed stata packages
+{txt}(contacting http://repec.org)
+
+{com}.         ssc hot // most popular packages
+{txt}{res}
+{txt}{title:Top 10 packages at SSC}
+
+{txt}        Aug 2018   
+  Rank   # hits    Package       Author(s)
+  {hline 70}
+     1  331271.0    {net "describe findname, from(http://fmwww.bc.edu/RePEc/bocode/f)":findname    }  Nicholas J. Cox                         
+     2  19504.6    {net "describe outreg2, from(http://fmwww.bc.edu/RePEc/bocode/o)":outreg2     }  Roy Wada                                
+     3  18223.6    {net "describe estout, from(http://fmwww.bc.edu/RePEc/bocode/e)":estout      }  Ben Jann                                
+     4  11066.7    {net "describe distinct, from(http://fmwww.bc.edu/RePEc/bocode/d)":distinct    }  Gary Longton, Nicholas J. Cox           
+     5   7746.3    {net "describe winsor, from(http://fmwww.bc.edu/RePEc/bocode/w)":winsor      }  Nicholas J. Cox                         
+     6   6881.7    {net "describe winsor2, from(http://fmwww.bc.edu/RePEc/bocode/w)":winsor2     }  Lian Yu-jun                             
+     7   6598.7    {net "describe ivreg2, from(http://fmwww.bc.edu/RePEc/bocode/i)":ivreg2      }  Mark E Schaffer, Steven Stillman,       
+{space 33}  Christopher F Baum                      
+     8   6579.3    {net "describe ivreg210, from(http://fmwww.bc.edu/RePEc/bocode/i)":ivreg210    }  Mark E Schaffer, Steven Stillman,       
+{space 33}  Christopher F Baum                      
+     9   6571.1    {net "describe ivreg28, from(http://fmwww.bc.edu/RePEc/bocode/i)":ivreg28     }  Mark E Schaffer, Steven Stillman,       
+{space 33}  Christopher F Baum                      
+    10   6561.8    {net "describe ivreg29, from(http://fmwww.bc.edu/RePEc/bocode/i)":ivreg29     }  Christopher F Baum, Mark E Schaffer,    
+{space 33}  Steven Stillman                         
+  {hline 70}
+  (Click on package name for description)
+
+{com}.         
+.         // user defined functions 
+.         
+.         program define say
+{txt}  1{com}.                 display "Stata says hello!"
+{txt}  2{com}.         end
+{txt}
+{com}.         //exit
+.         
+.         // now you type say, stata will print out 
+.         say
+Stata says hello!
+{txt}
+{com}.         // you can also put that in an ado file and put in ado path, then stata will load them in memeory
+.         // remember to put "exit" in the end 
+. 
+.         
+.         ***********************************
+.         *** some other basic commands *****
+.         ***********************************
+.         // list observations
+.         sysuse auto, clear
+{txt}(1978 Automobile Data)
+
+{com}.         sort price
+{txt}
+{com}.         list make price in 1/5
+{txt}
+     {c TLC}{hline 16}{c -}{hline 7}{c TRC}
+     {c |} {res}make             price {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 7}{c RT}
+  1. {c |} {res}Merc. Zephyr     3,291 {txt}{c |}
+  2. {c |} {res}Chev. Chevette   3,299 {txt}{c |}
+  3. {c |} {res}Chev. Monza      3,667 {txt}{c |}
+  4. {c |} {res}Toyota Corolla   3,748 {txt}{c |}
+  5. {c |} {res}Subaru           3,798 {txt}{c |}
+     {c BLC}{hline 16}{c -}{hline 7}{c BRC}
+
+{com}.         list make price in -5/l                         // list in reverse order 
+{txt}
+     {c TLC}{hline 18}{c -}{hline 8}{c TRC}
+     {c |} {res}make                price {txt}{c |}
+     {c LT}{hline 18}{c -}{hline 8}{c RT}
+ 70. {c |} {res}Peugeot 604        12,990 {txt}{c |}
+ 71. {c |} {res}Linc. Versailles   13,466 {txt}{c |}
+ 72. {c |} {res}Linc. Mark V       13,594 {txt}{c |}
+ 73. {c |} {res}Cad. Eldorado      14,500 {txt}{c |}
+ 74. {c |} {res}Cad. Seville       15,906 {txt}{c |}
+     {c BLC}{hline 18}{c -}{hline 8}{c BRC}
+
+{com}.         list make price if foreign == 1         // list with criteria
+{txt}
+     {c TLC}{hline 16}{c -}{hline 8}{c TRC}
+     {c |} {res}make              price {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 8}{c RT}
+  4. {c |} {res}Toyota Corolla    3,748 {txt}{c |}
+  5. {c |} {res}Subaru            3,798 {txt}{c |}
+  8. {c |} {res}Renault Le Car    3,895 {txt}{c |}
+ 11. {c |} {res}Mazda GLC         3,995 {txt}{c |}
+ 20. {c |} {res}Fiat Strada       4,296 {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 8}{c RT}
+ 26. {c |} {res}Honda Civic       4,499 {txt}{c |}
+ 29. {c |} {res}Datsun 210        4,589 {txt}{c |}
+ 31. {c |} {res}VW Rabbit         4,697 {txt}{c |}
+ 38. {c |} {res}Datsun 510        5,079 {txt}{c |}
+ 44. {c |} {res}VW Diesel         5,397 {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 8}{c RT}
+ 46. {c |} {res}Toyota Corona     5,719 {txt}{c |}
+ 49. {c |} {res}Honda Accord      5,799 {txt}{c |}
+ 51. {c |} {res}Toyota Celica     5,899 {txt}{c |}
+ 53. {c |} {res}Datsun 200        6,229 {txt}{c |}
+ 54. {c |} {res}Audi Fox          6,295 {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 8}{c RT}
+ 58. {c |} {res}VW Scirocco       6,850 {txt}{c |}
+ 59. {c |} {res}VW Dasher         7,140 {txt}{c |}
+ 61. {c |} {res}Datsun 810        8,129 {txt}{c |}
+ 63. {c |} {res}Audi 5000         9,690 {txt}{c |}
+ 64. {c |} {res}BMW 320i          9,735 {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 8}{c RT}
+ 69. {c |} {res}Volvo 260        11,995 {txt}{c |}
+ 70. {c |} {res}Peugeot 604      12,990 {txt}{c |}
+     {c BLC}{hline 16}{c -}{hline 8}{c BRC}
+
+{com}.         list make price if price > 10000 & !mi(price)   // note, stata treate missing as large number, need to be excluded
+{txt}
+     {c TLC}{hline 19}{c -}{hline 8}{c TRC}
+     {c |} {res}make                 price {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c RT}
+ 65. {c |} {res}Olds Toronado       10,371 {txt}{c |}
+ 66. {c |} {res}Buick Riviera       10,372 {txt}{c |}
+ 67. {c |} {res}Cad. Deville        11,385 {txt}{c |}
+ 68. {c |} {res}Linc. Continental   11,497 {txt}{c |}
+ 69. {c |} {res}Volvo 260           11,995 {txt}{c |}
+     {c LT}{hline 19}{c -}{hline 8}{c RT}
+ 70. {c |} {res}Peugeot 604         12,990 {txt}{c |}
+ 71. {c |} {res}Linc. Versailles    13,466 {txt}{c |}
+ 72. {c |} {res}Linc. Mark V        13,594 {txt}{c |}
+ 73. {c |} {res}Cad. Eldorado       14,500 {txt}{c |}
+ 74. {c |} {res}Cad. Seville        15,906 {txt}{c |}
+     {c BLC}{hline 19}{c -}{hline 8}{c BRC}
+
+{com}.         
+.         
+.         //save and load file 
+.         compress 
+  {txt}variable {bf}mpg{sf} was {bf}{res}int{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}rep78{sf} was {bf}{res}int{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}trunk{sf} was {bf}{res}int{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}turn{sf} was {bf}{res}int{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}make{sf} was {bf}{res}str18{sf}{txt} now {bf}{res}str17{sf}
+{txt}  (370 bytes saved)
+
+{com}.         save 0_basic.dta, replace
+{txt}file 0_basic.dta saved
+
+{com}.         use 0_basic.dta,clear
+{txt}(1978 Automobile Data)
+
+{com}.         
+.         
+.         ***********************************
+.         **** loops and macro **************
+.         ***********************************
+.         sysuse auto
+{txt}(1978 Automobile Data)
+
+{com}.         sum price  
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 7}price {c |}{res}         74    6165.257    2949.496       3291      15906
+{txt}
+{com}.         return list   // summary statistics are listed as scalars 
+
+{txt}scalars:
+                  r(N) =  {res}74
+              {txt}r(sum_w) =  {res}74
+               {txt}r(mean) =  {res}6165.256756756757
+                {txt}r(Var) =  {res}8699525.974268789
+                 {txt}r(sd) =  {res}2949.495884768919
+                {txt}r(min) =  {res}3291
+                {txt}r(max) =  {res}15906
+                {txt}r(sum) =  {res}456229
+{txt}
+{com}.         
+.         sum price,detail
+
+                            {txt}Price
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}     3291           3291
+{txt} 5%    {res}     3748           3299
+{txt}10%    {res}     3895           3667       {txt}Obs         {res}         74
+{txt}25%    {res}     4195           3748       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}   5006.5                      {txt}Mean          {res} 6165.257
+                        {txt}Largest       Std. Dev.     {res} 2949.496
+{txt}75%    {res}     6342          13466
+{txt}90%    {res}    11385          13594       {txt}Variance      {res}  8699526
+{txt}95%    {res}    13466          14500       {txt}Skewness      {res} 1.653434
+{txt}99%    {res}    15906          15906       {txt}Kurtosis      {res} 4.819188
+{txt}
+{com}.         return list   // more detailed return list
+
+{txt}scalars:
+                  r(N) =  {res}74
+              {txt}r(sum_w) =  {res}74
+               {txt}r(mean) =  {res}6165.256756756757
+                {txt}r(Var) =  {res}8699525.97426879
+                 {txt}r(sd) =  {res}2949.49588476892
+           {txt}r(skewness) =  {res}1.653433511704859
+           {txt}r(kurtosis) =  {res}4.819187528464004
+                {txt}r(sum) =  {res}456229
+                {txt}r(min) =  {res}3291
+                {txt}r(max) =  {res}15906
+                 {txt}r(p1) =  {res}3291
+                 {txt}r(p5) =  {res}3748
+                {txt}r(p10) =  {res}3895
+                {txt}r(p25) =  {res}4195
+                {txt}r(p50) =  {res}5006.5
+                {txt}r(p75) =  {res}6342
+                {txt}r(p90) =  {res}11385
+                {txt}r(p95) =  {res}13466
+                {txt}r(p99) =  {res}15906
+{txt}
+{com}.         
+.         reg price mpg turn
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        74
+{txt}{hline 13}{c +}{hline 34}   F(2, 71)        = {res}    10.08
+{txt}       Model {c |} {res}  140436412         2  70218206.1   {txt}Prob > F        ={res}    0.0001
+{txt}    Residual {c |} {res}  494628984        71  6966605.41   {txt}R-squared       ={res}    0.2211
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1992
+{txt}       Total {c |} {res}  635065396        73  8699525.97   {txt}Root MSE        =   {res} 2639.4
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       price{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}mpg {c |}{col 14}{res}{space 2}-259.6967{col 26}{space 2} 76.84886{col 37}{space 1}   -3.38{col 46}{space 3}0.001{col 54}{space 4} -412.929{col 67}{space 3}-106.4645
+{txt}{space 8}turn {c |}{col 14}{res}{space 2}-38.03857{col 26}{space 2} 101.0624{col 37}{space 1}   -0.38{col 46}{space 3}0.708{col 54}{space 4}-239.5513{col 67}{space 3} 163.4742
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 13204.27{col 26}{space 2} 5316.186{col 37}{space 1}    2.48{col 46}{space 3}0.015{col 54}{space 4}   2604.1{col 67}{space 3} 23804.45
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.         ereturn list // list estimation results
+
+{txt}scalars:
+                  e(N) =  {res}74
+               {txt}e(df_m) =  {res}2
+               {txt}e(df_r) =  {res}71
+                  {txt}e(F) =  {res}10.07925697225162
+                 {txt}e(r2) =  {res}.2211369303011632
+               {txt}e(rmse) =  {res}2639.432781261897
+                {txt}e(mss) =  {res}140436412.2388277
+                {txt}e(rss) =  {res}494628983.8827938
+               {txt}e(r2_a) =  {res}.1991971255209143
+                 {txt}e(ll) =  {res}-686.4658279521207
+               {txt}e(ll_0) =  {res}-695.7128688987767
+               {txt}e(rank) =  {res}3
+
+{txt}macros:
+            e(cmdline) : "{res}regress price mpg turn{txt}"
+              e(title) : "{res}Linear regression{txt}"
+          e(marginsok) : "{res}XB default{txt}"
+                e(vce) : "{res}ols{txt}"
+             e(depvar) : "{res}price{txt}"
+                e(cmd) : "{res}regress{txt}"
+         e(properties) : "{res}b V{txt}"
+            e(predict) : "{res}regres_p{txt}"
+          e(estat_cmd) : "{res}regress_estat{txt}"
+
+matrices:
+                  e(b) : {res} 1 x 3
+                  {txt}e(V) : {res} 3 x 3
+
+{txt}functions:
+             e(sample)   
+
+{com}.         matlist e(b)  // print out coefficient matrix
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:mpg}{space 1}{space 1}{ralign 9:turn}{space 1}{space 1}{ralign 9:_cons}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}{hline 11}{hline 11}
+{space 0}{space 0}{ralign 12:y1}{space 1}{c |}{space 1}{ralign 9:{res:{sf:-259.6967}}}{space 1}{space 1}{ralign 9:{res:{sf:-38.03857}}}{space 1}{space 1}{ralign 9:{res:{sf: 13204.27}}}{space 1}
+
+{com}.         matlist e(V)  // print out variance - covariance matrix
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:mpg}{space 1}{space 1}{ralign 9:turn}{space 1}{space 1}{ralign 9:_cons}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}{hline 11}{hline 11}
+{space 0}{space 0}{ralign 12:mpg}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 5905.748}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:turn}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 5585.584}}}{space 1}{space 1}{ralign 9:{res:{sf: 10213.61}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:_cons}{space 1}{c |}{space 1}{ralign 9:{res:{sf:-347237.3}}}{space 1}{space 1}{ralign 9:{res:{sf:-523913.8}}}{space 1}{space 1}{ralign 9:{res:{sf: 2.83e+07}}}{space 1}
+
+{com}.         
+.         // local macro
+.         local george 2 
+{txt}
+{com}.         local paul = `george' + 2  // when use =, it will evaluate the operation right way
+{txt}
+{com}.         display "`paul'"
+{res}4
+{txt}
+{com}.         
+.         // forvalues
+.         forvalues i=1/10{c -(}
+{txt}  2{com}.                 display "`i'"  
+{txt}  3{com}.         {c )-}
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+{txt}
+{com}.         
+.         // foreach  
+.         // loop through variables 
+.         sysuse lifeexp, clear
+{txt}(Life expectancy, 1998)
+
+{com}.         foreach v of varlist popgrowth lexp gnppc {c -(}
+{txt}  2{com}.                 summarize `v', detail
+{txt}  3{com}.         {c )-}
+
+                    {txt}Avg. annual % growth
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      -.5            -.5
+{txt} 5%    {res}      -.2            -.4
+{txt}10%    {res}        0            -.3       {txt}Obs         {res}         68
+{txt}25%    {res}       .3            -.2       {txt}Sum of Wgt. {res}         68
+
+{txt}50%    {res}      .55                      {txt}Mean          {res} .9720588
+                        {txt}Largest       Std. Dev.     {res} .9311918
+{txt}75%    {res}      1.8            2.8
+{txt}90%    {res}      2.4            2.8       {txt}Variance      {res} .8671181
+{txt}95%    {res}      2.8            2.9       {txt}Skewness      {res} .5976222
+{txt}99%    {res}        3              3       {txt}Kurtosis      {res} 2.188138
+
+                  {txt}Life expectancy at birth
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}       54             54
+{txt} 5%    {res}       65             62
+{txt}10%    {res}       67             64       {txt}Obs         {res}         68
+{txt}25%    {res}       69             65       {txt}Sum of Wgt. {res}         68
+
+{txt}50%    {res}       73                      {txt}Mean          {res} 72.27941
+                        {txt}Largest       Std. Dev.     {res} 4.715315
+{txt}75%    {res}       76             79
+{txt}90%    {res}       78             79       {txt}Variance      {res}  22.2342
+{txt}95%    {res}       79             79       {txt}Skewness      {res}-.9080208
+{txt}99%    {res}       79             79       {txt}Kurtosis      {res} 4.783111
+
+                       {txt}GNP per capita
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      370            370
+{txt} 5%    {res}      410            380
+{txt}10%    {res}      740            380       {txt}Obs         {res}         63
+{txt}25%    {res}     1360            410       {txt}Sum of Wgt. {res}         63
+
+{txt}50%    {res}     3360                      {txt}Mean          {res} 8674.857
+                        {txt}Largest       Std. Dev.     {res} 10634.68
+{txt}75%    {res}    14100          29240
+{txt}90%    {res}    25580          33040       {txt}Variance      {res} 1.13e+08
+{txt}95%    {res}    29240          34310       {txt}Skewness      {res}  1.30502
+{txt}99%    {res}    39980          39980       {txt}Kurtosis      {res} 3.382168
+{txt}
+{com}.         
+.         // levels of 
+.         levelsof region, local(regid)
+{txt}1 2 3
+
+{com}.         foreach c of local regid{c -(}
+{txt}  2{com}.                 local rr: label region `c'                             // get the value label 
+{txt}  3{com}.                         regress lexp gnppc if region == `c'
+{txt}  4{com}.                         twoway (scatter lexp gnppc if region ==`c') ///
+>                         (lfit lexp gnppc if region ==`c', ///
+>                         ti(Region: `rr') name(fig`c', replace))
+{txt}  5{com}.         {c )-}
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        41
+{txt}{hline 13}{c +}{hline 34}   F(1, 39)        = {res}    79.67
+{txt}       Model {c |} {res} 461.935023         1  461.935023   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 226.113758        39  5.79778866   {txt}R-squared       ={res}    0.6714
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.6629
+{txt}       Total {c |} {res}  688.04878        40  17.2012195   {txt}Root MSE        =   {res} 2.4079
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        lexp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}gnppc {c |}{col 14}{res}{space 2} .0002881{col 26}{space 2} .0000323{col 37}{space 1}    8.93{col 46}{space 3}0.000{col 54}{space 4} .0002229{col 67}{space 3} .0003534
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 70.17417{col 26}{space 2} .5114375{col 37}{space 1}  137.21{col 46}{space 3}0.000{col 54}{space 4} 69.13969{col 67}{space 3} 71.20865
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        12
+{txt}{hline 13}{c +}{hline 34}   F(1, 10)        = {res}     4.77
+{txt}       Model {c |} {res} 155.251546         1  155.251546   {txt}Prob > F        ={res}    0.0539
+{txt}    Residual {c |} {res}  325.66512        10   32.566512   {txt}R-squared       ={res}    0.3228
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2551
+{txt}       Total {c |} {res} 480.916667        11   43.719697   {txt}Root MSE        =   {res} 5.7067
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        lexp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}gnppc {c |}{col 14}{res}{space 2} .0004207{col 26}{space 2} .0001927{col 37}{space 1}    2.18{col 46}{space 3}0.054{col 54}{space 4}-8.62e-06{col 67}{space 3} .0008501
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 67.96926{col 26}{space 2}  1.99257{col 37}{space 1}   34.11{col 46}{space 3}0.000{col 54}{space 4} 63.52953{col 67}{space 3} 72.40898
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        10
+{txt}{hline 13}{c +}{hline 34}   F(1, 8)         = {res}     5.12
+{txt}       Model {c |} {res} 51.5576585         1  51.5576585   {txt}Prob > F        ={res}    0.0535
+{txt}    Residual {c |} {res} 80.5423415         8  10.0677927   {txt}R-squared       ={res}    0.3903
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.3141
+{txt}       Total {c |} {res}      132.1         9  14.6777778   {txt}Root MSE        =   {res}  3.173
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        lexp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}gnppc {c |}{col 14}{res}{space 2} .0010616{col 26}{space 2} .0004691{col 37}{space 1}    2.26{col 46}{space 3}0.053{col 54}{space 4}-.0000202{col 67}{space 3} .0021434
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 66.43039{col 26}{space 2} 1.982617{col 37}{space 1}   33.51{col 46}{space 3}0.000{col 54}{space 4} 61.85847{col 67}{space 3} 71.00231
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.         
+.         // another example
+.         sysuse lifeexp, clear
+{txt}(Life expectancy, 1998)
+
+{com}.         levelsof region, local(regid)
+{txt}1 2 3
+
+{com}.         local alleps
+{txt}
+{com}.         foreach c of local regid{c -(}
+{txt}  2{com}.                 regress lexp gnppc if region ==`c'
+{txt}  3{com}.                 predict double eps`c' if e(sample), residual
+{txt}  4{com}.                 local alleps "`alleps' eps`c'"     // generate a variable list with all new variables generated 
+{txt}  5{com}.         {c )-}
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        41
+{txt}{hline 13}{c +}{hline 34}   F(1, 39)        = {res}    79.67
+{txt}       Model {c |} {res} 461.935023         1  461.935023   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 226.113758        39  5.79778866   {txt}R-squared       ={res}    0.6714
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.6629
+{txt}       Total {c |} {res}  688.04878        40  17.2012195   {txt}Root MSE        =   {res} 2.4079
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        lexp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}gnppc {c |}{col 14}{res}{space 2} .0002881{col 26}{space 2} .0000323{col 37}{space 1}    8.93{col 46}{space 3}0.000{col 54}{space 4} .0002229{col 67}{space 3} .0003534
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 70.17417{col 26}{space 2} .5114375{col 37}{space 1}  137.21{col 46}{space 3}0.000{col 54}{space 4} 69.13969{col 67}{space 3} 71.20865
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}(27 missing values generated)
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}        12
+{txt}{hline 13}{c +}{hline 34}   F(1, 10)        = {res}     4.77
+{txt}       Model {c |} {res} 155.251546         1  155.251546   {txt}Prob > F        ={res}    0.0539
+{txt}    Residual {c |} {res}  325.66512        10   32.566512   {txt}R-squared       ={res}    0.3228
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2551
+{txt}       Total {c |} {res} 480.916667        11   43.719697   {txt}Root MSE        =   {res} 5.7067
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        lexp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}gnppc {c |}{col 14}{res}{space 2} .0004207{col 26}{space 2} .0001927{col 37}{space 1}    2.18{col 46}{space 3}0.054{col 54}{space 4}-8.62e-06{col 67}{space 3} .0008501
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 67.96926{col 26}{space 2}  1.99257{col 37}{space 1}   34.11{col 46}{space 3}0.000{col 54}{space 4} 63.52953{col 67}{space 3} 72.40898
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}(56 missing values generated)
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}        10
+{txt}{hline 13}{c +}{hline 34}   F(1, 8)         = {res}     5.12
+{txt}       Model {c |} {res} 51.5576585         1  51.5576585   {txt}Prob > F        ={res}    0.0535
+{txt}    Residual {c |} {res} 80.5423415         8  10.0677927   {txt}R-squared       ={res}    0.3903
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.3141
+{txt}       Total {c |} {res}      132.1         9  14.6777778   {txt}Root MSE        =   {res}  3.173
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        lexp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}gnppc {c |}{col 14}{res}{space 2} .0010616{col 26}{space 2} .0004691{col 37}{space 1}    2.26{col 46}{space 3}0.053{col 54}{space 4}-.0000202{col 67}{space 3} .0021434
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 66.43039{col 26}{space 2} 1.982617{col 37}{space 1}   33.51{col 46}{space 3}0.000{col 54}{space 4} 61.85847{col 67}{space 3} 71.00231
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}(58 missing values generated)
+
+{com}.         
+.         *************************
+.         ** prefix ***************
+.         *************************
+.         // prefix command : by
+.         sysuse census, clear
+{txt}(1980 Census data by state)
+
+{com}.         gen large = (pop > 5000000) if !mi(pop)
+{txt}
+{com}.         bys region large: summ pop medage  // by sort, with multiple categories 
+
+{txt}{hline}
+-> region = NE, large = 0
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}pop {c |}{res}          5     1322291     1022965     511456    3107576
+{txt}{space 6}medage {c |}{res}          5       30.74    1.121606       29.4         32
+
+{txt}{hline}
+-> region = NE, large = 1
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}pop {c |}{res}          4    1.06e+07     5295380    5737037   1.76e+07
+{txt}{space 6}medage {c |}{res}          4       31.85    .4509245       31.2       32.2
+
+{txt}{hline}
+-> region = N Cntrl, large = 0
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}pop {c |}{res}          8     2736153     1710645     652717    4916686
+{txt}{space 6}medage {c |}{res}          8     29.5625    .7998885       28.3       30.9
+
+{txt}{hline}
+-> region = N Cntrl, large = 1
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}pop {c |}{res}          4     9244113     2662600    5490224   1.14e+07
+{txt}{space 6}medage {c |}{res}          4       29.45    .5446711       28.8       29.9
+
+{txt}{hline}
+-> region = South, large = 0
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}pop {c |}{res}         11     3096984     1193482     594338    4591120
+{txt}{space 6}medage {c |}{res}         11    29.35455    1.142246       27.4       30.6
+
+{txt}{hline}
+-> region = South, large = 1
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}pop {c |}{res}          5     8133441     3864116    5346818   1.42e+07
+{txt}{space 6}medage {c |}{res}          5        30.2    2.599038       28.2       34.7
+
+{txt}{hline}
+-> region = West, large = 0
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}pop {c |}{res}         12     1625382     1180969     401851    4132156
+{txt}{space 6}medage {c |}{res}         12       28.15     1.78351       24.2       30.2
+
+{txt}{hline}
+-> region = West, large = 1
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}pop {c |}{res}          1    2.37e+07           .   2.37e+07   2.37e+07
+{txt}{space 6}medage {c |}{res}          1        29.9           .       29.9       29.9
+
+{txt}
+{com}. 
+.         
+.         // _n and _N will change under by 
+.         /* // the code block will not work here as we don't have the data 
+>                 sysuse census, clear
+>                 sort famid age
+>                 by famid: generate famsize = _N   // number of obs with in that group
+>                 by famid: generate birthorder = _N - _n + 1 
+>         */
+.         
+.         
+.         // deal with missing data 
+.         // mvdecode mvencode to convert missing values that is represented in a different form
+.         
+.         
+.         // display format 
+.         format varname %9.2f  // %9.2f would display a two decimal place real number 
+{err}variable {bf}varname{sf} not found
+{txt}{search r(111), local:r(111);}
+
+end of do-file
+
+{search r(111), local:r(111);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\2\STD65b4_000000.tmp"
+{txt}
+{com}.         bcuse census2c, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/census2c.dta
+{txt}  obs:{res}            21                          1980 Census data for NE and NC states
+{txt} vars:{res}             7                          23 Aug 2016 11:36
+{txt} size:{res}         1,050                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str13   }{bind:{txt}%-13s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:region         }{txt}{bind: byte    }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Population, '000{p_end}
+{p 0 48}{bind:popurb         }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Urban population, '000{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age, years{p_end}
+{p 0 48}{bind:marr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Marriages, '000{p_end}
+{p 0 48}{bind:divr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Divorces, '000{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}. 
+{txt}end of do-file
+
+{com}. clear
+
+. cls
+
+. do "C:\Users\CHuang\AppData\Local\Temp\2\STD65b4_000000.tmp"
+{txt}
+{com}.         bcuse census2c, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/census2c.dta
+{txt}  obs:{res}            21                          1980 Census data for NE and NC states
+{txt} vars:{res}             7                          23 Aug 2016 11:36
+{txt} size:{res}         1,050                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str13   }{bind:{txt}%-13s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:region         }{txt}{bind: byte    }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Population, '000{p_end}
+{p 0 48}{bind:popurb         }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Urban population, '000{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age, years{p_end}
+{p 0 48}{bind:marr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Marriages, '000{p_end}
+{p 0 48}{bind:divr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Divorces, '000{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\2\STD65b4_000000.tmp"
+{txt}
+{com}.         bcuse census2c, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/census2c.dta
+{txt}  obs:{res}            21                          1980 Census data for NE and NC states
+{txt} vars:{res}             7                          23 Aug 2016 11:36
+{txt} size:{res}         1,050                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str13   }{bind:{txt}%-13s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:region         }{txt}{bind: byte    }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Population, '000{p_end}
+{p 0 48}{bind:popurb         }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Urban population, '000{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age, years{p_end}
+{p 0 48}{bind:marr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Marriages, '000{p_end}
+{p 0 48}{bind:divr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Divorces, '000{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}.         gen size = irecode(pop, 1000,4000,8000,20000)
+{txt}
+{com}.         label define popsize 0 "<1m" 1 "1-4m" 2 "4-8m" 3 ">8m"  // defind value label 
+{txt}
+{com}.         label values size popsize  // assigin label
+{txt}
+{com}.         tabstat pop, stat(mean min max) by(size)
+
+{txt}Summary for variables: pop
+{col 6}by categories of: size 
+
+{ralign 6:size} {...}
+{c |}      mean       min       max
+{hline 7}{c +}{hline 30}
+{ralign 6:<1m} {...}
+{c |}{...}
+ {res}  744.541   511.456   947.154
+{txt}{ralign 6:1-4m} {...}
+{c |}{...}
+ {res}  2215.91   1124.66  3107.576
+{txt}{ralign 6:4-8m} {...}
+{c |}{...}
+ {res} 5381.751   4075.97  7364.823
+{txt}{ralign 6:>8m} {...}
+{c |}{...}
+ {res} 12181.64  9262.078  17558.07
+{txt}{hline 7}{c +}{hline 30}
+{ralign 6:Total} {...}
+{c |}{...}
+ {res} 5142.903   511.456  17558.07
+{txt}{hline 7}{c BT}{hline 30}
+
+{com}.         
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\2\STD65b4_000000.tmp"
+{txt}
+{com}.         bcuse census2c, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/census2c.dta
+{txt}  obs:{res}            21                          1980 Census data for NE and NC states
+{txt} vars:{res}             7                          23 Aug 2016 11:36
+{txt} size:{res}         1,050                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str13   }{bind:{txt}%-13s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:region         }{txt}{bind: byte    }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Population, '000{p_end}
+{p 0 48}{bind:popurb         }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Urban population, '000{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age, years{p_end}
+{p 0 48}{bind:marr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Marriages, '000{p_end}
+{p 0 48}{bind:divr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Divorces, '000{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}.         xtile medagequart = medage, nq(4)
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. br
+
+. do "C:\Users\CHuang\AppData\Local\Temp\2\STD65b4_000000.tmp"
+{txt}
+{com}.         bcuse census2c, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/census2c.dta
+{txt}  obs:{res}            21                          1980 Census data for NE and NC states
+{txt} vars:{res}             7                          23 Aug 2016 11:36
+{txt} size:{res}         1,050                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str13   }{bind:{txt}%-13s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:region         }{txt}{bind: byte    }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Population, '000{p_end}
+{p 0 48}{bind:popurb         }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Urban population, '000{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age, years{p_end}
+{p 0 48}{bind:marr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Marriages, '000{p_end}
+{p 0 48}{bind:divr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Divorces, '000{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}.         xtile medagequart = medage, nq(4)     // generage medagequart with quantile labels 
+{txt}
+{com}.         tabstat medage, stat(n mean min max) by(medagequart)
+
+{txt}Summary for variables: medage
+{col 6}by categories of: medagequart (4 quantiles of medage)
+
+{ralign 11:medagequart} {...}
+{c |}         N      mean       min       max
+{hline 12}{c +}{hline 40}
+{ralign 11:1} {...}
+{c |}{...}
+ {res}        7  29.02857      28.3      29.4
+{txt}{ralign 11:2} {...}
+{c |}{...}
+ {res}        4    29.875      29.7        30
+{txt}{ralign 11:3} {...}
+{c |}{...}
+ {res}        5     30.54      30.1      31.2
+{txt}{ralign 11:4} {...}
+{c |}{...}
+ {res}        5        32      31.8      32.2
+{txt}{hline 12}{c +}{hline 40}
+{ralign 11:Total} {...}
+{c |}{...}
+ {res}       21  30.25714      28.3      32.2
+{txt}{hline 12}{c BT}{hline 40}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\2\STD65b4_000000.tmp"
+{txt}
+{com}.         bcuse census2c, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/census2c.dta
+{txt}  obs:{res}            21                          1980 Census data for NE and NC states
+{txt} vars:{res}             7                          23 Aug 2016 11:36
+{txt} size:{res}         1,050                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str13   }{bind:{txt}%-13s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:region         }{txt}{bind: byte    }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Population, '000{p_end}
+{p 0 48}{bind:popurb         }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Urban population, '000{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age, years{p_end}
+{p 0 48}{bind:marr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Marriages, '000{p_end}
+{p 0 48}{bind:divr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Divorces, '000{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}.         egen nrCensus = rowmean(pop*)
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\2\STD65b4_000000.tmp"
+{txt}
+{com}.         bcuse census2c, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/census2c.dta
+{txt}  obs:{res}            21                          1980 Census data for NE and NC states
+{txt} vars:{res}             7                          23 Aug 2016 11:36
+{txt} size:{res}         1,050                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str13   }{bind:{txt}%-13s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:region         }{txt}{bind: byte    }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Population, '000{p_end}
+{p 0 48}{bind:popurb         }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Urban population, '000{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age, years{p_end}
+{p 0 48}{bind:marr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Marriages, '000{p_end}
+{p 0 48}{bind:divr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Divorces, '000{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}.         bysort size: egen avgpop = mean(pop) // generage grop mean by group 
+{err}variable {bf}size{sf} not found
+{txt}{search r(111), local:r(111);}
+
+end of do-file
+
+{search r(111), local:r(111);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\2\STD65b4_000000.tmp"
+{txt}
+{com}.         bcuse census2c, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/census2c.dta
+{txt}  obs:{res}            21                          1980 Census data for NE and NC states
+{txt} vars:{res}             7                          23 Aug 2016 11:36
+{txt} size:{res}         1,050                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str13   }{bind:{txt}%-13s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:region         }{txt}{bind: byte    }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Population, '000{p_end}
+{p 0 48}{bind:popurb         }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}1980 Urban population, '000{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age, years{p_end}
+{p 0 48}{bind:marr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Marriages, '000{p_end}
+{p 0 48}{bind:divr           }{txt}{bind: double  }{bind:{txt}%8.1f     }{space 1}{bind:         }{bind:  }{res}{res}Divorces, '000{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}.         gen size = irecode(pop, 1000,4000,8000,20000)
+{txt}
+{com}.         bysort size: egen avgpop = mean(pop) // generage grop mean by group 
+{txt}
+{com}.         egen nrCensus = rowmean(pop*)   // generate row-wise mean with certain varialbes 
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. 
