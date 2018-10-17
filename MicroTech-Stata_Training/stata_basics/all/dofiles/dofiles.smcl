@@ -1,0 +1,125 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\dofiles\dofiles.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 Mar 2016, 16:08:03
+
+{com}. net from "http://www.stata.com/training/08mar2016"
+{s6hlp}
+.-
+http://www.stata.com/training/08mar2016/
+^Washington, DC Training^
+.-
+
+The following packages are for the Washington, DC training, March, 2016.
+
+To install any of these packages, click their links and follow the
+instructions for the package.
+
+distribution-date 08mar2016
+Copyright 2016 StataCorp LP
+{smcl}
+
+PACKAGES you could -{hilite:net describe}-:
+{s6hlp}
+    @net:describe gettingdata!gettingdata@       
+    @net:describe datatodataset!datatodataset@     
+    @net:describe makingdata!makingdata@        
+    @net:describe combiningdata!combiningdata@     
+    @net:describe reshapingdata!reshapingdata@     
+    @net:describe dofiles!dofiles@           
+    @net:describe subscripting!subscripting@      
+    @net:describe looping!looping@           
+{smcl}
+{.-}
+
+{com}. doedit
+
+. projman do lesson
+{err}invalid 'lesson' 
+{txt}{search r(198), local:r(198);}
+
+{com}. projman dolesson
+
+. cls
+
+. net from "http://www.stata.com/training/08mar2016"
+{s6hlp}
+.-
+http://www.stata.com/training/08mar2016/
+^Washington, DC Training^
+.-
+
+The following packages are for the Washington, DC training, March, 2016.
+
+To install any of these packages, click their links and follow the
+instructions for the package.
+
+distribution-date 08mar2016
+Copyright 2016 StataCorp LP
+{smcl}
+
+PACKAGES you could -{hilite:net describe}-:
+{s6hlp}
+    @net:describe gettingdata!gettingdata@       
+    @net:describe datatodataset!datatodataset@     
+    @net:describe makingdata!makingdata@        
+    @net:describe combiningdata!combiningdata@     
+    @net:describe reshapingdata!reshapingdata@     
+    @net:describe dofiles!dofiles@           
+    @net:describe subscripting!subscripting@      
+    @net:describe looping!looping@           
+{smcl}
+{.-}
+
+{com}. cd ..
+{res}C:\Users\microtek\Desktop\stata_startup\dayone
+
+{com}. mkdir subscripting
+
+. net from "http://www.stata.com/training/08mar2016"
+{s6hlp}
+.-
+http://www.stata.com/training/08mar2016/
+^Washington, DC Training^
+.-
+
+The following packages are for the Washington, DC training, March, 2016.
+
+To install any of these packages, click their links and follow the
+instructions for the package.
+
+distribution-date 08mar2016
+Copyright 2016 StataCorp LP
+{smcl}
+
+PACKAGES you could -{hilite:net describe}-:
+{s6hlp}
+    @net:describe gettingdata!gettingdata@       
+    @net:describe datatodataset!datatodataset@     
+    @net:describe makingdata!makingdata@        
+    @net:describe combiningdata!combiningdata@     
+    @net:describe reshapingdata!reshapingdata@     
+    @net:describe dofiles!dofiles@           
+    @net:describe subscripting!subscripting@      
+    @net:describe looping!looping@           
+{smcl}
+{.-}
+
+{com}. log using subscripting
+{err}log file already open
+{txt}{search r(604), local:r(604);}
+
+{com}. log use subscripting
+{err}use invalid
+{txt}{search r(198), local:r(198);}
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\dofiles\dofiles.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 9 Mar 2016, 16:48:57
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

@@ -1,0 +1,958 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\reshapingdata\reshapingdata.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 Mar 2016, 09:58:19
+
+{com}. net from "http://www.stata.com/training/08mar2016"
+{s6hlp}
+.-
+http://www.stata.com/training/08mar2016/
+^Washington, DC Training^
+.-
+
+The following packages are for the Washington, DC training, March, 2016.
+
+To install any of these packages, click their links and follow the
+instructions for the package.
+
+distribution-date 08mar2016
+Copyright 2016 StataCorp LP
+{smcl}
+
+PACKAGES you could -{hilite:net describe}-:
+{s6hlp}
+    @net:describe gettingdata!gettingdata@       
+    @net:describe datatodataset!datatodataset@     
+    @net:describe makingdata!makingdata@        
+    @net:describe combiningdata!combiningdata@     
+    @net:describe reshapingdata!reshapingdata@     
+    @net:describe dofiles!dofiles@           
+    @net:describe subscripting!subscripting@      
+    @net:describe looping!looping@           
+{smcl}
+{.-}
+
+{com}. ls
+{txt}  <dir>   3/09/16  9:58  {res}.                 
+{txt}  <dir>   3/09/16  9:58  {res}..                
+{txt}   2.1k   3/09/16  9:58  {res}longone.dta       
+{txt}   2.1k   3/09/16  9:58  {res}longstring.dta    
+{txt}   0.0k   3/09/16  9:58  {res}reshapingdata.smcl
+{txt}   2.2k   3/09/16  9:58  {res}wideone.dta       
+{txt}   2.2k   3/09/16  9:58  {res}widestring.dta    
+
+{com}. use "longone.dta"
+{txt}(Fake growth data in long form)
+
+{com}. list spe(id)
+{err}variable {bf}spe{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. list sepby(id)
+{err}variable {bf}sepby{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. list, sepby(id)
+{txt}
+     {c TLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c TRC}
+     {c |} {res} id      sex     birthdt   birthwt   visitnum     visitdt     wt {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  1. {c |} {res}101     Male   08jan2009      1766          1   11jan2009   1823 {txt}{c |}
+  2. {c |} {res}101     Male   08jan2009      1766          2   21jan2009   2011 {txt}{c |}
+  3. {c |} {res}101     Male   08jan2009      1766          3   05feb2009   2293 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  4. {c |} {res}102   Female   20dec2008      3301          1   22dec2008   3338 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  5. {c |} {res}103   Female   30dec2008      1454          1   04jan2009   1549 {txt}{c |}
+  6. {c |} {res}103   Female   30dec2008      1454          2   22jan2009   1892 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  7. {c |} {res}104   Female   21dec2008      3139          1   29dec2008   3298 {txt}{c |}
+  8. {c |} {res}104   Female   21dec2008      3139          2   31dec2008   3338 {txt}{c |}
+  9. {c |} {res}104   Female   21dec2008      3139          3   02jan2009   3377 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+ 10. {c |} {res}105   Female   11jan2009      4133          1   20jan2009   4306 {txt}{c |}
+ 11. {c |} {res}105   Female   11jan2009      4133          2   03feb2009   4575 {txt}{c |}
+ 12. {c |} {res}105   Female   11jan2009      4133          3   15feb2009   4805 {txt}{c |}
+     {c BLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c BRC}
+
+{com}. br
+
+. clear
+
+. use "wideone.dta"
+{txt}(Fake growth data in wide form)
+
+{com}. reshape long visitdt wt, i(id) j(visitnum)
+{txt}(note: j = 1 2 3)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}       5   {txt}->{res}      15
+{txt}Number of variables            {res}      10   {txt}->{res}       7
+{txt}j variable (3 values)                     ->   {res}visitnum
+{txt}xij variables:
+             {res}visitdt1 visitdt2 visitdt3   {txt}->   {res}visitdt
+                            wt1 wt2 wt3   {txt}->   {res}wt
+{txt}{hline 77}
+
+{com}. br
+
+. reshape wide
+{txt}(note: j = 1 2 3)
+
+Data{col 36}long{col 43}->{col 48}wide
+{hline 77}
+Number of obs.                 {res}      15   {txt}->{res}       5
+{txt}Number of variables            {res}       7   {txt}->{res}      10
+{txt}j variable (3 values)          {res}visitnum   {txt}->   (dropped)
+xij variables:
+                                {res}visitdt   {txt}->   {res}visitdt1 visitdt2 visitdt3
+                                     wt   {txt}->   {res}wt1 wt2 wt3
+{txt}{hline 77}
+
+{com}. br
+
+. reshape long visitdt wt, i(id) j(visitnum)
+{txt}(note: j = 1 2 3)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}       5   {txt}->{res}      15
+{txt}Number of variables            {res}      10   {txt}->{res}       7
+{txt}j variable (3 values)                     ->   {res}visitnum
+{txt}xij variables:
+             {res}visitdt1 visitdt2 visitdt3   {txt}->   {res}visitdt
+                            wt1 wt2 wt3   {txt}->   {res}wt
+{txt}{hline 77}
+
+{com}. clear
+
+. use "longone.dtaP
+{err}{p 0 4 2}
+file longone.dtaP
+not found
+{p_end}
+{txt}{search r(601), local:r(601);}
+
+{com}. use "longone.dta"
+{txt}(Fake growth data in long form)
+
+{com}. reshape wide visitdt wt, i(id) j(visitnum)
+{txt}(note: j = 1 2 3)
+
+Data{col 36}long{col 43}->{col 48}wide
+{hline 77}
+Number of obs.                 {res}      12   {txt}->{res}       5
+{txt}Number of variables            {res}       7   {txt}->{res}      10
+{txt}j variable (3 values)          {res}visitnum   {txt}->   (dropped)
+xij variables:
+                                {res}visitdt   {txt}->   {res}visitdt1 visitdt2 visitdt3
+                                     wt   {txt}->   {res}wt1 wt2 wt3
+{txt}{hline 77}
+
+{com}. br
+
+. clear
+
+. use "longone.dta"
+{txt}(Fake growth data in long form)
+
+{com}. drop visitnum
+
+. br
+
+. gen obsnum = _n
+
+. rename obsnum visitnum
+{res}
+{com}. list, sepby(id)
+{txt}
+     {c TLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c TRC}
+     {c |} {res} id      sex     birthdt   birthwt     visitdt     wt   visitnum {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+  1. {c |} {res}101     Male   08jan2009      1766   11jan2009   1823          1 {txt}{c |}
+  2. {c |} {res}101     Male   08jan2009      1766   21jan2009   2011          2 {txt}{c |}
+  3. {c |} {res}101     Male   08jan2009      1766   05feb2009   2293          3 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+  4. {c |} {res}102   Female   20dec2008      3301   22dec2008   3338          4 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+  5. {c |} {res}103   Female   30dec2008      1454   04jan2009   1549          5 {txt}{c |}
+  6. {c |} {res}103   Female   30dec2008      1454   22jan2009   1892          6 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+  7. {c |} {res}104   Female   21dec2008      3139   29dec2008   3298          7 {txt}{c |}
+  8. {c |} {res}104   Female   21dec2008      3139   31dec2008   3338          8 {txt}{c |}
+  9. {c |} {res}104   Female   21dec2008      3139   02jan2009   3377          9 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+ 10. {c |} {res}105   Female   11jan2009      4133   20jan2009   4306         10 {txt}{c |}
+ 11. {c |} {res}105   Female   11jan2009      4133   03feb2009   4575         11 {txt}{c |}
+ 12. {c |} {res}105   Female   11jan2009      4133   15feb2009   4805         12 {txt}{c |}
+     {c BLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c BRC}
+
+{com}. drop visitnum
+
+. bys id (visitdt): gen visitnum = _n
+
+. list, sepby(id)
+{txt}
+     {c TLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c TRC}
+     {c |} {res} id      sex     birthdt   birthwt     visitdt     wt   visitnum {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+  1. {c |} {res}101     Male   08jan2009      1766   11jan2009   1823          1 {txt}{c |}
+  2. {c |} {res}101     Male   08jan2009      1766   21jan2009   2011          2 {txt}{c |}
+  3. {c |} {res}101     Male   08jan2009      1766   05feb2009   2293          3 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+  4. {c |} {res}102   Female   20dec2008      3301   22dec2008   3338          1 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+  5. {c |} {res}103   Female   30dec2008      1454   04jan2009   1549          1 {txt}{c |}
+  6. {c |} {res}103   Female   30dec2008      1454   22jan2009   1892          2 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+  7. {c |} {res}104   Female   21dec2008      3139   29dec2008   3298          1 {txt}{c |}
+  8. {c |} {res}104   Female   21dec2008      3139   31dec2008   3338          2 {txt}{c |}
+  9. {c |} {res}104   Female   21dec2008      3139   02jan2009   3377          3 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c RT}
+ 10. {c |} {res}105   Female   11jan2009      4133   20jan2009   4306          1 {txt}{c |}
+ 11. {c |} {res}105   Female   11jan2009      4133   03feb2009   4575          2 {txt}{c |}
+ 12. {c |} {res}105   Female   11jan2009      4133   15feb2009   4805          3 {txt}{c |}
+     {c BLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 11}{c -}{hline 6}{c -}{hline 10}{c BRC}
+
+{com}. edit
+
+. replace sex = 0 in 6
+{txt}(1 real change made)
+
+{com}. replace sex = 1 in 6
+{txt}(1 real change made)
+
+{com}. replace sex = 0 in 8
+{txt}(1 real change made)
+
+{com}. reshape wide visitdt wt, i(id) j(visitnum)
+{txt}(note: j = 1 2 3)
+{err}variable {bf:sex} not constant within {bf:id}
+{p 4 4 2}
+Your data are currently long.
+You are performing a {bf:reshape wide}.
+You typed something like
+
+{p 8 8 2}
+{bf:. reshape wide a b, i(id) j(visitnum)}
+
+{p 4 4 2}
+There are variables other than {bf:a},
+{bf:b}, {bf:id}, {bf:visitnum} in your data.
+They must be constant within
+{bf:id} because that is the only way they can
+fit into wide data without loss of information.
+
+{p 4 4 2}
+The variable or variables listed above are
+not constant within {bf:id}.
+Perhaps the values are in error.
+Type {bf:reshape error} for a list of the
+problem observations.
+
+{p 4 4 2}
+Either that, or the values vary because
+they should vary, in which
+case you must either add the variables
+to the list of xij variables to be reshaped,
+or {bf:drop} them.
+{p_end}
+{txt}{search r(9), local:r(9);}
+
+{com}. reshape error
+{txt}(note: j = 1 2 3)
+
+i ({res}id{txt}) indicates the top-level grouping such as subject id.
+j ({res}visitnum{txt}) indicates the subgrouping such as time.
+xij variables are {res}visitdt wt{txt}.
+Thus, the following variable(s) should be constant within i:
+      {res}sex birthdt birthwt
+
+sex{txt} not constant within i ({res}id{txt}) for 1 value of i:
+
+     {c TLC}{hline 5}{c -}{hline 10}{c -}{hline 8}{c TRC}
+     {c |} {res} id   visitnum      sex {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 10}{c -}{hline 8}{c RT}
+  7. {c |} {res}104          1   Female {txt}{c |}
+  8. {c |} {res}104          2     Male {txt}{c |}
+  9. {c |} {res}104          3   Female {txt}{c |}
+     {c BLC}{hline 5}{c -}{hline 10}{c -}{hline 8}{c BRC}
+
+(data now sorted by id visitnum)
+
+{com}. clear
+
+. use "wideone.dta"
+{txt}(Fake growth data in wide form)
+
+{com}. egen meanwt_wide = rowmean(wt*)
+
+. br
+
+. clear
+
+. use "longone.dta"
+{txt}(Fake growth data in long form)
+
+{com}. br
+
+. list, sepby(id)
+{txt}
+     {c TLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c TRC}
+     {c |} {res} id      sex     birthdt   birthwt   visitnum     visitdt     wt {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  1. {c |} {res}101     Male   08jan2009      1766          1   11jan2009   1823 {txt}{c |}
+  2. {c |} {res}101     Male   08jan2009      1766          2   21jan2009   2011 {txt}{c |}
+  3. {c |} {res}101     Male   08jan2009      1766          3   05feb2009   2293 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  4. {c |} {res}102   Female   20dec2008      3301          1   22dec2008   3338 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  5. {c |} {res}103   Female   30dec2008      1454          1   04jan2009   1549 {txt}{c |}
+  6. {c |} {res}103   Female   30dec2008      1454          2   22jan2009   1892 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  7. {c |} {res}104   Female   21dec2008      3139          1   29dec2008   3298 {txt}{c |}
+  8. {c |} {res}104   Female   21dec2008      3139          2   31dec2008   3338 {txt}{c |}
+  9. {c |} {res}104   Female   21dec2008      3139          3   02jan2009   3377 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+ 10. {c |} {res}105   Female   11jan2009      4133          1   20jan2009   4306 {txt}{c |}
+ 11. {c |} {res}105   Female   11jan2009      4133          2   03feb2009   4575 {txt}{c |}
+ 12. {c |} {res}105   Female   11jan2009      4133          3   15feb2009   4805 {txt}{c |}
+     {c BLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c BRC}
+
+{com}. bys id: egen meanwt_long= mean(wt)
+
+. clear
+
+. use "widestring.dta"
+{txt}(Fake growth data in wide form with messy variable names)
+
+{com}. clear
+
+. cd ..
+{res}C:\Users\microtek\Desktop\stata_startup\dayone
+
+{com}. mkdir summaries
+
+. cd summaries
+{res}C:\Users\microtek\Desktop\stata_startup\dayone\summaries
+
+{com}. net from "http://www.stata.com/training/08mar2016"
+{s6hlp}
+.-
+http://www.stata.com/training/08mar2016/
+^Washington, DC Training^
+.-
+
+The following packages are for the Washington, DC training, March, 2016.
+
+To install any of these packages, click their links and follow the
+instructions for the package.
+
+distribution-date 08mar2016
+Copyright 2016 StataCorp LP
+{smcl}
+
+PACKAGES you could -{hilite:net describe}-:
+{s6hlp}
+    @net:describe gettingdata!gettingdata@       
+    @net:describe datatodataset!datatodataset@     
+    @net:describe makingdata!makingdata@        
+    @net:describe combiningdata!combiningdata@     
+    @net:describe reshapingdata!reshapingdata@     
+    @net:describe dofiles!dofiles@           
+    @net:describe subscripting!subscripting@      
+    @net:describe looping!looping@           
+{smcl}
+{.-}
+
+{com}. webuse lbw
+{txt}(Hosmer & Lemeshow data)
+
+{com}. codebook
+
+{txt}{hline}
+{res}id{right:identification code}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}int{txt})
+
+{col 18}range:  [{res}4{txt},{res}226{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}189{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 19}mean:{res}{col 26} 121.079
+{txt}{col 15}std. dev:{res}{col 26} 63.3036
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}      30{col 37}      68{col 47}     123{col 57}     176{col 67}     208
+
+{txt}{hline}
+{res}low{right:birthweight<2500g}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}1{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}2{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 21}{res}       130{col 33}0
+{col 21}        59{col 33}1
+
+{txt}{hline}
+{res}age{right:age of mother}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}14{txt},{res}45{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}24{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 19}mean:{res}{col 26} 23.2381
+{txt}{col 15}std. dev:{res}{col 26} 5.29868
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}      17{col 37}      19{col 47}      23{col 57}      26{col 67}      31
+
+{txt}{hline}
+{res}lwt{right:weight at last menstrual period}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}int{txt})
+
+{col 18}range:  [{res}80{txt},{res}250{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}76{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 19}mean:{res}{col 26}  129.82
+{txt}{col 15}std. dev:{res}{col 26} 30.5752
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}      98{col 37}     110{col 47}     121{col 57}     140{col 67}     170
+
+{txt}{hline}
+{res}race{right:race}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+{ralign 22:label}:  {res:race}
+
+{col 18}range:  [{res}1{txt},{res}3{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}3{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.   Numeric  Label
+{col 21}{res}        96{col 33}       1{col 43}{txt}white
+{col 21}{res}        26{col 33}       2{col 43}{txt}black
+{col 21}{res}        67{col 33}       3{col 43}{txt}other
+
+{txt}{hline}
+{res}smoke{right:smoked during pregnancy}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+{ralign 22:label}:  {res:smoke}
+
+{col 18}range:  [{res}0{txt},{res}1{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}2{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.   Numeric  Label
+{col 21}{res}       115{col 33}       0{col 43}{txt}nonsmoker
+{col 21}{res}        74{col 33}       1{col 43}{txt}smoker
+
+{txt}{hline}
+{res}ptl{right:premature labor history (count)}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}3{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}4{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 21}{res}       159{col 33}0
+{col 21}        24{col 33}1
+{col 21}         5{col 33}2
+{col 21}         1{col 33}3
+
+{txt}{hline}
+{res}ht{right:has history of hypertension}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}1{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}2{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 21}{res}       177{col 33}0
+{col 21}        12{col 33}1
+
+{txt}{hline}
+{res}ui{right:presence, uterine irritability}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}1{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}2{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 21}{res}       161{col 33}0
+{col 21}        28{col 33}1
+
+{txt}{hline}
+{res}ftv{right:number of visits to physician during 1st trimester}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}6{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}6{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 21}{res}       100{col 33}0
+{col 21}        47{col 33}1
+{col 21}        30{col 33}2
+{col 21}         7{col 33}3
+{col 21}         4{col 33}4
+{col 21}         1{col 33}6
+
+{txt}{hline}
+{res}bwt{right:birthweight (grams)}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}int{txt})
+
+{col 18}range:  [{res}709{txt},{res}4990{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}133{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 19}mean:{res}{col 26} 2944.29
+{txt}{col 15}std. dev:{res}{col 26} 729.016
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}    1970{col 37}    2414{col 47}    2977{col 57}    3475{col 67}    3884
+
+{com}. su
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 10}id {c |}{res}        189    121.0794    63.30363          4        226
+{txt}{space 9}low {c |}{res}        189    .3121693    .4646093          0          1
+{txt}{space 9}age {c |}{res}        189     23.2381    5.298678         14         45
+{txt}{space 9}lwt {c |}{res}        189    129.8201    30.57515         80        250
+{txt}{space 8}race {c |}{res}        189    1.846561    .9183422          1          3
+{txt}{hline 13}{c +}{hline 57}
+{space 7}smoke {c |}{res}        189    .3915344    .4893898          0          1
+{txt}{space 9}ptl {c |}{res}        189    .1957672    .4933419          0          3
+{txt}{space 10}ht {c |}{res}        189    .0634921    .2444936          0          1
+{txt}{space 10}ui {c |}{res}        189    .1481481    .3561903          0          1
+{txt}{space 9}ftv {c |}{res}        189    .7936508    1.059286          0          6
+{txt}{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}        189    2944.286     729.016        709       4990
+
+{com}. db compact table of sumary
+{err}{p 0 4 2}
+compact_table_of_sumary is not a command name
+or an abbreviation of a command name
+{p_end}
+{txt}{search r(199), local:r(199);}
+
+{com}. db tabset
+{err}{p 0 4 2}
+tabset is not a command name
+or an abbreviation of a command name
+{p_end}
+{txt}{search r(199), local:r(199);}
+
+{com}. db tabstst
+{err}{p 0 4 2}
+tabstst is not a command name
+or an abbreviation of a command name
+{p_end}
+{txt}{search r(199), local:r(199);}
+
+{com}. tabstat bwt age lwt, statistics( p25 p50 p75 )
+
+{txt}   stats {...}
+{c |}{...}
+       bwt       age       lwt
+{hline 9}{c +}{hline 30}
+{ralign 8:p25} {...}
+{c |}{...}
+ {res}     2414        19       110
+{txt}{ralign 8:p50} {...}
+{c |}{...}
+ {res}     2977        23       121
+{txt}{ralign 8:p75} {...}
+{c |}{...}
+ {res}     3475        26       140
+{txt}{hline 9}{c BT}{hline 30}
+
+{com}. tab
+{err}varlist required
+{txt}{search r(100), local:r(100);}
+
+{com}. tab race
+
+       {txt}race {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+      white {c |}{res}         96       50.79       50.79
+{txt}      black {c |}{res}         26       13.76       64.55
+{txt}      other {c |}{res}         67       35.45      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}        189      100.00
+
+{com}. tab race, detail
+{err}option {bf:detail} not allowed
+{txt}{search r(198), local:r(198);}
+
+{com}. tab race low
+
+           {txt}{c |}   birthweight<2500g
+      race {c |}         0          1 {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+     white {c |}{res}        73         23 {txt}{c |}{res}        96 
+{txt}     black {c |}{res}        15         11 {txt}{c |}{res}        26 
+{txt}     other {c |}{res}        42         25 {txt}{c |}{res}        67 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}       130         59 {txt}{c |}{res}       189 
+
+
+{com}. tab race low,row
+{txt}
+{c TLC}{hline 16}{c TRC}
+{c |} Key{col 18}{c |}
+{c LT}{hline 16}{c RT}
+{c |}{space 3}{it:frequency}{col 18}{c |}
+{c |}{space 1}{it:row percentage}{col 18}{c |}
+{c BLC}{hline 16}{c BRC}
+
+           {c |}   birthweight<2500g
+      race {c |}         0          1 {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+     white {c |}{res}        73         23 {txt}{c |}{res}        96 
+           {txt}{c |}{res}     76.04      23.96 {txt}{c |}{res}    100.00 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     black {c |}{res}        15         11 {txt}{c |}{res}        26 
+           {txt}{c |}{res}     57.69      42.31 {txt}{c |}{res}    100.00 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     other {c |}{res}        42         25 {txt}{c |}{res}        67 
+           {txt}{c |}{res}     62.69      37.31 {txt}{c |}{res}    100.00 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}       130         59 {txt}{c |}{res}       189 
+           {txt}{c |}{res}     68.78      31.22 {txt}{c |}{res}    100.00 
+
+
+{com}. tab race low,row chi2 exact
+{txt}
+{c TLC}{hline 16}{c TRC}
+{c |} Key{col 18}{c |}
+{c LT}{hline 16}{c RT}
+{c |}{space 3}{it:frequency}{col 18}{c |}
+{c |}{space 1}{it:row percentage}{col 18}{c |}
+{c BLC}{hline 16}{c BRC}
+
+{text}Enumerating sample-space combinations:
+{text}stage 3:{col 11}enumerations = 1
+{text}stage 2:{col 11}enumerations = 10
+{text}stage 1:{col 11}enumerations = 0
+
+           {c |}   birthweight<2500g
+      race {c |}         0          1 {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+     white {c |}{res}        73         23 {txt}{c |}{res}        96 
+           {txt}{c |}{res}     76.04      23.96 {txt}{c |}{res}    100.00 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     black {c |}{res}        15         11 {txt}{c |}{res}        26 
+           {txt}{c |}{res}     57.69      42.31 {txt}{c |}{res}    100.00 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     other {c |}{res}        42         25 {txt}{c |}{res}        67 
+           {txt}{c |}{res}     62.69      37.31 {txt}{c |}{res}    100.00 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}       130         59 {txt}{c |}{res}       189 
+           {txt}{c |}{res}     68.78      31.22 {txt}{c |}{res}    100.00 
+
+{txt}          Pearson chi2({res}2{txt}) = {res}  5.0048  {txt} Pr = {res}0.082
+{txt}           Fisher's exact =                 {res}0.079
+
+{com}. tab race, summarize(bwt)
+
+            {txt}{c |}   Summary of birthweight (grams)
+       race {c |}        Mean   Std. Dev.       Freq.
+{hline 12}{c +}{hline 36}
+      white {c |}  {res} 3103.0104   727.87244          96
+  {txt}    black {c |}  {res} 2719.6923   638.68388          26
+  {txt}    other {c |}  {res} 2804.0149   721.30115          67
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 2944.2857   729.01602         189
+
+{com}. tab race smoke , summarize(bwt)
+
+     {txt}Means, Standard Deviations and Frequencies of birthweight (grams)
+
+           {c |}    smoked during
+           {c |}      pregnancy
+      race {c |} nonsmoker     smoker {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+     white {c |}{res}   3428.75  2827.3846 {txt}{c |}{res} 3103.0104
+           {txt}{c |}{res} 710.09892  626.68443 {txt}{c |}{res} 727.87244
+           {txt}{c |}{res}        44         52 {txt}{c |}{res}        96
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     black {c |}{res}    2854.5       2504 {txt}{c |}{res} 2719.6923
+           {txt}{c |}{res} 621.25432  637.05677 {txt}{c |}{res} 638.68388
+           {txt}{c |}{res}        16         10 {txt}{c |}{res}        26
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     other {c |}{res} 2814.2364  2757.1667 {txt}{c |}{res} 2804.0149
+           {txt}{c |}{res}  708.2607  810.04465 {txt}{c |}{res} 721.30115
+           {txt}{c |}{res}        55         12 {txt}{c |}{res}        67
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res} 3054.9565  2772.2973 {txt}{c |}{res} 2944.2857
+           {txt}{c |}{res} 752.40901  659.80748 {txt}{c |}{res} 729.01602
+           {txt}{c |}{res}       115         74 {txt}{c |}{res}       189
+
+{com}. db table
+
+. table race smoke, contents(mean bwt sd bwt count bwt) format(%6.lf)
+{err}invalid %format
+{txt}{search r(120), local:r(120);}
+
+{com}. table race smoke, contents(mean bwt sd bwt count bwt)
+
+{txt}{hline 10}{c TT}{hline 21}
+          {c |}    smoked during    
+          {c |}      pregnancy      
+     race {c |} nonsmoker     smoker
+{hline 10}{c +}{hline 21}
+    white {c |}   {res}3428.75    2827.38
+          {txt}{c |}  {res}710.0989   626.6844
+          {txt}{c |}        {res}44         52
+          {txt}{c |} 
+    black {c |}    {res}2854.5       2504
+          {txt}{c |}  {res}621.2543   637.0568
+          {txt}{c |}        {res}16         10
+          {txt}{c |} 
+    other {c |}   {res}2814.24    2757.17
+          {txt}{c |}  {res}708.2607   810.0447
+          {txt}{c |}        {res}55         12
+{txt}{hline 10}{c BT}{hline 21}
+
+{com}. bys race smoke: summarize bwt
+
+{txt}{hline}
+-> race = white, smoke = nonsmoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         44     3428.75    710.0989       1021       4990
+
+{txt}{hline}
+-> race = white, smoke = smoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         52    2827.385    626.6844       1790       4238
+
+{txt}{hline}
+-> race = black, smoke = nonsmoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         16      2854.5    621.2543       1701       3860
+
+{txt}{hline}
+-> race = black, smoke = smoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         10        2504    637.0568       1135       3444
+
+{txt}{hline}
+-> race = other, smoke = nonsmoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         55    2814.236    708.2607       1330       4054
+
+{txt}{hline}
+-> race = other, smoke = smoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         12    2757.167    810.0446        709       3572
+
+
+{com}. bys race smoke: summarize bwt
+
+{txt}{hline}
+-> race = white, smoke = nonsmoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         44     3428.75    710.0989       1021       4990
+
+{txt}{hline}
+-> race = white, smoke = smoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         52    2827.385    626.6844       1790       4238
+
+{txt}{hline}
+-> race = black, smoke = nonsmoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         16      2854.5    621.2543       1701       3860
+
+{txt}{hline}
+-> race = black, smoke = smoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         10        2504    637.0568       1135       3444
+
+{txt}{hline}
+-> race = other, smoke = nonsmoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         55    2814.236    708.2607       1330       4054
+
+{txt}{hline}
+-> race = other, smoke = smoker
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}         12    2757.167    810.0446        709       3572
+
+
+{com}. summarize bwt
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}bwt {c |}{res}        189    2944.286     729.016        709       4990
+
+{com}. return list
+
+{txt}scalars:
+                  r(N) =  {res}189
+              {txt}r(sum_w) =  {res}189
+               {txt}r(mean) =  {res}2944.285714285714
+                {txt}r(Var) =  {res}531464.3541033434
+                 {txt}r(sd) =  {res}729.0160177275554
+                {txt}r(min) =  {res}709
+                {txt}r(max) =  {res}4990
+                {txt}r(sum) =  {res}556470
+
+{com}. di r(sum)
+{res}556470
+
+{com}. di r(mean).453.6
+{res}{err}invalid syntax
+{txt}{search r(198), local:r(198);}
+
+{com}. di r(mean)/453.6
+{res}6.4909297
+
+{com}. statsby, by(race smoke) saving(alltabdata): summarize bwt
+{txt}(running summarize on estimation sample)
+{p2colset 7 17 21 2}{...}
+
+{p2col :command:}summarize bwt{p_end}
+{p2colset 13 17 21 2}{...}
+{p2col :N:}{res:r(N)}{p_end}
+{p2colset 9 17 21 2}{...}
+{p2col :sum_w:}{res:r(sum_w)}{p_end}
+{p2colset 10 17 21 2}{...}
+{p2col :mean:}{res:r(mean)}{p_end}
+{p2colset 11 17 21 2}{...}
+{p2col :Var:}{res:r(Var)}{p_end}
+{p2colset 12 17 21 2}{...}
+{p2col :sd:}{res:r(sd)}{p_end}
+{p2colset 11 17 21 2}{...}
+{p2col :min:}{res:r(min)}{p_end}
+{p2colset 11 17 21 2}{...}
+{p2col :max:}{res:r(max)}{p_end}
+{p2colset 11 17 21 2}{...}
+{p2col :sum:}{res:r(sum)}{p_end}
+           by:  race smoke
+
+Statsby groups
+{hline 4}{c +}{hline 3} 1 {hline 3}{c +}{hline 3} 2 {hline 3}{c +}{hline 3} 3 {hline 3}{c +}{hline 3} 4 {hline 3}{c +}{hline 3} 5 
+......
+
+{com}. use "alltabdata.dta"
+{txt}(statsby: summarize)
+
+{com}. br
+
+. export excel using "alltabdata.xls", firstrow(variables)
+{res}{txt}file alltabdata.xls saved
+
+{com}. db tabstat
+
+. tabstat bwt age lwt, statistics( p25 p50 p75 ) save
+{err}variable {bf}bwt{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. wbuse lbw
+{err}command {bf}wbuse{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. webuse lbw
+{txt}(Hosmer & Lemeshow data)
+
+{com}. tabstat bwt age lwt, statistics( p25 p50 p75 ) save
+
+{txt}   stats {...}
+{c |}{...}
+       bwt       age       lwt
+{hline 9}{c +}{hline 30}
+{ralign 8:p25} {...}
+{c |}{...}
+ {res}     2414        19       110
+{txt}{ralign 8:p50} {...}
+{c |}{...}
+ {res}     2977        23       121
+{txt}{ralign 8:p75} {...}
+{c |}{...}
+ {res}     3475        26       140
+{txt}{hline 9}{c BT}{hline 30}
+
+{com}. matlist r(StatTotal)
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:bwt}{space 1}{space 1}{ralign 9:age}{space 1}{space 1}{ralign 9:lwt}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}{hline 11}{hline 11}
+{space 0}{space 0}{ralign 12:p25}{space 1}{c |}{space 1}{ralign 9:{res:{sf:     2414}}}{space 1}{space 1}{ralign 9:{res:{sf:       19}}}{space 1}{space 1}{ralign 9:{res:{sf:      110}}}{space 1}
+{space 0}{space 0}{ralign 12:p50}{space 1}{c |}{space 1}{ralign 9:{res:{sf:     2977}}}{space 1}{space 1}{ralign 9:{res:{sf:       23}}}{space 1}{space 1}{ralign 9:{res:{sf:      121}}}{space 1}
+{space 0}{space 0}{ralign 12:p75}{space 1}{c |}{space 1}{ralign 9:{res:{sf:     3475}}}{space 1}{space 1}{ralign 9:{res:{sf:       26}}}{space 1}{space 1}{ralign 9:{res:{sf:      140}}}{space 1}
+
+{com}. matlist r(StatTotal)'
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:p25}{space 1}{space 1}{ralign 9:p50}{space 1}{space 1}{ralign 9:p75}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}{hline 11}{hline 11}
+{space 0}{space 0}{ralign 12:bwt}{space 1}{c |}{space 1}{ralign 9:{res:{sf:     2414}}}{space 1}{space 1}{ralign 9:{res:{sf:     2977}}}{space 1}{space 1}{ralign 9:{res:{sf:     3475}}}{space 1}
+{space 0}{space 0}{ralign 12:age}{space 1}{c |}{space 1}{ralign 9:{res:{sf:       19}}}{space 1}{space 1}{ralign 9:{res:{sf:       23}}}{space 1}{space 1}{ralign 9:{res:{sf:       26}}}{space 1}
+{space 0}{space 0}{ralign 12:lwt}{space 1}{c |}{space 1}{ralign 9:{res:{sf:      110}}}{space 1}{space 1}{ralign 9:{res:{sf:      121}}}{space 1}{space 1}{ralign 9:{res:{sf:      140}}}{space 1}
+
+{com}. help putexcel
+
+. putexcel set tabstat.xls
+{res}
+{com}. putexcel A1 = matrix(r(StatTotal)'),names
+{res}{txt}file tabstat.xls saved
+
+{com}. putexcel A1:D1, bold hcenter
+{res}{txt}file tabstat.xls saved
+
+{com}. putexcel clear
+{res}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\reshapingdata\reshapingdata.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 9 Mar 2016, 11:49:29
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

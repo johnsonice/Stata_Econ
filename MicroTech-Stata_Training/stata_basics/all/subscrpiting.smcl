@@ -1,0 +1,87 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\subscrpiting.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 Mar 2016, 16:49:11
+
+{com}. cd subscripting
+{res}C:\Users\microtek\Desktop\stata_startup\dayone\subscripting
+
+{com}. net from "http://www.stata.com/training/08mar2016"
+{s6hlp}
+.-
+http://www.stata.com/training/08mar2016/
+^Washington, DC Training^
+.-
+
+The following packages are for the Washington, DC training, March, 2016.
+
+To install any of these packages, click their links and follow the
+instructions for the package.
+
+distribution-date 08mar2016
+Copyright 2016 StataCorp LP
+{smcl}
+
+PACKAGES you could -{hilite:net describe}-:
+{s6hlp}
+    @net:describe gettingdata!gettingdata@       
+    @net:describe datatodataset!datatodataset@     
+    @net:describe makingdata!makingdata@        
+    @net:describe combiningdata!combiningdata@     
+    @net:describe reshapingdata!reshapingdata@     
+    @net:describe dofiles!dofiles@           
+    @net:describe subscripting!subscripting@      
+    @net:describe looping!looping@           
+{smcl}
+{.-}
+
+{com}. edit
+
+. clear
+
+. set obs 8
+{txt}{p}
+number of observations (_N)  was 0,
+now 8
+{p_end}
+
+{com}. set seed 948924
+
+. gen  visitdt = 20000 + floor(runiform()*150) // get a random intiger
+{err}unknown function ()
+{txt}{search r(133), local:r(133);}
+
+{com}. gen  visitdt = 20000 + floor(runiform()*150)
+
+. format visitdt %td
+
+. sor visitdt
+
+. gen datedif = visitdt - visitdt[_n-1]
+{txt}(1 missing value generated)
+
+{com}. list
+{txt}
+     {c TLC}{hline 11}{c -}{hline 9}{c TRC}
+     {c |} {res}  visitdt   datedif {txt}{c |}
+     {c LT}{hline 11}{c -}{hline 9}{c RT}
+  1. {c |} {res}25oct2014         . {txt}{c |}
+  2. {c |} {res}21dec2014        57 {txt}{c |}
+  3. {c |} {res}07jan2015        17 {txt}{c |}
+  4. {c |} {res}08jan2015         1 {txt}{c |}
+  5. {c |} {res}08feb2015        31 {txt}{c |}
+     {c LT}{hline 11}{c -}{hline 9}{c RT}
+  6. {c |} {res}12feb2015         4 {txt}{c |}
+  7. {c |} {res}12feb2015         0 {txt}{c |}
+  8. {c |} {res}19feb2015         7 {txt}{c |}
+     {c BLC}{hline 11}{c -}{hline 9}{c BRC}
+
+{com}. clear
+
+. display date("`c_(current_date)")
+{res}{err}invalid syntax
+{txt}{search r(198), local:r(198);}
+
+{com}. exit, clear

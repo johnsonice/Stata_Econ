@@ -1,0 +1,561 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\syntax\syntax.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 8 Mar 2016, 09:55:20
+
+{com}. sysuse census
+{txt}(1980 Census data by state)
+
+{com}. coodbook
+{err}command {bf}coodbook{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. codebook
+
+{txt}{hline}
+{res}state{right:State}
+{txt}{hline}
+
+{col 19}type:  string ({res}str14{txt}), but longest is str13
+
+{col 10}unique values:  {res}50{col 51}{txt}missing "":  {res}0{txt}/{res}50
+
+{txt}{col 15}examples:  {res}"Georgia"
+{col 26}"Maryland"
+{col 26}"Nevada"
+{col 26}"S. Carolina"
+
+{txt}{col 16}warning:  variable has embedded blanks
+
+{txt}{hline}
+{res}state2{right:Two-letter state abbreviation}
+{txt}{hline}
+
+{col 19}type:  string ({res}str2{txt})
+
+{col 10}unique values:  {res}50{col 51}{txt}missing "":  {res}0{txt}/{res}50
+
+{txt}{col 15}examples:  {res}"GA"
+{col 26}"MD"
+{col 26}"NH"
+{col 26}"SC"
+
+{txt}{hline}
+{res}region{right:Census region}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}int{txt})
+{ralign 22:label}:  {res:cenreg}
+
+{col 18}range:  [{res}1{txt},{res}4{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}4{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 13}tabulation:  Freq.   Numeric  Label
+{col 21}{res}         9{col 33}       1{col 43}{txt}NE
+{col 21}{res}        12{col 33}       2{col 43}{txt}N Cntrl
+{col 21}{res}        16{col 33}       3{col 43}{txt}South
+{col 21}{res}        13{col 33}       4{col 43}{txt}West
+
+{txt}{hline}
+{res}pop{right:Population}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}long{txt})
+
+{col 18}range:  [{res}401851{txt},{res}23667902{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}50{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26} 4.5e+06
+{txt}{col 15}std. dev:{res}{col 26} 4.7e+06
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}  671743{col 37} 1.1e+06{col 47} 3.1e+06{col 57} 5.5e+06{col 67} 1.1e+07
+
+{txt}{hline}
+{res}poplt5{right:Pop, < 5 year}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}long{txt})
+
+{col 18}range:  [{res}35998{txt},{res}1708400{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}50{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26}  326278
+{txt}{col 15}std. dev:{res}{col 26}  331585
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}   55442{col 37}   93531{col 47}  227468{col 57}  361533{col 67}  767304
+
+{txt}{hline}
+{res}pop5_17{right:Pop, 5 to 17 years}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}long{txt})
+
+{col 18}range:  [{res}91796{txt},{res}4680558{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}50{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26}  945952
+{txt}{col 15}std. dev:{res}{col 26}  959373
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}  141700{col 37}  242873{col 47}  629654{col 57} 1.2e+06{col 67} 2.3e+06
+
+{txt}{hline}
+{res}pop18p{right:Pop, 18 and older}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}long{txt})
+
+{col 18}range:  [{res}271106{txt},{res}17278944{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}50{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26} 3.2e+06
+{txt}{col 15}std. dev:{res}{col 26} 3.4e+06
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}  473444{col 37}  803273{col 47} 2.2e+06{col 57} 3.9e+06{col 67} 7.9e+06
+
+{txt}{hline}
+{res}pop65p{right:Pop, 65 and older}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}long{txt})
+
+{col 18}range:  [{res}11547{txt},{res}2414250{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}50{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26}  509503
+{txt}{col 15}std. dev:{res}{col 26}  538932
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}   70953{col 37}  115906{col 47}  370495{col 57}  585384{col 67} 1.3e+06
+
+{txt}{hline}
+{res}popurban{right:Urban population}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}long{txt})
+
+{col 18}range:  [{res}172735{txt},{res}21607606{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}50{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26} 3.3e+06
+{txt}{col 15}std. dev:{res}{col 26} 4.1e+06
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}  368590{col 37}  824004{col 47} 2.2e+06{col 57} 3.4e+06{col 67} 8.2e+06
+
+{txt}{hline}
+{res}medage{right:Median age}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}float{txt})
+
+{col 18}range:  [{res}24.2{txt},{res}34.7{txt}]{col 55}units:  {res}.1
+{col 10}{txt}unique values:  {res}37{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26}   29.54
+{txt}{col 15}std. dev:{res}{col 26} 1.69344
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}    27.5{col 37}    28.7{col 47}   29.75{col 57}    30.2{col 67}   31.85
+
+{txt}{hline}
+{res}death{right:Number of deaths}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}long{txt})
+
+{col 18}range:  [{res}1604{txt},{res}186428{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}50{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26} 39474.3
+{txt}{col 15}std. dev:{res}{col 26} 41742.3
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}  5359.5{col 37}    9016{col 47} 26176.5{col 57}   47300{col 67}  103210
+
+{txt}{hline}
+{res}marriage{right:Number of marriages}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}long{txt})
+
+{col 18}range:  [{res}4437{txt},{res}210864{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}50{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26} 47701.4
+{txt}{col 15}std. dev:{res}{col 26} 45130.4
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}    7179{col 37}   14239{col 47}   36279{col 57}   57853{col 67}  109084
+
+{txt}{hline}
+{res}divorce{right:Number of divorces}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}long{txt})
+
+{col 18}range:  [{res}2142{txt},{res}133541{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}50{col 51}{txt}missing .:  {res}0{txt}/{res}50
+
+{txt}{col 19}mean:{res}{col 26} 23679.4
+{txt}{col 15}std. dev:{res}{col 26}   25094
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}  3561.5{col 37}    6596{col 47} 17112.5{col 57}   28050{col 67}   54903
+
+{com}. d
+
+{txt}Contains data from {res}C:\Program Files (x86)\Stata14\ado\base/c/census.dta
+{txt}  obs:{res}            50                          1980 Census data by state
+{txt} vars:{res}            13                          6 Apr 2014 15:43
+{txt} size:{res}         2,900                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str14   }{bind:{txt}%-14s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:state2         }{txt}{bind: str2    }{bind:{txt}%-2s      }{space 1}{bind:         }{bind:  }{res}{res}Two-letter state abbreviation{p_end}
+{p 0 48}{bind:region         }{txt}{bind: int     }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Population{p_end}
+{p 0 48}{bind:poplt5         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, < 5 year{p_end}
+{p 0 48}{bind:pop5_17        }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 5 to 17 years{p_end}
+{p 0 48}{bind:pop18p         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 18 and older{p_end}
+{p 0 48}{bind:pop65p         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 65 and older{p_end}
+{p 0 48}{bind:popurban       }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Urban population{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age{p_end}
+{p 0 48}{bind:death          }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Number of deaths{p_end}
+{p 0 48}{bind:marriage       }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Number of marriages{p_end}
+{p 0 48}{bind:divorce        }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Number of divorces{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}. d
+
+{txt}Contains data from {res}C:\Program Files (x86)\Stata14\ado\base/c/census.dta
+{txt}  obs:{res}            50                          1980 Census data by state
+{txt} vars:{res}            13                          6 Apr 2014 15:43
+{txt} size:{res}         2,900                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str14   }{bind:{txt}%-14s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:state2         }{txt}{bind: str2    }{bind:{txt}%-2s      }{space 1}{bind:         }{bind:  }{res}{res}Two-letter state abbreviation{p_end}
+{p 0 48}{bind:region         }{txt}{bind: int     }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Population{p_end}
+{p 0 48}{bind:poplt5         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, < 5 year{p_end}
+{p 0 48}{bind:pop5_17        }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 5 to 17 years{p_end}
+{p 0 48}{bind:pop18p         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 18 and older{p_end}
+{p 0 48}{bind:pop65p         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 65 and older{p_end}
+{p 0 48}{bind:popurban       }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Urban population{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age{p_end}
+{p 0 48}{bind:death          }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Number of deaths{p_end}
+{p 0 48}{bind:marriage       }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Number of marriages{p_end}
+{p 0 48}{bind:divorce        }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Number of divorces{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}. d, f
+
+{txt}Contains data from {res}C:\Program Files (x86)\Stata14\ado\base/c/census.dta
+{txt}  obs:{res}            50                          1980 Census data by state
+{txt} vars:{res}            13                          6 Apr 2014 15:43
+{txt} size:{res}         2,900                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:state          }{txt}{bind: str14   }{bind:{txt}%-14s     }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:state2         }{txt}{bind: str2    }{bind:{txt}%-2s      }{space 1}{bind:         }{bind:  }{res}{res}Two-letter state abbreviation{p_end}
+{p 0 48}{bind:region         }{txt}{bind: int     }{bind:{txt}%-8.0g    }{space 1}{bind:cenreg   }{bind:  }{res}{res}Census region{p_end}
+{p 0 48}{bind:pop            }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Population{p_end}
+{p 0 48}{bind:poplt5         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, < 5 year{p_end}
+{p 0 48}{bind:pop5_17        }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 5 to 17 years{p_end}
+{p 0 48}{bind:pop18p         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 18 and older{p_end}
+{p 0 48}{bind:pop65p         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 65 and older{p_end}
+{p 0 48}{bind:popurban       }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Urban population{p_end}
+{p 0 48}{bind:medage         }{txt}{bind: float   }{bind:{txt}%9.2f     }{space 1}{bind:         }{bind:  }{res}{res}Median age{p_end}
+{p 0 48}{bind:death          }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Number of deaths{p_end}
+{p 0 48}{bind:marriage       }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Number of marriages{p_end}
+{p 0 48}{bind:divorce        }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Number of divorces{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}. 
+. 
+. de pop*
+
+              {txt}storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:pop            }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Population{p_end}
+{p 0 48}{bind:poplt5         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, < 5 year{p_end}
+{p 0 48}{bind:pop5_17        }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 5 to 17 years{p_end}
+{p 0 48}{bind:pop18p         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 18 and older{p_end}
+{p 0 48}{bind:pop65p         }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Pop, 65 and older{p_end}
+{p 0 48}{bind:popurban       }{txt}{bind: long    }{bind:{txt}%12.0gc   }{space 1}{bind:         }{bind:  }{res}{res}Urban population{p_end}
+
+{com}. su pop-popurban
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}pop {c |}{res}         50     4518149     4715038     401851   2.37e+07
+{txt}{space 6}poplt5 {c |}{res}         50    326277.8    331585.1      35998    1708400
+{txt}{space 5}pop5_17 {c |}{res}         50    945951.6    959372.8      91796    4680558
+{txt}{space 6}pop18p {c |}{res}         50     3245920     3430531     271106   1.73e+07
+{txt}{space 6}pop65p {c |}{res}         50    509502.8    538932.4      11547    2414250
+{txt}{hline 13}{c +}{hline 57}
+{space 4}popurban {c |}{res}         50     3328253     4090178     172735   2.16e+07
+
+{com}. do "C:\Users\microtek\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}.                 summarize _all
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 7}state {c |}{res}          0
+{txt}{space 6}state2 {c |}{res}          0
+{txt}{space 6}region {c |}{res}         50        2.66    1.061574          1          4
+{txt}{space 9}pop {c |}{res}         50     4518149     4715038     401851   2.37e+07
+{txt}{space 6}poplt5 {c |}{res}         50    326277.8    331585.1      35998    1708400
+{txt}{hline 13}{c +}{hline 57}
+{space 5}pop5_17 {c |}{res}         50    945951.6    959372.8      91796    4680558
+{txt}{space 6}pop18p {c |}{res}         50     3245920     3430531     271106   1.73e+07
+{txt}{space 6}pop65p {c |}{res}         50    509502.8    538932.4      11547    2414250
+{txt}{space 4}popurban {c |}{res}         50     3328253     4090178     172735   2.16e+07
+{txt}{space 6}medage {c |}{res}         50       29.54    1.693445       24.2       34.7
+{txt}{hline 13}{c +}{hline 57}
+{space 7}death {c |}{res}         50    39474.26    41742.35       1604     186428
+{txt}{space 4}marriage {c |}{res}         50     47701.4    45130.42       4437     210864
+{txt}{space 5}divorce {c |}{res}         50    23679.44    25094.01       2142     133541
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. sort pop
+
+. list state pop in 1/5
+{txt}
+     {c TLC}{hline 11}{c -}{hline 9}{c TRC}
+     {c |} {res}state           pop {txt}{c |}
+     {c LT}{hline 11}{c -}{hline 9}{c RT}
+  1. {c |} {res}Alaska      401,851 {txt}{c |}
+  2. {c |} {res}Wyoming     469,557 {txt}{c |}
+  3. {c |} {res}Vermont     511,456 {txt}{c |}
+  4. {c |} {res}Delaware    594,338 {txt}{c |}
+  5. {c |} {res}N. Dakota   652,717 {txt}{c |}
+     {c BLC}{hline 11}{c -}{hline 9}{c BRC}
+
+{com}. do "C:\Users\microtek\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}.         list state pop in -8/-1
+{txt}
+     {c TLC}{hline 14}{c -}{hline 12}{c TRC}
+     {c |} {res}state                 pop {txt}{c |}
+     {c LT}{hline 14}{c -}{hline 12}{c RT}
+ 43. {c |} {res}Michigan        9,262,078 {txt}{c |}
+ 44. {c |} {res}Florida         9,746,324 {txt}{c |}
+ 45. {c |} {res}Ohio           10,797,630 {txt}{c |}
+ 46. {c |} {res}Illinois       11,426,518 {txt}{c |}
+ 47. {c |} {res}Pennsylvania   11,863,895 {txt}{c |}
+     {c LT}{hline 14}{c -}{hline 12}{c RT}
+ 48. {c |} {res}Texas          14,229,191 {txt}{c |}
+ 49. {c |} {res}New York       17,558,072 {txt}{c |}
+ 50. {c |} {res}California     23,667,902 {txt}{c |}
+     {c BLC}{hline 14}{c -}{hline 12}{c BRC}
+
+{com}. 
+{txt}end of do-file
+
+{com}. help gsort
+
+. do "C:\Users\microtek\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}.         gsort -pop
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\microtek\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}.         list state pop in 1/5
+{txt}
+     {c TLC}{hline 14}{c -}{hline 12}{c TRC}
+     {c |} {res}state                 pop {txt}{c |}
+     {c LT}{hline 14}{c -}{hline 12}{c RT}
+  1. {c |} {res}California     23,667,902 {txt}{c |}
+  2. {c |} {res}New York       17,558,072 {txt}{c |}
+  3. {c |} {res}Texas          14,229,191 {txt}{c |}
+  4. {c |} {res}Pennsylvania   11,863,895 {txt}{c |}
+  5. {c |} {res}Illinois       11,426,518 {txt}{c |}
+     {c BLC}{hline 14}{c -}{hline 12}{c BRC}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\microtek\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}.         summarize medage, detail
+
+                         {txt}Median age
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}     24.2           24.2
+{txt} 5%    {res}     27.1           26.1
+{txt}10%    {res}     27.5           27.1       {txt}Obs         {res}         50
+{txt}25%    {res}     28.7           27.4       {txt}Sum of Wgt. {res}         50
+
+{txt}50%    {res}    29.75                      {txt}Mean          {res}    29.54
+                        {txt}Largest       Std. Dev.     {res} 1.693445
+{txt}75%    {res}     30.2             32
+{txt}90%    {res}    31.85           32.1       {txt}Variance      {res} 2.867755
+{txt}95%    {res}     32.1           32.2       {txt}Skewness      {res}-.1178646
+{txt}99%    {res}     34.7           34.7       {txt}Kurtosis      {res} 5.013541
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\microtek\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}.         list state medage if medage < 27
+{txt}
+     {c TLC}{hline 8}{c -}{hline 8}{c TRC}
+     {c |} {res}state    medage {txt}{c |}
+     {c LT}{hline 8}{c -}{hline 8}{c RT}
+ 36. {c |} {res}Utah      24.20 {txt}{c |}
+ 50. {c |} {res}Alaska    26.10 {txt}{c |}
+     {c BLC}{hline 8}{c -}{hline 8}{c BRC}
+
+{com}. 
+{txt}end of do-file
+
+{com}. list state medage if 30<= medage & medage < 32
+{txt}
+     {c TLC}{hline 15}{c -}{hline 8}{c TRC}
+     {c |} {res}state           medage {txt}{c |}
+     {c LT}{hline 15}{c -}{hline 8}{c RT}
+  2. {c |} {res}New York         31.90 {txt}{c |}
+ 11. {c |} {res}Massachusetts    31.20 {txt}{c |}
+ 15. {c |} {res}Missouri         30.90 {txt}{c |}
+ 17. {c |} {res}Tennessee        30.10 {txt}{c |}
+ 18. {c |} {res}Maryland         30.30 {txt}{c |}
+     {c LT}{hline 15}{c -}{hline 8}{c RT}
+ 26. {c |} {res}Oklahoma         30.10 {txt}{c |}
+ 27. {c |} {res}Iowa             30.00 {txt}{c |}
+ 30. {c |} {res}Oregon           30.20 {txt}{c |}
+ 32. {c |} {res}Kansas           30.10 {txt}{c |}
+ 33. {c |} {res}Arkansas         30.60 {txt}{c |}
+     {c LT}{hline 15}{c -}{hline 8}{c RT}
+ 34. {c |} {res}W. Virginia      30.40 {txt}{c |}
+ 38. {c |} {res}Maine            30.40 {txt}{c |}
+ 40. {c |} {res}Rhode Island     31.80 {txt}{c |}
+ 42. {c |} {res}New Hampshire    30.10 {txt}{c |}
+ 43. {c |} {res}Nevada           30.20 {txt}{c |}
+     {c BLC}{hline 15}{c -}{hline 8}{c BRC}
+
+{com}. help function
+
+. list state if ustrpos(state, " ")>0
+{txt}
+     {c TLC}{hline 15}{c TRC}
+     {c |} {res}state         {txt}{c |}
+     {c LT}{hline 15}{c RT}
+  2. {c |} {res}New York      {txt}{c |}
+  9. {c |} {res}New Jersey    {txt}{c |}
+ 10. {c |} {res}N. Carolina   {txt}{c |}
+ 24. {c |} {res}S. Carolina   {txt}{c |}
+ 34. {c |} {res}W. Virginia   {txt}{c |}
+     {c LT}{hline 15}{c RT}
+ 37. {c |} {res}New Mexico    {txt}{c |}
+ 40. {c |} {res}Rhode Island  {txt}{c |}
+ 42. {c |} {res}New Hampshire {txt}{c |}
+ 45. {c |} {res}S. Dakota     {txt}{c |}
+ 46. {c |} {res}N. Dakota     {txt}{c |}
+     {c BLC}{hline 15}{c BRC}
+
+{com}. gen dth_per_1000 = 1000*death/pop
+
+. scatter dth_per_1000 medage
+{res}
+{com}. scatter dth_per_1000 medage ||lfit
+{err}varlist required
+{txt}{search r(100), local:r(100);}
+
+{com}. scatter dth_per_1000 medage || lfit dth_per_1000 medage
+{res}
+{com}. scatter dth_per_1000 medage || lfit dth_per_1000 medage,mlabel(state2)
+{res}
+{com}. scatter dth_per_1000 medage,mlabel(state2)|| lfit dth_per_1000 medage
+{res}
+{com}. su dth_per_1000
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+dth_per_1000 {c |}{res}         50    8.435983    1.302892   3.991529   10.69018
+
+{com}. su dth_per_1000
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+dth_per_1000 {c |}{res}         50    8.435983    1.302892   3.991529   10.69018
+
+{com}. su dth_per_1000 [aw=pop]
+
+{txt}    Variable {c |}     Obs      Weight        Mean   Std. Dev.       Min        Max
+{hline 13}{c +}{hline 65}
+dth_per_1000 {c |}{res}      50   225907472     8.73682   1.040095   3.991529   10.69018
+
+{com}. su dth_per_1000 [aw=pop]
+
+{txt}    Variable {c |}     Obs      Weight        Mean   Std. Dev.       Min        Max
+{hline 13}{c +}{hline 65}
+dth_per_1000 {c |}{res}      50   225907472     8.73682   1.040095   3.991529   10.69018
+
+{com}. by region: summarize dth_per_1000 [aw = pop]
+{err}not sorted
+{txt}{search r(5), local:r(5);}
+
+{com}. bys region: summarize dth_per_1000 [aw = pop]
+
+{txt}{hline}
+-> region = NE
+
+    Variable {c |}     Obs      Weight        Mean   Std. Dev.       Min        Max
+{hline 13}{c +}{hline 65}
+dth_per_1000 {c |}{res}       9    49135283    9.707179    .577783   8.248878   10.38959
+
+{txt}{hline}
+-> region = N Cntrl
+
+    Variable {c |}     Obs      Weight        Mean   Std. Dev.       Min        Max
+{hline 13}{c +}{hline 65}
+dth_per_1000 {c |}{res}      12    58865670    8.829221   .5614956   8.108547   10.03298
+
+{txt}{hline}
+-> region = South
+
+    Variable {c |}     Obs      Weight        Mean   Std. Dev.       Min        Max
+{hline 13}{c +}{hline 65}
+dth_per_1000 {c |}{res}      16    74734029    8.705633   1.038138   7.591366   10.69018
+
+{txt}{hline}
+-> region = West
+
+    Variable {c |}     Obs      Weight        Mean   Std. Dev.       Min        Max
+{hline 13}{c +}{hline 65}
+dth_per_1000 {c |}{res}      13    43172490    7.560439   .8047769   3.991529   8.470935
+
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\syntax\syntax.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 8 Mar 2016, 10:50:16
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

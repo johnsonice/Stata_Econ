@@ -1,0 +1,44 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\was.int.imf.org\citrix\Redirected\chuang\Desktop\Stata Training\2
+> .Intro_to_programming\mylog.txt
+  log type:  text
+ opened on:  15 Mar 2017, 09:58:01
+
+. *this is an example
+. 
+end of do-file
+
+. do "C:\Users\chuang\AppData\Local\Temp\40\STD00000000.tmp"
+
+. sysuse auto, clear
+(1978 Automobile Data)
+
+. graph twoway (scatter price weight) ///
+> (lfit price weight)
+
+. 
+. graph twoway (scatter price weight) /*
+> */ (lfit price weight)
+
+. 
+. #delimit; 
+delimiter now ;
+. graph twoway (scatter price weight) 
+> (lfit price weight);
+
+. #delimit cr
+delimiter now cr
+. 
+end of do-file
+
+. do "C:\Users\chuang\AppData\Local\Temp\40\STD00000000.tmp"
+
+. 
+. log close
+      name:  <unnamed>
+       log:  \\was.int.imf.org\citrix\Redirected\chuang\Desktop\Stata Training\2
+> .Intro_to_programming\mylog.txt
+  log type:  text
+ closed on:  15 Mar 2017, 09:58:39
+--------------------------------------------------------------------------------

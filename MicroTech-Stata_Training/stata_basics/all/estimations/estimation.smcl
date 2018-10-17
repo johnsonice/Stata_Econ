@@ -1,0 +1,1273 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\estimations\estimation.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 Mar 2016, 13:01:58
+
+{com}. webuse lbw
+{txt}(Hosmer & Lemeshow data)
+
+{com}. reg bwt lwt ui smoke
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(3, 185)       = {res}     9.14
+{txt}       Model {c |} {res} 12896994.4         3  4298998.13   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 87018304.2       185  470369.212   {txt}R-squared       ={res}    0.1291
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1150
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 685.83
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2}  3.33615{col 26}{space 2} 1.656444{col 37}{space 1}    2.01{col 46}{space 3}0.045{col 54}{space 4} .0682023{col 67}{space 3} 6.604098
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-514.6085{col 26}{space 2} 142.3235{col 37}{space 1}   -3.62{col 46}{space 3}0.000{col 54}{space 4}-795.3943{col 67}{space 3}-233.8227
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2}-250.1394{col 26}{space 2} 102.4701{col 37}{space 1}   -2.44{col 46}{space 3}0.016{col 54}{space 4}-452.2995{col 67}{space 3}-47.97925
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2685.363{col 26}{space 2} 229.4873{col 37}{space 1}   11.70{col 46}{space 3}0.000{col 54}{space 4} 2232.614{col 67}{space 3} 3138.112
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg bwt lwt ui smoke
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(3, 185)       = {res}     9.14
+{txt}       Model {c |} {res} 12896994.4         3  4298998.13   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 87018304.2       185  470369.212   {txt}R-squared       ={res}    0.1291
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1150
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 685.83
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2}  3.33615{col 26}{space 2} 1.656444{col 37}{space 1}    2.01{col 46}{space 3}0.045{col 54}{space 4} .0682023{col 67}{space 3} 6.604098
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-514.6085{col 26}{space 2} 142.3235{col 37}{space 1}   -3.62{col 46}{space 3}0.000{col 54}{space 4}-795.3943{col 67}{space 3}-233.8227
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2}-250.1394{col 26}{space 2} 102.4701{col 37}{space 1}   -2.44{col 46}{space 3}0.016{col 54}{space 4}-452.2995{col 67}{space 3}-47.97925
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2685.363{col 26}{space 2} 229.4873{col 37}{space 1}   11.70{col 46}{space 3}0.000{col 54}{space 4} 2232.614{col 67}{space 3} 3138.112
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. br
+
+. logit low lwt ui smoke
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:  -117.336}  
+Iteration 1:{space 3}log likelihood = {res:-110.67957}  
+Iteration 2:{space 3}log likelihood = {res:-110.58821}  
+Iteration 3:{space 3}log likelihood = {res:-110.58811}  
+Iteration 4:{space 3}log likelihood = {res:-110.58811}  
+{res}
+{txt}Logistic regression{col 49}Number of obs{col 67}= {res}       189
+{txt}{col 49}LR chi2({res}3{txt}){col 67}= {res}     13.50
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0037
+{txt}Log likelihood = {res}-110.58811{txt}{col 49}Pseudo R2{col 67}= {res}    0.0575
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         low{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2}-.0115934{col 26}{space 2} .0061002{col 37}{space 1}   -1.90{col 46}{space 3}0.057{col 54}{space 4}-.0235496{col 67}{space 3} .0003629
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}  .780847{col 26}{space 2} .4343454{col 37}{space 1}    1.80{col 46}{space 3}0.072{col 54}{space 4}-.0704543{col 67}{space 3} 1.632148
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2} .6515712{col 26}{space 2} .3283232{col 37}{space 1}    1.98{col 46}{space 3}0.047{col 54}{space 4} .0080696{col 67}{space 3} 1.295073
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .2865285{col 26}{space 2} .8145549{col 37}{space 1}    0.35{col 46}{space 3}0.725{col 54}{space 4} -1.30997{col 67}{space 3} 1.883027
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. logit low lwt ui smoke,or
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:  -117.336}  
+Iteration 1:{space 3}log likelihood = {res:-110.67957}  
+Iteration 2:{space 3}log likelihood = {res:-110.58821}  
+Iteration 3:{space 3}log likelihood = {res:-110.58811}  
+Iteration 4:{space 3}log likelihood = {res:-110.58811}  
+{res}
+{txt}Logistic regression{col 49}Number of obs{col 67}= {res}       189
+{txt}{col 49}LR chi2({res}3{txt}){col 67}= {res}     13.50
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0037
+{txt}Log likelihood = {res}-110.58811{txt}{col 49}Pseudo R2{col 67}= {res}    0.0575
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         low{col 14}{c |} Odds Ratio{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} .9884736{col 26}{space 2} .0060299{col 37}{space 1}   -1.90{col 46}{space 3}0.057{col 54}{space 4} .9767256{col 67}{space 3} 1.000363
+{txt}{space 10}ui {c |}{col 14}{res}{space 2} 2.183321{col 26}{space 2} .9483154{col 37}{space 1}    1.80{col 46}{space 3}0.072{col 54}{space 4} .9319703{col 67}{space 3} 5.114852
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2} 1.918553{col 26}{space 2} .6299054{col 37}{space 1}    1.98{col 46}{space 3}0.047{col 54}{space 4} 1.008102{col 67}{space 3} 3.651262
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.331796{col 26}{space 2} 1.084821{col 37}{space 1}    0.35{col 46}{space 3}0.725{col 54}{space 4} .2698282{col 67}{space 3} 6.573371
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. regress bwt lwt i.ui i.smoke i.race
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.666585{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4}-.1448951{col 67}{space 3} 6.431489
+{txt}{space 8}1.ui {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 136.9717{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-762.1784{col 67}{space 3}-221.6848
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 105.3998{col 37}{space 1}   -3.53{col 46}{space 3}0.001{col 54}{space 4}-580.0631{col 67}{space 3} -164.153
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 148.3603{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-790.7105{col 67}{space 3}-205.2771
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 114.3175{col 37}{space 1}   -3.28{col 46}{space 3}0.001{col 54}{space 4}-600.1766{col 67}{space 3}-149.0772
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.2066{col 37}{space 1}   12.06{col 46}{space 3}0.000{col 54}{space 4}  2472.31{col 67}{space 3} 3439.901
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt i.ui i.smoke i.race, base
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.666585{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4}-.1448951{col 67}{space 3} 6.431489
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 136.9717{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-762.1784{col 67}{space 3}-221.6848
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 105.3998{col 37}{space 1}   -3.53{col 46}{space 3}0.001{col 54}{space 4}-580.0631{col 67}{space 3} -164.153
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 148.3603{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-790.7105{col 67}{space 3}-205.2771
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 114.3175{col 37}{space 1}   -3.28{col 46}{space 3}0.001{col 54}{space 4}-600.1766{col 67}{space 3}-149.0772
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.2066{col 37}{space 1}   12.06{col 46}{space 3}0.000{col 54}{space 4}  2472.31{col 67}{space 3} 3439.901
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. global F4 regress bwt lwt i.ui i.smoke i.race, base
+
+. regress bwt lwt i.ui i.smoke i.race, base
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.666585{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4}-.1448951{col 67}{space 3} 6.431489
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 136.9717{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-762.1784{col 67}{space 3}-221.6848
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 105.3998{col 37}{space 1}   -3.53{col 46}{space 3}0.001{col 54}{space 4}-580.0631{col 67}{space 3} -164.153
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 148.3603{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-790.7105{col 67}{space 3}-205.2771
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 114.3175{col 37}{space 1}   -3.28{col 46}{space 3}0.001{col 54}{space 4}-600.1766{col 67}{space 3}-149.0772
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.2066{col 37}{space 1}   12.06{col 46}{space 3}0.000{col 54}{space 4}  2472.31{col 67}{space 3} 3439.901
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt i.ui i.smoke i.race, base
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.666585{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4}-.1448951{col 67}{space 3} 6.431489
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 136.9717{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-762.1784{col 67}{space 3}-221.6848
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 105.3998{col 37}{space 1}   -3.53{col 46}{space 3}0.001{col 54}{space 4}-580.0631{col 67}{space 3} -164.153
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 148.3603{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-790.7105{col 67}{space 3}-205.2771
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 114.3175{col 37}{space 1}   -3.28{col 46}{space 3}0.001{col 54}{space 4}-600.1766{col 67}{space 3}-149.0772
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.2066{col 37}{space 1}   12.06{col 46}{space 3}0.000{col 54}{space 4}  2472.31{col 67}{space 3} 3439.901
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt i.(ui smoke race), base
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.666585{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4}-.1448951{col 67}{space 3} 6.431489
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 136.9717{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-762.1784{col 67}{space 3}-221.6848
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 105.3998{col 37}{space 1}   -3.53{col 46}{space 3}0.001{col 54}{space 4}-580.0631{col 67}{space 3} -164.153
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 148.3603{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-790.7105{col 67}{space 3}-205.2771
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 114.3175{col 37}{space 1}   -3.28{col 46}{space 3}0.001{col 54}{space 4}-600.1766{col 67}{space 3}-149.0772
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.2066{col 37}{space 1}   12.06{col 46}{space 3}0.000{col 54}{space 4}  2472.31{col 67}{space 3} 3439.901
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt b(freq).(ui smoke race), base
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.666585{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4}-.1448951{col 67}{space 3} 6.431489
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 136.9717{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-762.1784{col 67}{space 3}-221.6848
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 105.3998{col 37}{space 1}   -3.53{col 46}{space 3}0.001{col 54}{space 4}-580.0631{col 67}{space 3} -164.153
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 148.3603{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-790.7105{col 67}{space 3}-205.2771
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 114.3175{col 37}{space 1}   -3.28{col 46}{space 3}0.001{col 54}{space 4}-600.1766{col 67}{space 3}-149.0772
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.2066{col 37}{space 1}   12.06{col 46}{space 3}0.000{col 54}{space 4}  2472.31{col 67}{space 3} 3439.901
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. bys race: regress bwt lwt ui smoke
+
+{txt}{hline}
+-> race = white
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}        96
+{txt}{hline 13}{c +}{hline 34}   F(3, 92)        = {res}     8.32
+{txt}       Model {c |} {res} 10742367.3         3   3580789.1   {txt}Prob > F        ={res}    0.0001
+{txt}    Residual {c |} {res} 39588469.7        92  430309.453   {txt}R-squared       ={res}    0.2134
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1878
+{txt}       Total {c |} {res}   50330837        95  529798.284   {txt}Root MSE        =   {res} 655.98
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 1.591451{col 26}{space 2} 2.469496{col 37}{space 1}    0.64{col 46}{space 3}0.521{col 54}{space 4}-3.313182{col 67}{space 3} 6.496083
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-381.5866{col 26}{space 2} 205.4349{col 37}{space 1}   -1.86{col 46}{space 3}0.066{col 54}{space 4}-789.5982{col 67}{space 3} 26.42489
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2}-550.0652{col 26}{space 2}  137.851{col 37}{space 1}   -3.99{col 46}{space 3}0.000{col 54}{space 4}-823.8492{col 67}{space 3}-276.2812
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3242.481{col 26}{space 2}  362.355{col 37}{space 1}    8.95{col 46}{space 3}0.000{col 54}{space 4} 2522.813{col 67}{space 3}  3962.15
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{hline}
+-> race = black
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}        26
+{txt}{hline 13}{c +}{hline 34}   F(3, 22)        = {res}     2.69
+{txt}       Model {c |} {res} 2736364.39         3  912121.464   {txt}Prob > F        ={res}    0.0712
+{txt}    Residual {c |} {res} 7461563.15        22  339161.961   {txt}R-squared       ={res}    0.2683
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1686
+{txt}       Total {c |} {res} 10197927.5        25  407917.102   {txt}Root MSE        =   {res} 582.38
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.507723{col 26}{space 2} 3.014205{col 37}{space 1}    1.16{col 46}{space 3}0.257{col 54}{space 4}-2.743356{col 67}{space 3} 9.758803
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-881.5992{col 26}{space 2} 381.2425{col 37}{space 1}   -2.31{col 46}{space 3}0.030{col 54}{space 4}-1672.248{col 67}{space 3}-90.95069
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2}-491.8158{col 26}{space 2}   245.03{col 37}{space 1}   -2.01{col 46}{space 3}0.057{col 54}{space 4} -999.977{col 67}{space 3} 16.34539
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2495.614{col 26}{space 2} 464.6467{col 37}{space 1}    5.37{col 46}{space 3}0.000{col 54}{space 4} 1531.996{col 67}{space 3} 3459.233
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{hline}
+-> race = other
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}        67
+{txt}{hline 13}{c +}{hline 34}   F(3, 63)        = {res}     3.61
+{txt}       Model {c |} {res} 5037290.11         3   1679096.7   {txt}Prob > F        ={res}    0.0180
+{txt}    Residual {c |} {res} 29300882.9        63  465093.379   {txt}R-squared       ={res}    0.1467
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1061
+{txt}       Total {c |} {res}   34338173        66  520275.348   {txt}Root MSE        =   {res} 681.98
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2}  5.19699{col 26}{space 2} 3.372721{col 37}{space 1}    1.54{col 46}{space 3}0.128{col 54}{space 4}-1.542856{col 67}{space 3} 11.93684
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-601.6991{col 26}{space 2} 222.6704{col 37}{space 1}   -2.70{col 46}{space 3}0.009{col 54}{space 4} -1046.67{col 67}{space 3}-156.7279
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2} 30.84227{col 26}{space 2} 222.2282{col 37}{space 1}    0.14{col 46}{space 3}0.890{col 54}{space 4}-413.2454{col 67}{space 3}   474.93
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2282.464{col 26}{space 2}  417.124{col 37}{space 1}    5.47{col 46}{space 3}0.000{col 54}{space 4} 1448.908{col 67}{space 3}  3116.02
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg bwt lwt i.ui smoke##race, base
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(7, 181)       = {res}     7.52
+{txt}       Model {c |} {res} 22520465.3         7  3217209.34   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 77394833.2       181  427595.764   {txt}R-squared       ={res}    0.2254
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1954
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 653.91
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}          bwt{col 15}{c |}      Coef.{col 27}   Std. Err.{col 39}      t{col 47}   P>|t|{col 55}     [95% Con{col 68}f. Interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}lwt {c |}{col 15}{res}{space 2} 2.681556{col 27}{space 2} 1.666472{col 38}{space 1}    1.61{col 47}{space 3}0.109{col 55}{space 4}-.6066557{col 68}{space 3} 5.969768
+{txt}{space 13} {c |}
+{space 11}ui {c |}
+{space 11}0  {c |}{col 15}{res}{space 2}        0{col 27}{txt}  (base)
+{space 11}1  {c |}{col 15}{res}{space 2}-518.5897{col 27}{space 2} 137.6639{col 38}{space 1}   -3.77{col 47}{space 3}0.000{col 55}{space 4}-790.2222{col 68}{space 3}-246.9572
+{txt}{space 13} {c |}
+{space 8}smoke {c |}
+{space 3}nonsmoker  {c |}{col 15}{res}{space 2}        0{col 27}{txt}  (base)
+{space 6}smoker  {c |}{col 15}{res}{space 2}-525.1455{col 27}{space 2} 135.7893{col 38}{space 1}   -3.87{col 47}{space 3}0.000{col 55}{space 4}-793.0791{col 68}{space 3}-257.2119
+{txt}{space 13} {c |}
+{space 9}race {c |}
+{space 7}white  {c |}{col 15}{res}{space 2}        0{col 27}{txt}  (base)
+{space 7}black  {c |}{col 15}{res}{space 2}-552.5743{col 27}{space 2} 192.3476{col 38}{space 1}   -2.87{col 47}{space 3}0.005{col 55}{space 4}-932.1063{col 68}{space 3}-173.0423
+{txt}{space 7}other  {c |}{col 15}{res}{space 2}-533.4612{col 27}{space 2} 136.2163{col 38}{space 1}   -3.92{col 47}{space 3}0.000{col 55}{space 4}-802.2374{col 68}{space 3} -264.685
+{txt}{space 13} {c |}
+{space 3}smoke#race {c |}
+smoker#black  {c |}{col 15}{res}{space 2} 95.74504{col 27}{space 2} 297.9839{col 38}{space 1}    0.32{col 47}{space 3}0.748{col 55}{space 4} -492.224{col 68}{space 3} 683.7141
+{txt}smoker#other  {c |}{col 15}{res}{space 2} 552.5388{col 27}{space 2} 250.0336{col 38}{space 1}    2.21{col 47}{space 3}0.028{col 55}{space 4} 59.18324{col 68}{space 3} 1045.894
+{txt}{space 13} {c |}
+{space 8}_cons {c |}{col 15}{res}{space 2} 3103.585{col 27}{space 2} 253.4252{col 38}{space 1}   12.25{col 47}{space 3}0.000{col 55}{space 4} 2603.537{col 68}{space 3} 3603.633
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg bwt c.age##c.age lwt i.ui i.smoke i.race, base
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(7, 181)       = {res}     7.79
+{txt}       Model {c |} {res} 23133756.7         7  3304822.39   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 76781541.9       181  424207.414   {txt}R-squared       ={res}    0.2315
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2018
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 651.31
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}age {c |}{col 14}{res}{space 2}-153.2407{col 26}{space 2}  60.5265{col 37}{space 1}   -2.53{col 46}{space 3}0.012{col 54}{space 4} -272.669{col 67}{space 3}-33.81238
+{txt}{space 12} {c |}
+{space 1}c.age#c.age {c |}{col 14}{res}{space 2} 2.980441{col 26}{space 2} 1.189952{col 37}{space 1}    2.50{col 46}{space 3}0.013{col 54}{space 4} .6324778{col 67}{space 3} 5.328404
+{txt}{space 12} {c |}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.385803{col 26}{space 2} 1.673242{col 37}{space 1}    2.02{col 46}{space 3}0.044{col 54}{space 4} .0842332{col 67}{space 3} 6.687373
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-485.9668{col 26}{space 2} 135.5004{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-753.3303{col 67}{space 3}-218.6034
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-361.3113{col 26}{space 2} 104.7002{col 37}{space 1}   -3.45{col 46}{space 3}0.001{col 54}{space 4}-567.9013{col 67}{space 3}-154.7214
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-526.0686{col 26}{space 2} 150.1276{col 37}{space 1}   -3.50{col 46}{space 3}0.001{col 54}{space 4}-822.2939{col 67}{space 3}-229.8433
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-361.0183{col 26}{space 2} 114.5793{col 37}{space 1}   -3.15{col 46}{space 3}0.002{col 54}{space 4}-587.1013{col 67}{space 3}-134.9352
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4786.871{col 26}{space 2} 767.9409{col 37}{space 1}    6.23{col 46}{space 3}0.000{col 54}{space 4} 3271.603{col 67}{space 3} 6302.139
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt i.ui i.smoke i.race, base vce(robust)
+
+{txt}Linear regression                               Number of obs     = {res}       189
+                                                {txt}F(5, 183)         =  {res}    10.47
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.2043
+                                                {txt}Root MSE          =    {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.454568{col 37}{space 1}    2.16{col 46}{space 3}0.032{col 54}{space 4} .2734165{col 67}{space 3} 6.013178
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 146.8647{col 37}{space 1}   -3.35{col 46}{space 3}0.001{col 54}{space 4}-781.6975{col 67}{space 3}-202.1657
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 108.5627{col 37}{space 1}   -3.43{col 46}{space 3}0.001{col 54}{space 4}-586.3036{col 67}{space 3}-157.9125
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 128.8454{col 37}{space 1}   -3.87{col 46}{space 3}0.000{col 54}{space 4}-752.2074{col 67}{space 3}-243.7802
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 122.3402{col 37}{space 1}   -3.06{col 46}{space 3}0.003{col 54}{space 4}-616.0055{col 67}{space 3}-133.2484
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 231.8945{col 37}{space 1}   12.75{col 46}{space 3}0.000{col 54}{space 4} 2498.575{col 67}{space 3} 3413.636
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt i.ui i.smoke i.race, base r
+
+{txt}Linear regression                               Number of obs     = {res}       189
+                                                {txt}F(5, 183)         =  {res}    10.47
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.2043
+                                                {txt}Root MSE          =    {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.454568{col 37}{space 1}    2.16{col 46}{space 3}0.032{col 54}{space 4} .2734165{col 67}{space 3} 6.013178
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 146.8647{col 37}{space 1}   -3.35{col 46}{space 3}0.001{col 54}{space 4}-781.6975{col 67}{space 3}-202.1657
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 108.5627{col 37}{space 1}   -3.43{col 46}{space 3}0.001{col 54}{space 4}-586.3036{col 67}{space 3}-157.9125
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 128.8454{col 37}{space 1}   -3.87{col 46}{space 3}0.000{col 54}{space 4}-752.2074{col 67}{space 3}-243.7802
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 122.3402{col 37}{space 1}   -3.06{col 46}{space 3}0.003{col 54}{space 4}-616.0055{col 67}{space 3}-133.2484
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 231.8945{col 37}{space 1}   12.75{col 46}{space 3}0.000{col 54}{space 4} 2498.575{col 67}{space 3} 3413.636
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt i.ui i.smoke i.race, vec(jacknife)
+{err}option {bf:vec()} not allowed
+{txt}{search r(198), local:r(198);}
+
+{com}. regress bwt lwt i.ui i.smoke i.race, base vec(jackknife)
+{err}option {bf:vec()} not allowed
+{txt}{search r(198), local:r(198);}
+
+{com}. regress bwt lwt i.ui i.smoke i.race, base vce(jackknife)
+{txt}(running regress on estimation sample)
+
+Jackknife replications ({res}189{txt})
+{hline 4}{c +}{hline 3} 1 {hline 3}{c +}{hline 3} 2 {hline 3}{c +}{hline 3} 3 {hline 3}{c +}{hline 3} 4 {hline 3}{c +}{hline 3} 5 
+..................................................    50
+..................................................   100
+..................................................   150
+.......................................
+{res}
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}       189
+{txt}{col 49}Replications{col 67}= {res}       189
+{txt}{col 49}F({res}   5{txt},{res}    188{txt}){col 67}= {res}      9.97
+{txt}{col 49}Prob > F{col 67}= {res}    0.0000
+{txt}{col 49}R-squared{col 67}= {res}    0.2043
+{txt}{col 49}Adj R-squared{col 67}= {res}    0.1826
+{txt}{col 49}Root MSE{col 67}= {res}  659.1140
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   Jackknife
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.498543{col 37}{space 1}    2.10{col 46}{space 3}0.037{col 54}{space 4} .1871772{col 67}{space 3} 6.099417
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 151.8844{col 37}{space 1}   -3.24{col 46}{space 3}0.001{col 54}{space 4}-791.5484{col 67}{space 3}-192.3148
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 110.6622{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-590.4073{col 67}{space 3}-153.8088
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 132.8931{col 37}{space 1}   -3.75{col 46}{space 3}0.000{col 54}{space 4} -760.147{col 67}{space 3}-235.8406
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 124.1806{col 37}{space 1}   -3.02{col 46}{space 3}0.003{col 54}{space 4}-619.5934{col 67}{space 3}-129.6605
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 237.8146{col 37}{space 1}   12.43{col 46}{space 3}0.000{col 54}{space 4} 2486.978{col 67}{space 3} 3425.234
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. sort id
+
+. 
+. set seed 142857
+
+. regress bwt lwt i.ui i.smoke i.race, vce(bootstrap)
+{txt}(running regress on estimation sample)
+
+Bootstrap replications ({res}50{txt})
+{hline 4}{c +}{hline 3} 1 {hline 3}{c +}{hline 3} 2 {hline 3}{c +}{hline 3} 3 {hline 3}{c +}{hline 3} 4 {hline 3}{c +}{hline 3} 5 
+..................................................    50
+{res}
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}       189
+{txt}{col 49}Replications{col 67}= {res}        50
+{txt}{col 49}Wald chi2({res}5{txt}){col 67}= {res}     73.54
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 49}R-squared{col 67}= {res}    0.2043
+{txt}{col 49}Adj R-squared{col 67}= {res}    0.1826
+{txt}{col 49}Root MSE{col 67}= {res}  659.1140
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}   Observed{col 26}   Bootstrap{col 54}         Norm{col 67}al-based
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.517883{col 37}{space 1}    2.07{col 46}{space 3}0.038{col 54}{space 4} .1683005{col 67}{space 3} 6.118294
+{txt}{space 8}1.ui {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 156.8639{col 37}{space 1}   -3.14{col 46}{space 3}0.002{col 54}{space 4}-799.3793{col 67}{space 3}-184.4839
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 111.9954{col 37}{space 1}   -3.32{col 46}{space 3}0.001{col 54}{space 4}-591.6151{col 67}{space 3} -152.601
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 124.7404{col 37}{space 1}   -3.99{col 46}{space 3}0.000{col 54}{space 4}-742.4806{col 67}{space 3}-253.5071
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 109.9729{col 37}{space 1}   -3.41{col 46}{space 3}0.001{col 54}{space 4}-590.1699{col 67}{space 3} -159.084
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.9914{col 37}{space 1}   12.02{col 46}{space 3}0.000{col 54}{space 4} 2473.972{col 67}{space 3}  3438.24
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. regress bwt lwt i.ui i.smoke i.race, vce(bootstrap,reps(100))
+{txt}(running regress on estimation sample)
+
+Bootstrap replications ({res}100{txt})
+{hline 4}{c +}{hline 3} 1 {hline 3}{c +}{hline 3} 2 {hline 3}{c +}{hline 3} 3 {hline 3}{c +}{hline 3} 4 {hline 3}{c +}{hline 3} 5 
+..................................................    50
+..................................................   100
+{res}
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}       189
+{txt}{col 49}Replications{col 67}= {res}       100
+{txt}{col 49}Wald chi2({res}5{txt}){col 67}= {res}     61.11
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 49}R-squared{col 67}= {res}    0.2043
+{txt}{col 49}Adj R-squared{col 67}= {res}    0.1826
+{txt}{col 49}Root MSE{col 67}= {res}  659.1140
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}   Observed{col 26}   Bootstrap{col 54}         Norm{col 67}al-based
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.530668{col 37}{space 1}    2.05{col 46}{space 3}0.040{col 54}{space 4} .1432435{col 67}{space 3} 6.143351
+{txt}{space 8}1.ui {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 144.5314{col 37}{space 1}   -3.40{col 46}{space 3}0.001{col 54}{space 4} -775.208{col 67}{space 3}-208.6552
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 112.1776{col 37}{space 1}   -3.32{col 46}{space 3}0.001{col 54}{space 4}-591.9721{col 67}{space 3} -152.244
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 137.3585{col 37}{space 1}   -3.63{col 46}{space 3}0.000{col 54}{space 4}-767.2115{col 67}{space 3}-228.7762
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 124.8733{col 37}{space 1}   -3.00{col 46}{space 3}0.003{col 54}{space 4}-619.3742{col 67}{space 3}-129.8797
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 243.8376{col 37}{space 1}   12.12{col 46}{space 3}0.000{col 54}{space 4} 2478.193{col 67}{space 3} 3434.019
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. help bootstrap
+
+. test 2.race == 3.race
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}2.race - 3.race = 0{p_end}
+
+{txt}{col 12}chi2(  1) ={res}    0.82
+{txt}{col 10}Prob > chi2 =  {res}  0.3651
+
+{com}. test (2.race == 3.race) (lwt ==0)
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}2.race - 3.race = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} lwt = 0{p_end}
+
+{txt}{col 12}chi2(  2) ={res}    4.25
+{txt}{col 10}Prob > chi2 =  {res}  0.1192
+
+{com}. reg bwt lwt (smoke ui)#race
+{p 0 6 2}{txt}note: 1.ui#2.race omitted because of collinearity{p_end}
+{p 0 6 2}note: 1.ui#3.race omitted because of collinearity{p_end}
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(9, 179)       = {res}     6.02
+{txt}       Model {c |} {res} 23218009.8         9  2579778.87   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 76697288.8       179  428476.474   {txt}R-squared       ={res}    0.2324
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1938
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 654.58
+
+{txt}{hline 17}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}             bwt{col 18}{c |}      Coef.{col 30}   Std. Err.{col 42}      t{col 50}   P>|t|{col 58}     [95% Con{col 71}f. Interval]
+{hline 17}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 13}lwt {c |}{col 18}{res}{space 2} 3.063128{col 30}{space 2}  1.69705{col 41}{space 1}    1.80{col 50}{space 3}0.073{col 58}{space 4}-.2856702{col 71}{space 3} 6.411926
+{txt}{space 16} {c |}
+{space 6}smoke#race {c |}
+nonsmoker#black  {c |}{col 18}{res}{space 2}-1345.118{col 30}{space 2} 394.2361{col 41}{space 1}   -3.41{col 50}{space 3}0.001{col 58}{space 4}-2123.066{col 71}{space 3}-567.1697
+{txt}nonsmoker#other  {c |}{col 18}{res}{space 2} -1113.65{col 30}{space 2} 230.3652{col 41}{space 1}   -4.83{col 50}{space 3}0.000{col 58}{space 4}-1568.231{col 71}{space 3}-659.0693
+{txt}{space 3}smoker#white  {c |}{col 18}{res}{space 2}-534.4598{col 30}{space 2} 136.2461{col 41}{space 1}   -3.92{col 50}{space 3}0.000{col 58}{space 4}-803.3148{col 71}{space 3}-265.6047
+{txt}{space 3}smoker#black  {c |}{col 18}{res}{space 2}-1837.796{col 30}{space 2} 480.5297{col 41}{space 1}   -3.82{col 50}{space 3}0.000{col 58}{space 4}-2786.027{col 71}{space 3}-889.5637
+{txt}{space 3}smoker#other  {c |}{col 18}{res}{space 2}-1069.479{col 30}{space 2} 259.2191{col 41}{space 1}   -4.13{col 50}{space 3}0.000{col 58}{space 4}-1580.998{col 71}{space 3}-557.9611
+{txt}{space 16} {c |}
+{space 9}ui#race {c |}
+{space 8}0#black  {c |}{col 18}{res}{space 2} 869.9828{col 30}{space 2} 421.6057{col 41}{space 1}    2.06{col 50}{space 3}0.041{col 58}{space 4} 38.02601{col 71}{space 3} 1701.939
+{txt}{space 8}0#other  {c |}{col 18}{res}{space 2} 617.7112{col 30}{space 2} 212.7218{col 41}{space 1}    2.90{col 50}{space 3}0.004{col 58}{space 4} 197.9461{col 71}{space 3} 1037.476
+{txt}{space 8}1#white  {c |}{col 18}{res}{space 2}-347.0309{col 30}{space 2}  200.658{col 41}{space 1}   -1.73{col 50}{space 3}0.085{col 58}{space 4}-742.9904{col 71}{space 3} 48.92861
+{txt}{space 8}1#black  {c |}{col 18}{res}{space 2}        0{col 30}{txt}  (omitted)
+{space 8}1#other  {c |}{col 18}{res}{space 2}        0{col 30}{txt}  (omitted)
+{space 16} {c |}
+{space 11}_cons {c |}{col 18}{res}{space 2} 3035.011{col 30}{space 2} 259.4122{col 41}{space 1}   11.70{col 50}{space 3}0.000{col 58}{space 4} 2523.111{col 71}{space 3}  3546.91
+{txt}{hline 17}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. testparm ui#race
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}0b.ui#2.race = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} 0b.ui#3.race = 0{p_end}
+{p 0 7}{space 1}{text:( 3)}{space 1} 1.ui#1b.race = 0{p_end}
+
+{txt}       F(  3,   179) ={res}    5.26
+{txt}{col 13}Prob > F ={res}    0.0017
+
+{com}. regress bwt age lwt i.ui i.smoke i.race, base
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(6, 182)       = {res}     7.82
+{txt}       Model {c |} {res} 20472541.1         6  3412090.18   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79442757.5       182  436498.668   {txt}R-squared       ={res}    0.2049
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1787
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 660.68
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}age {c |}{col 14}{res}{space 2}-3.474884{col 26}{space 2} 9.519409{col 37}{space 1}   -0.37{col 46}{space 3}0.716{col 54}{space 4}-22.25748{col 67}{space 3} 15.30771
+{txt}{space 9}lwt {c |}{col 14}{res}{space 2} 3.251065{col 26}{space 2} 1.696433{col 37}{space 1}    1.92{col 46}{space 3}0.057{col 54}{space 4}-.0961394{col 67}{space 3} 6.598269
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-493.9733{col 26}{space 2} 137.4111{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4} -765.097{col 67}{space 3}-222.8496
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-375.4712{col 26}{space 2} 106.0512{col 37}{space 1}   -3.54{col 46}{space 3}0.001{col 54}{space 4}-584.7192{col 67}{space 3}-166.2232
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-509.7201{col 26}{space 2}  152.143{col 37}{space 1}   -3.35{col 46}{space 3}0.001{col 54}{space 4}-809.9111{col 67}{space 3}-209.5292
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-381.0763{col 26}{space 2} 115.9432{col 37}{space 1}   -3.29{col 46}{space 3}0.001{col 54}{space 4} -609.842{col 67}{space 3}-152.3106
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 3028.384{col 26}{space 2} 315.6236{col 37}{space 1}    9.59{col 46}{space 3}0.000{col 54}{space 4} 2405.632{col 67}{space 3} 3651.136
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. estimates store
+{err}name required
+{txt}{search r(100), local:r(100);}
+
+{com}. estimates store bwt_alusr
+
+. br
+
+. regress bwt lwt i.ui i.smoke i.race, if _est_bwt_alusr
+{err}option {bf:if} not allowed
+{txt}{search r(198), local:r(198);}
+
+{com}. 
+. regress bwt lwt i.ui i.smoke i.race if _est_bwt_alusr
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.666585{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4}-.1448951{col 67}{space 3} 6.431489
+{txt}{space 8}1.ui {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 136.9717{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-762.1784{col 67}{space 3}-221.6848
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 105.3998{col 37}{space 1}   -3.53{col 46}{space 3}0.001{col 54}{space 4}-580.0631{col 67}{space 3} -164.153
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 148.3603{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-790.7105{col 67}{space 3}-205.2771
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 114.3175{col 37}{space 1}   -3.28{col 46}{space 3}0.001{col 54}{space 4}-600.1766{col 67}{space 3}-149.0772
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.2066{col 37}{space 1}   12.06{col 46}{space 3}0.000{col 54}{space 4}  2472.31{col 67}{space 3} 3439.901
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. estimates store bwt_usr
+
+. lrtest bwt_alusr bwt_usr
+
+{txt}Likelihood-ratio test{col 55}LR chi2({res}1{txt}){col 67}={res}      0.14
+{txt}(Assumption: {res}{stata est replay bwt_usr:bwt_usr}{txt} nested in {res}{stata est replay bwt_alusr:bwt_alusr}{txt}){col 55}Prob > chi2 = {res}   0.7100
+
+{com}. lrtest bwt_alusr bwt_usr
+
+{txt}Likelihood-ratio test{col 55}LR chi2({res}1{txt}){col 67}={res}      0.14
+{txt}(Assumption: {res}{stata est replay bwt_usr:bwt_usr}{txt} nested in {res}{stata est replay bwt_alusr:bwt_alusr}{txt}){col 55}Prob > chi2 = {res}   0.7100
+
+{com}. lrtest bwt_alusr bwt_usr,stat
+
+{txt}Likelihood-ratio test{col 55}LR chi2({res}1{txt}){col 67}={res}      0.14
+{txt}(Assumption: {res}{stata est replay bwt_usr:bwt_usr}{txt} nested in {res}{stata est replay bwt_alusr:bwt_alusr}{txt}){col 55}Prob > chi2 = {res}   0.7100
+
+Akaike's information criterion and Bayesian information criterion
+
+{txt}{hline 13}{c TT}{hline 63}
+       Model {c |}        Obs  ll(null)  ll(model)      df         AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:{stata estimates replay bwt_usr:bwt_usr}}{col 14}{c |}{res}{col 16}       189{col 27}-1513.509{col 38} -1491.91{col 49}     6{col 58}  2995.82{col 69} 3015.271
+{txt}{ralign 12:{stata estimates replay bwt_alusr:bwt_alusr}}{col 14}{c |}{res}{col 16}       189{col 27}-1513.509{col 38}-1491.841{col 49}     7{col 58} 2997.682{col 69} 3020.374
+{txt}{hline 13}{c BT}{hline 63}
+{p 15 21 2}
+Note: N=Obs used in calculating BIC; see {helpb bic_note:[R] BIC note}.
+{p_end}
+
+{com}. help estimates
+
+. est table bwt*
+{res}
+{txt}{hline 12}{c -}{c TT}{c -}{hline 10}{c -}{c -}{c -}{hline 10}{c -}{c -}
+{ralign 12:Variable} {c |} {center 10:bwt_alusr} {space 1} {center 10:bwt_usr} {space 1}
+{hline 12}{c -}{c +}{c -}{hline 10}{c -}{c -}{c -}{hline 10}{c -}{c -}
+{res}{txt}{space 9}age {c |}{res} {ralign 10:-3.4748842}{txt} {space 1}{res} {ralign 10:}{txt} {space 1}
+{res}{txt}{space 9}lwt {c |}{res} {ralign 10:3.2510647}{txt} {space 1}{res} {ralign 10:3.143297}{txt} {space 1}
+{res}{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}1  {c |}{res} {ralign 10:-493.97329}{txt} {space 1}{res} {ralign 10:-491.93159}{txt} {space 1}
+{res}{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 5}smoker  {c |}{res} {ralign 10:-375.47119}{txt} {space 1}{res} {ralign 10:-372.10807}{txt} {space 1}
+{res}{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}black  {c |}{res} {ralign 10:-509.72015}{txt} {space 1}{res} {ralign 10:-497.99382}{txt} {space 1}
+{res}{txt}{space 6}other  {c |}{res} {ralign 10:-381.07629}{txt} {space 1}{res} {ralign 10:-374.62695}{txt} {space 1}
+{res}{txt}{space 12} {c |}
+{space 7}_cons {c |}{res} {ralign 10:3028.3837}{txt} {space 1}{res} {ralign 10:2956.1058}{txt} {space 1}
+{hline 12}{c -}{c BT}{c -}{hline 10}{c -}{c -}{c -}{hline 10}{c -}{c -}
+
+{com}. regress
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.666585{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4}-.1448951{col 67}{space 3} 6.431489
+{txt}{space 8}1.ui {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 136.9717{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-762.1784{col 67}{space 3}-221.6848
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 105.3998{col 37}{space 1}   -3.53{col 46}{space 3}0.001{col 54}{space 4}-580.0631{col 67}{space 3} -164.153
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 148.3603{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-790.7105{col 67}{space 3}-205.2771
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 114.3175{col 37}{space 1}   -3.28{col 46}{space 3}0.001{col 54}{space 4}-600.1766{col 67}{space 3}-149.0772
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.2066{col 37}{space 1}   12.06{col 46}{space 3}0.000{col 54}{space 4}  2472.31{col 67}{space 3} 3439.901
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. regress, level (90)
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [90% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{space 2} 1.666585{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4} .3880606{col 67}{space 3} 5.898533
+{txt}{space 8}1.ui {c |}{col 14}{res}{space 2}-491.9316{col 26}{space 2} 136.9717{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-718.3763{col 67}{space 3}-265.4868
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{space 2} 105.3998{col 37}{space 1}   -3.53{col 46}{space 3}0.001{col 54}{space 4}-546.3574{col 67}{space 3}-197.8587
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{space 2} 148.3603{col 37}{space 1}   -3.36{col 46}{space 3}0.001{col 54}{space 4}-743.2665{col 67}{space 3}-252.7211
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{space 2} 114.3175{col 37}{space 1}   -3.28{col 46}{space 3}0.001{col 54}{space 4}-563.6192{col 67}{space 3}-185.6347
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{space 2} 245.2066{col 37}{space 1}   12.06{col 46}{space 3}0.000{col 54}{space 4} 2550.725{col 67}{space 3} 3361.487
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. help log lat
+
+. ereturn list
+
+{txt}scalars:
+               e(rank) =  {res}6
+               {txt}e(ll_0) =  {res}-1513.508543388173
+                 {txt}e(ll) =  {res}-1491.910169793308
+               {txt}e(r2_a) =  {res}.1825768673299962
+                {txt}e(rss) =  {res}79500920.07374795
+                {txt}e(mss) =  {res}20414378.49768066
+               {txt}e(rmse) =  {res}659.1139941114856
+                 {txt}e(r2) =  {res}.2043168442627091
+                  {txt}e(F) =  {res}9.398208880123823
+               {txt}e(df_r) =  {res}183
+               {txt}e(df_m) =  {res}5
+                  {txt}e(N) =  {res}189
+
+{txt}macros:
+    e(_estimates_name) : "{res}bwt_usr{txt}"
+            e(cmdline) : "{res}regress bwt lwt i.ui i.smoke i.race if _est_bwt_alusr{txt}"
+              e(title) : "{res}Linear regression{txt}"
+          e(marginsok) : "{res}XB default{txt}"
+                e(vce) : "{res}ols{txt}"
+             e(depvar) : "{res}bwt{txt}"
+                e(cmd) : "{res}regress{txt}"
+         e(properties) : "{res}b V{txt}"
+            e(predict) : "{res}regres_p{txt}"
+              e(model) : "{res}ols{txt}"
+          e(estat_cmd) : "{res}regress_estat{txt}"
+
+matrices:
+                  e(b) : {res} 1 x 9
+                  {txt}e(V) : {res} 9 x 9
+
+{txt}functions:
+             e(sample)   
+
+{com}. _b(i.smoke)
+{err}command {bf}_b{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. display _b()
+{res}{err}unknown function _b()
+{txt}{search r(133), local:r(133);}
+
+{com}. display _b(i.smoke)
+{res}{err}unknown function _b()
+{txt}{search r(133), local:r(133);}
+
+{com}. matrix list e(b)
+{res}
+{txt}e(b)[1,9]
+                        0b.          1.         0b.          1.         1b.          2.
+           lwt          ui          ui       smoke       smoke        race        race
+y1 {res}   3.143297           0  -491.93159           0  -372.10807           0  -497.99382
+
+{txt}             3.            
+          race       _cons
+y1 {res} -374.62695   2956.1058
+{reset}
+{com}. regress, coeflegend
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(5, 183)       = {res}     9.40
+{txt}       Model {c |} {res} 20414378.5         5   4082875.7   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 79500920.1       183  434431.257   {txt}R-squared       ={res}    0.2043
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1826
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 659.11
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}  Legend
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.143297{col 26}{txt}  _b[lwt]
+{space 8}1.ui {c |}{col 14}{res}{space 2}-491.9316{col 26}{txt}  _b[1.ui]
+{space 12} {c |}
+{space 7}smoke {c |}
+{space 5}smoker  {c |}{col 14}{res}{space 2}-372.1081{col 26}{txt}  _b[1.smoke]
+{space 12} {c |}
+{space 8}race {c |}
+{space 6}black  {c |}{col 14}{res}{space 2}-497.9938{col 26}{txt}  _b[2.race]
+{space 6}other  {c |}{col 14}{res}{space 2}-374.6269{col 26}{txt}  _b[3.race]
+{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2956.106{col 26}{txt}  _b[_cons]
+{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. di _b[lwt]
+{res}3.143297
+
+{com}. regress bwt c.age##c.age lwt i.ui i.smoke i.race, base
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       189
+{txt}{hline 13}{c +}{hline 34}   F(7, 181)       = {res}     7.79
+{txt}       Model {c |} {res} 23133756.7         7  3304822.39   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 76781541.9       181  424207.414   {txt}R-squared       ={res}    0.2315
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2018
+{txt}       Total {c |} {res} 99915298.6       188  531464.354   {txt}Root MSE        =   {res} 651.31
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}age {c |}{col 14}{res}{space 2}-153.2407{col 26}{space 2}  60.5265{col 37}{space 1}   -2.53{col 46}{space 3}0.012{col 54}{space 4} -272.669{col 67}{space 3}-33.81238
+{txt}{space 12} {c |}
+{space 1}c.age#c.age {c |}{col 14}{res}{space 2} 2.980441{col 26}{space 2} 1.189952{col 37}{space 1}    2.50{col 46}{space 3}0.013{col 54}{space 4} .6324778{col 67}{space 3} 5.328404
+{txt}{space 12} {c |}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.385803{col 26}{space 2} 1.673242{col 37}{space 1}    2.02{col 46}{space 3}0.044{col 54}{space 4} .0842332{col 67}{space 3} 6.687373
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2}-485.9668{col 26}{space 2} 135.5004{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-753.3303{col 67}{space 3}-218.6034
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2}-361.3113{col 26}{space 2} 104.7002{col 37}{space 1}   -3.45{col 46}{space 3}0.001{col 54}{space 4}-567.9013{col 67}{space 3}-154.7214
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2}-526.0686{col 26}{space 2} 150.1276{col 37}{space 1}   -3.50{col 46}{space 3}0.001{col 54}{space 4}-822.2939{col 67}{space 3}-229.8433
+{txt}{space 6}other  {c |}{col 14}{res}{space 2}-361.0183{col 26}{space 2} 114.5793{col 37}{space 1}   -3.15{col 46}{space 3}0.002{col 54}{space 4}-587.1013{col 67}{space 3}-134.9352
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4786.871{col 26}{space 2} 767.9409{col 37}{space 1}    6.23{col 46}{space 3}0.000{col 54}{space 4} 3271.603{col 67}{space 3} 6302.139
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. estimate store qage
+
+. lincom 2.race - 3.race
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}2.race - 3.race = 0{p_end}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}(1) {c |}{col 14}{res}{space 2}-165.0503{col 26}{space 2} 160.1956{col 37}{space 1}   -1.03{col 46}{space 3}0.304{col 54}{space 4}-481.1414{col 67}{space 3} 151.0407
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. ncom -_b[age]/(2*_b[c.age##c.age]
+{err}command {bf}ncom{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. ncom =_b[age]/(2*_b[c.age##c.age]
+{err}command {bf}ncom{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. nlcom -_b[age]/(2*_b[c.age##c.age]
+
+{err}too few ')' or ']'
+{txt}{search r(132), local:r(132);}
+
+{com}. nlcom -_b[age]/(2*_b[c.age##c.age])
+
+{err}invalid matrix stripe;
+c.age##c.age
+{txt}{search r(198), local:r(198);}
+
+{com}. nlcom -_b[age]/(2*_b[c.age#c.age])
+
+       {txt}_nl_1:  {res}-_b[age]/(2*_b[c.age#c.age])
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_nl_1 {c |}{col 14}{res}{space 2} 25.70772{col 26}{space 2} 1.591446{col 37}{space 1}   16.15{col 46}{space 3}0.000{col 54}{space 4} 22.58854{col 67}{space 3}  28.8269
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. list bwt* in 101/110
+{txt}
+     {c TLC}{hline 6}{c TRC}
+     {c |} {res} bwt {txt}{c |}
+     {c LT}{hline 6}{c RT}
+101. {c |} {res}3062 {txt}{c |}
+102. {c |} {res}3062 {txt}{c |}
+103. {c |} {res}3062 {txt}{c |}
+104. {c |} {res}3076 {txt}{c |}
+105. {c |} {res}3076 {txt}{c |}
+     {c LT}{hline 6}{c RT}
+106. {c |} {res}3080 {txt}{c |}
+107. {c |} {res}3090 {txt}{c |}
+108. {c |} {res}3090 {txt}{c |}
+109. {c |} {res}3090 {txt}{c |}
+110. {c |} {res}3100 {txt}{c |}
+     {c BLC}{hline 6}{c BRC}
+
+{com}. predit bwthat
+{err}command {bf}predit{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. predict bwthat
+{txt}(option {bf:xb} assumed; fitted values)
+
+{com}. list bwt* in 101/110
+{txt}
+     {c TLC}{hline 6}{c -}{hline 10}{c TRC}
+     {c |} {res} bwt     bwthat {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 10}{c RT}
+101. {c |} {res}3062   3591.154 {txt}{c |}
+102. {c |} {res}3062   2753.074 {txt}{c |}
+103. {c |} {res}3062   3424.919 {txt}{c |}
+104. {c |} {res}3076   2451.646 {txt}{c |}
+105. {c |} {res}3076   2451.646 {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 10}{c RT}
+106. {c |} {res}3080   3382.067 {txt}{c |}
+107. {c |} {res}3090   3037.145 {txt}{c |}
+108. {c |} {res}3090   3215.196 {txt}{c |}
+109. {c |} {res}3090   2423.573 {txt}{c |}
+110. {c |} {res}3100   3264.406 {txt}{c |}
+     {c BLC}{hline 6}{c -}{hline 10}{c BRC}
+
+{com}. logistic low lwt i.ui i.smoke i.race, base
+{res}
+{txt}Logistic regression{col 49}Number of obs{col 67}= {res}       189
+{txt}{col 49}LR chi2({res}5{txt}){col 67}= {res}     22.74
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0004
+{txt}Log likelihood = {res}-105.96529{txt}{col 49}Pseudo R2{col 67}= {res}    0.0969
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         low{col 14}{c |} Odds Ratio{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} .9881172{col 26}{space 2} .0062604{col 37}{space 1}   -1.89{col 46}{space 3}0.059{col 54}{space 4} .9759229{col 67}{space 3} 1.000464
+{txt}{space 12} {c |}
+{space 10}ui {c |}
+{space 10}0  {c |}{col 14}{res}{space 2}        1{col 26}{txt}  (base)
+{space 10}1  {c |}{col 14}{res}{space 2} 2.178327{col 26}{space 2} .9565981{col 37}{space 1}    1.77{col 46}{space 3}0.076{col 54}{space 4} .9211355{col 67}{space 3} 5.151369
+{txt}{space 12} {c |}
+{space 7}smoke {c |}
+{space 2}nonsmoker  {c |}{col 14}{res}{space 2}        1{col 26}{txt}  (base)
+{space 5}smoker  {c |}{col 14}{res}{space 2} 2.798811{col 26}{space 2} 1.069126{col 37}{space 1}    2.69{col 46}{space 3}0.007{col 54}{space 4} 1.323794{col 67}{space 3} 5.917341
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 6}white  {c |}{col 14}{res}{space 2}        1{col 26}{txt}  (base)
+{space 6}black  {c |}{col 14}{res}{space 2} 3.705936{col 26}{space 2} 1.888766{col 37}{space 1}    2.57{col 46}{space 3}0.010{col 54}{space 4} 1.364818{col 67}{space 3} 10.06285
+{txt}{space 6}other  {c |}{col 14}{res}{space 2} 2.601558{col 26}{space 2} 1.085523{col 37}{space 1}    2.29{col 46}{space 3}0.022{col 54}{space 4} 1.148318{col 67}{space 3} 5.893929
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .6772217{col 26}{space 2} .6079862{col 37}{space 1}   -0.43{col 46}{space 3}0.664{col 54}{space 4} .1165606{col 67}{space 3} 3.934687
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. est store stdlogit
+
+. predict lowprobhat
+{txt}(option {bf:pr} assumed; Pr(low))
+
+{com}. list low* in 101/110
+{txt}
+     {c TLC}{hline 5}{c -}{hline 10}{c TRC}
+     {c |} {res}low   lowpro~t {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 10}{c RT}
+101. {c |} {res}  0   .0660475 {txt}{c |}
+102. {c |} {res}  0   .3466419 {txt}{c |}
+103. {c |} {res}  0   .0909255 {txt}{c |}
+104. {c |} {res}  0   .5847104 {txt}{c |}
+105. {c |} {res}  0   .5847104 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 10}{c RT}
+106. {c |} {res}  0   .1226386 {txt}{c |}
+107. {c |} {res}  0   .2666734 {txt}{c |}
+108. {c |} {res}  0   .1462327 {txt}{c |}
+109. {c |} {res}  0   .6409439 {txt}{c |}
+110. {c |} {res}  0   .1389271 {txt}{c |}
+     {c BLC}{hline 5}{c -}{hline 10}{c BRC}
+
+{com}. est restore qage
+{txt}(results {stata estimates replay qage:qage} are active now)
+
+{com}. db predict
+
+. margins, at (age=27)
+{res}
+{txt}Predictive margins{col 49}Number of obs{col 67}= {res}       189
+{txt}Model VCE{col 14}: {res}OLS
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:Expression}:{space 1}{res:Linear prediction, predict()}{p_end}
+{p2colreset}{...}
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}27}{p_end}
+{p2colreset}{...}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}     Margin{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2847.849{col 26}{space 2} 67.81301{col 37}{space 1}   42.00{col 46}{space 3}0.000{col 54}{space 4} 2714.043{col 67}{space 3} 2981.655
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. margins, at (age = 15(5)45)
+{err}(5) invalid statistic
+{txt}{search r(198), local:r(198);}
+
+{com}. margins, at ((age = 15(5)45))
+{err}(age) invalid statistic
+{txt}{search r(198), local:r(198);}
+
+{com}. margins, at (age = (15(5)45))
+{res}
+{txt}Predictive margins{col 49}Number of obs{col 67}= {res}       189
+{txt}Model VCE{col 14}: {res}OLS
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:Expression}:{space 1}{res:Linear prediction, predict()}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:1._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}15}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:2._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}20}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:3._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}25}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:4._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}30}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:5._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}35}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:6._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}40}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:7._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}45}{p_end}
+{p2colreset}{...}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}     Margin{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}_at {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} 3184.595{col 26}{space 2}  123.952{col 37}{space 1}   25.69{col 46}{space 3}0.000{col 54}{space 4} 2940.018{col 67}{space 3} 3429.172
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} 2939.969{col 26}{space 2} 56.62625{col 37}{space 1}   51.92{col 46}{space 3}0.000{col 54}{space 4} 2828.236{col 67}{space 3} 3051.701
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} 2844.365{col 26}{space 2} 62.61259{col 37}{space 1}   45.43{col 46}{space 3}0.000{col 54}{space 4}  2720.82{col 67}{space 3} 2967.909
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} 2897.782{col 26}{space 2} 79.72198{col 37}{space 1}   36.35{col 46}{space 3}0.000{col 54}{space 4} 2740.478{col 67}{space 3} 3055.086
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} 3100.222{col 26}{space 2} 143.5346{col 37}{space 1}   21.60{col 46}{space 3}0.000{col 54}{space 4} 2817.006{col 67}{space 3} 3383.439
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} 3451.684{col 26}{space 2} 279.2664{col 37}{space 1}   12.36{col 46}{space 3}0.000{col 54}{space 4} 2900.648{col 67}{space 3} 4002.721
+{txt}{space 10}7  {c |}{col 14}{res}{space 2} 3952.168{col 26}{space 2} 480.7159{col 37}{space 1}    8.22{col 46}{space 3}0.000{col 54}{space 4}  3003.64{col 67}{space 3} 4900.696
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. margisplot
+{err}command {bf}margisplot{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. marginsplot
+
+{text}{p 2 6 2}Variables that uniquely identify margins: age{p_end}
+{res}
+{com}. marginsplot, no ci
+
+{text}{p 2 6 2}Variables that uniquely identify margins: age{p_end}
+{err}option {bf:no} not allowed
+{txt}{search r(198), local:r(198);}
+
+{com}. marginsplot, noci
+
+{text}{p 2 6 2}Variables that uniquely identify margins: age{p_end}
+{res}
+{com}. margins, at (age=(20(5)40)) dydx(age lwt)
+{res}
+{txt}Average marginal effects{col 49}Number of obs{col 67}= {res}       189
+{txt}Model VCE{col 14}: {res}OLS
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:Expression}:{space 1}{res:Linear prediction, predict()}{p_end}
+{p2colreset}{...}
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:dy/dx w.r.t.}:{space 1}{res:age lwt}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:1._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}20}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:2._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}25}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:3._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}30}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:4._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}35}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:5._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}40}{p_end}
+{p2colreset}{...}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}      dy/dx{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}age          {txt}{c |}
+{space 9}_at {c |}
+{space 10}1  {c |}{col 14}{res}{space 2}-34.02305{col 26}{space 2}   15.389{col 37}{space 1}   -2.21{col 46}{space 3}0.028{col 54}{space 4}-64.38796{col 67}{space 3}-3.658132
+{txt}{space 10}2  {c |}{col 14}{res}{space 2}-4.218639{col 26}{space 2} 9.389122{col 37}{space 1}   -0.45{col 46}{space 3}0.654{col 54}{space 4}-22.74485{col 67}{space 3} 14.30757
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} 25.58577{col 26}{space 2} 14.92271{col 37}{space 1}    1.71{col 46}{space 3}0.088{col 54}{space 4}-3.859078{col 67}{space 3} 55.03062
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} 55.39018{col 26}{space 2} 25.30644{col 37}{space 1}    2.19{col 46}{space 3}0.030{col 54}{space 4} 5.456585{col 67}{space 3} 105.3238
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} 85.19458{col 26}{space 2} 36.62434{col 37}{space 1}    2.33{col 46}{space 3}0.021{col 54}{space 4}   12.929{col 67}{space 3} 157.4602
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}lwt          {txt}{c |}
+{space 9}_at {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} 3.385803{col 26}{space 2} 1.673242{col 37}{space 1}    2.02{col 46}{space 3}0.044{col 54}{space 4} .0842332{col 67}{space 3} 6.687373
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} 3.385803{col 26}{space 2} 1.673242{col 37}{space 1}    2.02{col 46}{space 3}0.044{col 54}{space 4} .0842332{col 67}{space 3} 6.687373
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} 3.385803{col 26}{space 2} 1.673242{col 37}{space 1}    2.02{col 46}{space 3}0.044{col 54}{space 4} .0842332{col 67}{space 3} 6.687373
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} 3.385803{col 26}{space 2} 1.673242{col 37}{space 1}    2.02{col 46}{space 3}0.044{col 54}{space 4} .0842332{col 67}{space 3} 6.687373
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} 3.385803{col 26}{space 2} 1.673242{col 37}{space 1}    2.02{col 46}{space 3}0.044{col 54}{space 4} .0842332{col 67}{space 3} 6.687373
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. margins, at (age=(20(5)40)) eyex(age)
+{res}
+{txt}Average marginal effects{col 49}Number of obs{col 67}= {res}       189
+{txt}Model VCE{col 14}: {res}OLS
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:Expression}:{space 1}{res:Linear prediction, predict()}{p_end}
+{p2colreset}{...}
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:ey/ex w.r.t.}:{space 1}{res:age}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:1._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}20}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:2._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}25}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:3._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}30}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:4._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}35}{p_end}
+{p2colreset}{...}
+
+{txt}{p2colset 1 14 16 2}{...}
+{p2col:5._at}:{space 1}{res:{txt:age}{space 13}{txt:=} {space 9}40}{p_end}
+{p2colreset}{...}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}      ey/ex{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}age          {txt}{c |}
+{space 9}_at {c |}
+{space 10}1  {c |}{col 14}{res}{space 2}-.2345794{col 26}{space 2} .1052023{col 37}{space 1}   -2.23{col 46}{space 3}0.027{col 54}{space 4}  -.44216{col 67}{space 3}-.0269988
+{txt}{space 10}2  {c |}{col 14}{res}{space 2}-.0376164{col 26}{space 2} .0840066{col 37}{space 1}   -0.45{col 46}{space 3}0.655{col 54}{space 4}-.2033746{col 67}{space 3} .1281417
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .2685738{col 26}{space 2} .1534773{col 37}{space 1}    1.75{col 46}{space 3}0.082{col 54}{space 4} -.034261{col 67}{space 3} .5714087
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} .6328811{col 26}{space 2} .2656904{col 37}{space 1}    2.38{col 46}{space 3}0.018{col 54}{space 4} .1086322{col 67}{space 3}  1.15713
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} .9967992{col 26}{space 2}  .353493{col 37}{space 1}    2.82{col 46}{space 3}0.005{col 54}{space 4} .2993019{col 67}{space 3} 1.694296
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. marginsplot
+
+{text}{p 2 6 2}Variables that uniquely identify margins: age{p_end}
+{res}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\estimations\estimation.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 9 Mar 2016, 15:01:20
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

@@ -1,0 +1,198 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\combiningdata\combiningdata.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 Mar 2016, 08:54:11
+
+{com}. net from http://wwww.stata.com/training/08mar2016
+{err}host not found
+{hilite:http://wwww.stata.com/training/08mar2016/} either
+  1)  is not a valid URL, or
+  2)  could not be contacted, or
+  3)  is not a Stata download site (has no stata.toc file).
+{txt}{search r(631), local:r(631);}
+
+{com}. net from http://wwww.stata.com/trainning/08mar2016
+{err}host not found
+{hilite:http://wwww.stata.com/trainning/08mar2016/} either
+  1)  is not a valid URL, or
+  2)  could not be contacted, or
+  3)  is not a Stata download site (has no stata.toc file).
+{txt}{search r(631), local:r(631);}
+
+{com}. net from "http://www.stata.com/training/08mar2016"
+{s6hlp}
+.-
+http://www.stata.com/training/08mar2016/
+^Washington, DC Training^
+.-
+
+The following packages are for the Washington, DC training, March, 2016.
+
+To install any of these packages, click their links and follow the
+instructions for the package.
+
+distribution-date 08mar2016
+Copyright 2016 StataCorp LP
+{smcl}
+
+PACKAGES you could -{hilite:net describe}-:
+{s6hlp}
+    @net:describe gettingdata!gettingdata@       
+    @net:describe datatodataset!datatodataset@     
+    @net:describe makingdata!makingdata@        
+    @net:describe combiningdata!combiningdata@     
+    @net:describe reshapingdata!reshapingdata@     
+    @net:describe dofiles!dofiles@           
+    @net:describe subscripting!subscripting@      
+    @net:describe looping!looping@           
+{smcl}
+{.-}
+
+{com}. clear
+
+. clear
+
+. global F5 net from "http://www.stata.com/training/08mar2016"
+
+. clear
+
+. append using "old_visit_info.dta" "new_visit_info.dta",gen(whichfile)
+{txt}{p 0 7 2}
+(note: variable
+patid was 
+byte, now int to accommodate using data's values)
+{p_end}
+(label instype already defined)
+
+{com}. list, sepby(whichfile)
+{txt}
+     {c TLC}{hline 10}{c -}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c TRC}
+     {c |} {res}whichf~e   patid     visitdt       illness   insurance   doctor {txt}{c |}
+     {c LT}{hline 10}{c -}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c RT}
+  1. {c |} {res}       1       9   05oct2009          Cold   Major Med          {txt}{c |}
+  2. {c |} {res}       1       4   19oct2009   Sore Throat         HMO          {txt}{c |}
+  3. {c |} {res}       1       1   20oct2009          Pneu           .          {txt}{c |}
+  4. {c |} {res}       1      25   12nov2009          Cold         PPO          {txt}{c |}
+  5. {c |} {res}       1       4   15nov2009   Sore Throat           .          {txt}{c |}
+  6. {c |} {res}       1      25   30nov2009          Cold         PPO          {txt}{c |}
+  7. {c |} {res}       1       9   29dec2009           Flu           .          {txt}{c |}
+     {c LT}{hline 10}{c -}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c RT}
+  8. {c |} {res}       2     616   18jan2010          Pneu         HMO    Jones {txt}{c |}
+  9. {c |} {res}       2       9   23feb2010   Sore Throat         HMO    Smith {txt}{c |}
+     {c BLC}{hline 10}{c -}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c BRC}
+
+{com}. br
+
+. br
+
+. help append
+
+. clear
+
+. local theFIles : dir . files "*visit_info.dta"
+
+. macro list _theFiles
+{err}local macro `theFiles' not found
+{txt}{search r(111), local:r(111);}
+
+{com}. macro list theFIles
+{err}global macro $theFIles not found
+{txt}{search r(111), local:r(111);}
+
+{com}. macro list _theFIles
+{txt}{p 0 16}
+_theFIles:{space 6}{res}{res}"new_visit_info.dta" "old_visit_info.dta"
+{p_end}
+
+{com}. append using `theFIles', gen(fancyappend)
+{txt}(label instype already defined)
+
+{com}. list, sepby(fancyappend)
+{txt}
+     {c TLC}{hline 10}{c -}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c TRC}
+     {c |} {res}fancya~d   patid     visitdt       illness   insurance   doctor {txt}{c |}
+     {c LT}{hline 10}{c -}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c RT}
+  1. {c |} {res}       1     616   18jan2010          Pneu         HMO    Jones {txt}{c |}
+  2. {c |} {res}       1       9   23feb2010   Sore Throat         HMO    Smith {txt}{c |}
+     {c LT}{hline 10}{c -}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c RT}
+  3. {c |} {res}       2       9   05oct2009          Cold   Major Med          {txt}{c |}
+  4. {c |} {res}       2       4   19oct2009   Sore Throat         HMO          {txt}{c |}
+  5. {c |} {res}       2       1   20oct2009          Pneu           .          {txt}{c |}
+  6. {c |} {res}       2      25   12nov2009          Cold         PPO          {txt}{c |}
+  7. {c |} {res}       2       4   15nov2009   Sore Throat           .          {txt}{c |}
+  8. {c |} {res}       2      25   30nov2009          Cold         PPO          {txt}{c |}
+  9. {c |} {res}       2       9   29dec2009           Flu           .          {txt}{c |}
+     {c BLC}{hline 10}{c -}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c BRC}
+
+{com}. local theFiles : dir . files "*visit_info.dta"
+
+. macro list _theFiles
+{txt}{p 0 16}
+_theFiles:{space 6}{res}{res}"new_visit_info.dta" "old_visit_info.dta"
+{p_end}
+
+{com}. save all_visit_info
+{txt}file all_visit_info.dta saved
+
+{com}. merge m:1 patid using "patient_info.dta"
+{res}{txt}(label instype already defined)
+
+{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               4
+{txt}{col 9}from master{col 30}{res}               3{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               1{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}               6{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. br
+
+. br
+
+. help merge
+
+. rename visit2patient
+{res}{err}syntax error
+    Syntax is
+        {bf:rename}  {it:oldname}    {it:newname}   [{bf:, renumber}[{bf:(}{it:#}{bf:)}] {bf:addnumber}[{bf:(}{it:#}{bf:)}] {bf:sort} ...]
+        {bf:rename (}{it:oldnames}{bf:) (}{it:newnames}{bf:)} [{bf:, renumber}[{bf:(}{it:#}{bf:)}] {bf:addnumber}[{bf:(}{it:#}{bf:)}] {bf:sort} ...]
+        {bf:rename}  {it:oldnames}              {bf:,} {{bf:upper}|{bf:lower}|{bf:proper}}
+{txt}{search r(198), local:r(198);}
+
+{com}. rename _merge visit2patient
+{res}
+{com}. save all_info
+{txt}file all_info.dta saved
+
+{com}. clear
+
+. use "all_visit_info.dta"
+
+. merge m:1 patid using "patient_info.dta", update
+{res}{txt}(label instype already defined)
+
+{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               4
+{txt}{col 9}from master{col 30}{res}               3{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               1{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}               6
+{txt}{col 9}not updated{col 30}{res}               2{txt}  (_merge==3)
+{col 9}missing updated{col 30}{res}               3{txt}  (_merge==4)
+{col 9}nonmissing conflict{col 30}{res}               1{txt}  (_merge==5)
+{col 5}{hline 41}
+
+{com}. br
+
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\combiningdata\combiningdata.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 9 Mar 2016, 09:44:50
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

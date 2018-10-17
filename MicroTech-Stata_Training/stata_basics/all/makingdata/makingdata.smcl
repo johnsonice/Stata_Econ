@@ -1,0 +1,1087 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\DayOne\makingdata\makingdata.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 8 Mar 2016, 15:45:44
+
+{com}. use "apt_search_prepped.dta"
+
+. isid patid
+{err}variable {bf}patid{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. isid aptid
+{err}variable aptid does not uniquely identify the observations
+{txt}{search r(459), local:r(459);}
+
+{com}. isid aptidduplicates report
+{err}variable {bf}aptidduplicates{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. duplicates report
+
+{p 0 4}{txt}Duplicates in terms of {txt} all variables{p_end}
+
+{hline 10}{c TT}{hline 27}
+   copies {c |} observations       surplus
+{hline 10}{c +}{hline 27}
+        1 {c |}            {res}7             0
+{txt}{hline 10}{c BT}{hline 27}
+
+{com}. duplicates tag aptid
+{err}option {bf}generate(){sf} required
+{txt}{search r(198), local:r(198);}
+
+{com}. duplicates tag aptid, gen(dupid)
+
+{p 0 4}{txt}Duplicates in terms of {res} aptid{p_end}
+
+{com}. br aptid dupid
+
+. do "C:\Users\microtek\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}.                 list aptid if dupid
+{txt}
+     {c TLC}{hline 7}{c TRC}
+     {c |} {res}aptid {txt}{c |}
+     {c LT}{hline 7}{c RT}
+  1. {c |} {res}  107 {txt}{c |}
+  5. {c |} {res}  107 {txt}{c |}
+     {c BLC}{hline 7}{c BRC}
+
+{com}. 
+{txt}end of do-file
+
+{com}. duplicates aptid
+{err}illegal {cmd}duplicates {err}subcommand
+{txt}{search r(198), local:r(198);}
+
+{com}. duplicates list aptid
+
+{p 0 4}{txt}Duplicates in terms of {res} aptid{p_end}
+{txt}
+  {c TLC}{hline 6}{c -}{hline 7}{c TRC}
+  {c |} {res}obs:   aptid {txt}{c |}
+  {c LT}{hline 6}{c -}{hline 7}{c RT}
+  {c |} {res}   1     107 {txt}{c |}
+  {c |} {res}   5     107 {txt}{c |}
+  {c BLC}{hline 6}{c -}{hline 7}{c BRC}
+
+{com}. list aptid exterior zipcode if dupid,
+{txt}
+     {c TLC}{hline 7}{c -}{hline 10}{c -}{hline 9}{c TRC}
+     {c |} {res}aptid   exterior   zipcode {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 10}{c -}{hline 9}{c RT}
+  1. {c |} {res}  107      brick     02474 {txt}{c |}
+  5. {c |} {res}  107    shingle     03593 {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 10}{c -}{hline 9}{c BRC}
+
+{com}. list aptid exterior zipcode if dupid, nolabel
+{txt}
+     {c TLC}{hline 7}{c -}{hline 10}{c -}{hline 9}{c TRC}
+     {c |} {res}aptid   exterior   zipcode {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 10}{c -}{hline 9}{c RT}
+  1. {c |} {res}  107          1     02474 {txt}{c |}
+  5. {c |} {res}  107          3     03593 {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 10}{c -}{hline 9}{c BRC}
+
+{com}. replace aptid = 1071 if aptid ==107 & exterior ==3 & zipcoe =="03593"
+{err}zipcoe not found
+{txt}{search r(111), local:r(111);}
+
+{com}. replace aptid = 1071 if aptid ==107 & exterior ==3 & zipcode =="03593"
+{txt}(1 real change made)
+
+{com}. duplicates report
+
+{p 0 4}{txt}Duplicates in terms of {txt} all variables{p_end}
+
+{hline 10}{c TT}{hline 27}
+   copies {c |} observations       surplus
+{hline 10}{c +}{hline 27}
+        1 {c |}            {res}7             0
+{txt}{hline 10}{c BT}{hline 27}
+
+{com}. duplicates report aptid
+
+{p 0 4}{txt}Duplicates in terms of {res} aptid{p_end}
+
+{txt}{hline 10}{c TT}{hline 27}
+   copies {c |} observations       surplus
+{hline 10}{c +}{hline 27}
+        1 {c |}            {res}7             0
+{txt}{hline 10}{c BT}{hline 27}
+
+{com}. duplicates report location
+
+{p 0 4}{txt}Duplicates in terms of {res} location{p_end}
+
+{txt}{hline 10}{c TT}{hline 27}
+   copies {c |} observations       surplus
+{hline 10}{c +}{hline 27}
+        1 {c |}            {res}2             0
+        {txt}2 {c |}            {res}2             1
+        {txt}3 {c |}            {res}3             2
+{txt}{hline 10}{c BT}{hline 27}
+
+{com}. assert(rent>=0)
+
+. labe book
+{err}invalid syntax
+{txt}{search r(198), local:r(198);}
+
+{com}. labelbook
+
+{txt}{hline}
+value label {res}exterior_new 
+{txt}{hline}
+
+{col 7}{hi:values}{col 49}{hi:labels}
+{col 8}range:  [{res}1{txt},{res}4{txt}]{col 42}string length:  [{res}5{txt},{res}9{txt}]
+{col 12}N:  {res}4{col 34}{txt}unique at full length:  {res}yes
+{col 9}{txt}gaps:  {res}no{col 36}{txt}{ralign 20:unique at length 12:}  {res}yes
+{col 3}{txt}missing .*:  {res}0{col 44}{txt}null string:  {res}no
+{col 32}{txt}leading/trailing blanks:  {res}no
+{col 37}{txt}numeric -> numeric:  {res}no
+  {hi:definition}
+{txt}{p 0 15 2}{space 11}1{space 2}
+{res}brick
+{p_end}
+{txt}{p 0 15 2}{space 11}2{space 2}
+{res}clapboard
+{p_end}
+{txt}{p 0 15 2}{space 11}3{space 2}
+{res}shingle
+{p_end}
+{txt}{p 0 15 2}{space 11}4{space 2}
+{res}siding
+{p_end}
+
+{txt}{p 3 15}variables:{space 2}{res}exterior
+
+
+{txt}{hline}
+value label {res}noyes 
+{txt}{hline}
+
+{col 7}{hi:values}{col 49}{hi:labels}
+{col 8}range:  [{res}0{txt},{res}1{txt}]{col 42}string length:  [{res}2{txt},{res}3{txt}]
+{col 12}N:  {res}2{col 34}{txt}unique at full length:  {res}yes
+{col 9}{txt}gaps:  {res}no{col 36}{txt}{ralign 20:unique at length 12:}  {res}yes
+{col 3}{txt}missing .*:  {res}0{col 44}{txt}null string:  {res}no
+{col 32}{txt}leading/trailing blanks:  {res}no
+{col 37}{txt}numeric -> numeric:  {res}no
+  {hi:definition}
+{txt}{p 0 15 2}{space 11}0{space 2}
+{res}No
+{p_end}
+{txt}{p 0 15 2}{space 11}1{space 2}
+{res}Yes
+{p_end}
+
+{txt}{p 3 15}variables:{space 2}{res}pets
+
+
+{txt}{hline}
+value label {res}qual 
+{txt}{hline}
+
+{col 7}{hi:values}{col 49}{hi:labels}
+{col 8}range:  [{res}0{txt},{res}2{txt}]{col 42}string length:  [{res}4{txt},{res}7{txt}]
+{col 12}N:  {res}3{col 34}{txt}unique at full length:  {res}yes
+{col 9}{txt}gaps:  {res}no{col 36}{txt}{ralign 20:unique at length 12:}  {res}yes
+{col 3}{txt}missing .*:  {res}0{col 44}{txt}null string:  {res}no
+{col 32}{txt}leading/trailing blanks:  {res}no
+{col 37}{txt}numeric -> numeric:  {res}no
+  {hi:definition}
+{txt}{p 0 15 2}{space 11}0{space 2}
+{res}poor
+{p_end}
+{txt}{p 0 15 2}{space 11}1{space 2}
+{res}good
+{p_end}
+{txt}{p 0 15 2}{space 11}2{space 2}
+{res}perfect
+{p_end}
+
+{txt}{p 3 15}variables:{space 2}{res}quality
+
+
+{txt}{hline}
+value label {res}whereat 
+{txt}{hline}
+
+{col 7}{hi:values}{col 49}{hi:labels}
+{col 8}range:  [{res}1{txt},{res}4{txt}]{col 42}string length:  [{res}4{txt},{res}7{txt}]
+{col 12}N:  {res}4{col 34}{txt}unique at full length:  {res}yes
+{col 9}{txt}gaps:  {res}no{col 36}{txt}{ralign 20:unique at length 12:}  {res}yes
+{col 3}{txt}missing .*:  {res}0{col 44}{txt}null string:  {res}no
+{col 32}{txt}leading/trailing blanks:  {res}no
+{col 37}{txt}numeric -> numeric:  {res}no
+  {hi:definition}
+{txt}{p 0 15 2}{space 11}1{space 2}
+{res}City
+{p_end}
+{txt}{p 0 15 2}{space 11}2{space 2}
+{res}Suburbs
+{p_end}
+{txt}{p 0 15 2}{space 11}3{space 2}
+{res}Exurbs
+{p_end}
+{txt}{p 0 15 2}{space 11}4{space 2}
+{res}Country
+{p_end}
+
+{txt}{p 3 15}variables:{space 2}{res}location
+
+
+{com}. assert quality < 2 if pets==0
+{txt}1 contradiction in 4 observations
+{err}assertion is false
+{txt}{search r(9), local:r(9);}
+
+{com}. gen qualityerror = (quality ==2 & pets ==0)
+
+. di qualityerror
+{res}0
+
+{com}. list aptid quality pets qualityerror
+{txt}
+     {c TLC}{hline 7}{c -}{hline 9}{c -}{hline 6}{c -}{hline 10}{c TRC}
+     {c |} {res}aptid   quality   pets   qualit~r {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 9}{c -}{hline 6}{c -}{hline 10}{c RT}
+  1. {c |} {res}  107      poor    Yes          0 {txt}{c |}
+  2. {c |} {res}  143      poor     No          0 {txt}{c |}
+  3. {c |} {res}  113   perfect    Yes          0 {txt}{c |}
+  4. {c |} {res}  220      good     No          0 {txt}{c |}
+  5. {c |} {res} 1071   perfect     No          1 {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 9}{c -}{hline 6}{c -}{hline 10}{c RT}
+  6. {c |} {res}  145      good    Yes          0 {txt}{c |}
+  7. {c |} {res}  147      poor     No          0 {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 9}{c -}{hline 6}{c -}{hline 10}{c BRC}
+
+{com}. replace quality = 1 if qualityerror
+{txt}(1 real change made)
+
+{com}. help ckvar
+
+. edit
+
+. replace available = date("July 1, 2016","MDY") in 6
+{txt}(1 real change made)
+
+{com}. drop dupid qualityerror
+
+. sort rent
+
+. list rent
+{txt}
+     {c TLC}{hline 6}{c TRC}
+     {c |} {res}rent {txt}{c |}
+     {c LT}{hline 6}{c RT}
+  1. {c |} {res} 695 {txt}{c |}
+  2. {c |} {res} 720 {txt}{c |}
+  3. {c |} {res} 800 {txt}{c |}
+  4. {c |} {res}1100 {txt}{c |}
+  5. {c |} {res}1225 {txt}{c |}
+     {c LT}{hline 6}{c RT}
+  6. {c |} {res}1400 {txt}{c |}
+  7. {c |} {res}1500 {txt}{c |}
+     {c BLC}{hline 6}{c BRC}
+
+{com}. do makecat
+{txt}
+{com}. recode rent ///
+>   (1300/max=4 "$1300 and above") ///
+>   (1000/1300=3 "$1000 to under $1300") ///
+>   (800/1000=2 "$800 to under $1000") ///
+>   (min/800=1 "under $800") ///
+>   , gen(rentgrp)
+{txt}(7 differences between rent and rentgrp)
+
+{com}. 
+{txt}end of do-file
+
+{com}. list rent rentgrp, sepby(rentgrp)
+{txt}
+     {c TLC}{hline 6}{c -}{hline 22}{c TRC}
+     {c |} {res}rent                rentgrp {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 22}{c RT}
+  1. {c |} {res} 695             under $800 {txt}{c |}
+  2. {c |} {res} 720             under $800 {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 22}{c RT}
+  3. {c |} {res} 800    $800 to under $1000 {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 22}{c RT}
+  4. {c |} {res}1100   $1000 to under $1300 {txt}{c |}
+  5. {c |} {res}1225   $1000 to under $1300 {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 22}{c RT}
+  6. {c |} {res}1400        $1300 and above {txt}{c |}
+  7. {c |} {res}1500        $1300 and above {txt}{c |}
+     {c BLC}{hline 6}{c -}{hline 22}{c BRC}
+
+{com}. xtile rentquart = rent, n(4)
+
+. list rentquart
+{txt}
+     {c TLC}{hline 10}{c TRC}
+     {c |} {res}rentqu~t {txt}{c |}
+     {c LT}{hline 10}{c RT}
+  1. {c |} {res}       1 {txt}{c |}
+  2. {c |} {res}       1 {txt}{c |}
+  3. {c |} {res}       2 {txt}{c |}
+  4. {c |} {res}       2 {txt}{c |}
+  5. {c |} {res}       3 {txt}{c |}
+     {c LT}{hline 10}{c RT}
+  6. {c |} {res}       3 {txt}{c |}
+  7. {c |} {res}       4 {txt}{c |}
+     {c BLC}{hline 10}{c BRC}
+
+{com}. help egen
+
+. save "apartment_search_clean"
+{txt}file apartment_search_clean.dta saved
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\DayOne\makingdata\makingdata.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 8 Mar 2016, 16:29:41
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\makingdata\makingdata.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 Mar 2016, 08:35:57
+
+{com}. do edit
+{err}{p 0 4 2}
+file edit.do
+not found
+{p_end}
+{txt}{search r(601), local:r(601);}
+
+{com}. doedit
+
+. sysue auto
+{err}command {bf}sysue{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. sysye auto
+{err}command {bf}sysye{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. sysue auto
+{err}command {bf}sysue{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. sysuse auto
+{txt}(1978 Automobile Data)
+
+{com}. cls
+
+. list
+
+     {txt}{c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+  1. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}AMC Concord       {txt}{c |} {res} 4,099 {txt}{c |} {res} 22 {txt}{c |} {res}    3 {txt}{c |} {res}     2.5 {txt}{c |} {res}   11 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,930 {txt}{c |} {res}   186 {txt}{c |} {res}  40  {txt}{c |} {res}     121  {txt}{c |} {res}    3.58  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+  2. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}AMC Pacer         {txt}{c |} {res} 4,749 {txt}{c |} {res} 17 {txt}{c |} {res}    3 {txt}{c |} {res}     3.0 {txt}{c |} {res}   11 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,350 {txt}{c |} {res}   173 {txt}{c |} {res}  40  {txt}{c |} {res}     258  {txt}{c |} {res}    2.53  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+  3. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}AMC Spirit        {txt}{c |} {res} 3,799 {txt}{c |} {res} 22 {txt}{c |} {res}    . {txt}{c |} {res}     3.0 {txt}{c |} {res}   12 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,640 {txt}{c |} {res}   168 {txt}{c |} {res}  35  {txt}{c |} {res}     121  {txt}{c |} {res}    3.08  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+  4. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Buick Century     {txt}{c |} {res} 4,816 {txt}{c |} {res} 20 {txt}{c |} {res}    3 {txt}{c |} {res}     4.5 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,250 {txt}{c |} {res}   196 {txt}{c |} {res}  40  {txt}{c |} {res}     196  {txt}{c |} {res}    2.93  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+  5. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Buick Electra     {txt}{c |} {res} 7,827 {txt}{c |} {res} 15 {txt}{c |} {res}    4 {txt}{c |} {res}     4.0 {txt}{c |} {res}   20 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 4,080 {txt}{c |} {res}   222 {txt}{c |} {res}  43  {txt}{c |} {res}     350  {txt}{c |} {res}    2.41  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+  6. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Buick LeSabre     {txt}{c |} {res} 5,788 {txt}{c |} {res} 18 {txt}{c |} {res}    3 {txt}{c |} {res}     4.0 {txt}{c |} {res}   21 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,670 {txt}{c |} {res}   218 {txt}{c |} {res}  43  {txt}{c |} {res}     231  {txt}{c |} {res}    2.73  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+  7. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Buick Opel        {txt}{c |} {res} 4,453 {txt}{c |} {res} 26 {txt}{c |} {res}    . {txt}{c |} {res}     3.0 {txt}{c |} {res}   10 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,230 {txt}{c |} {res}   170 {txt}{c |} {res}  34  {txt}{c |} {res}     304  {txt}{c |} {res}    2.87  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+  8. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Buick Regal       {txt}{c |} {res} 5,189 {txt}{c |} {res} 20 {txt}{c |} {res}    3 {txt}{c |} {res}     2.0 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,280 {txt}{c |} {res}   200 {txt}{c |} {res}  42  {txt}{c |} {res}     196  {txt}{c |} {res}    2.93  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+  9. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Buick Riviera     {txt}{c |} {res}10,372 {txt}{c |} {res} 16 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   17 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,880 {txt}{c |} {res}   207 {txt}{c |} {res}  43  {txt}{c |} {res}     231  {txt}{c |} {res}    2.93  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 10. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Buick Skylark     {txt}{c |} {res} 4,082 {txt}{c |} {res} 19 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   13 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,400 {txt}{c |} {res}   200 {txt}{c |} {res}  42  {txt}{c |} {res}     231  {txt}{c |} {res}    3.08  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 11. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Cad. Deville      {txt}{c |} {res}11,385 {txt}{c |} {res} 14 {txt}{c |} {res}    3 {txt}{c |} {res}     4.0 {txt}{c |} {res}   20 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 4,330 {txt}{c |} {res}   221 {txt}{c |} {res}  44  {txt}{c |} {res}     425  {txt}{c |} {res}    2.28  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 12. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Cad. Eldorado     {txt}{c |} {res}14,500 {txt}{c |} {res} 14 {txt}{c |} {res}    2 {txt}{c |} {res}     3.5 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,900 {txt}{c |} {res}   204 {txt}{c |} {res}  43  {txt}{c |} {res}     350  {txt}{c |} {res}    2.19  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 13. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Cad. Seville      {txt}{c |} {res}15,906 {txt}{c |} {res} 21 {txt}{c |} {res}    3 {txt}{c |} {res}     3.0 {txt}{c |} {res}   13 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 4,290 {txt}{c |} {res}   204 {txt}{c |} {res}  45  {txt}{c |} {res}     350  {txt}{c |} {res}    2.24  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 14. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Chev. Chevette    {txt}{c |} {res} 3,299 {txt}{c |} {res} 29 {txt}{c |} {res}    3 {txt}{c |} {res}     2.5 {txt}{c |} {res}    9 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,110 {txt}{c |} {res}   163 {txt}{c |} {res}  34  {txt}{c |} {res}     231  {txt}{c |} {res}    2.93  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 15. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Chev. Impala      {txt}{c |} {res} 5,705 {txt}{c |} {res} 16 {txt}{c |} {res}    4 {txt}{c |} {res}     4.0 {txt}{c |} {res}   20 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,690 {txt}{c |} {res}   212 {txt}{c |} {res}  43  {txt}{c |} {res}     250  {txt}{c |} {res}    2.56  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 16. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Chev. Malibu      {txt}{c |} {res} 4,504 {txt}{c |} {res} 22 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   17 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,180 {txt}{c |} {res}   193 {txt}{c |} {res}  31  {txt}{c |} {res}     200  {txt}{c |} {res}    2.73  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 17. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Chev. Monte Carlo {txt}{c |} {res} 5,104 {txt}{c |} {res} 22 {txt}{c |} {res}    2 {txt}{c |} {res}     2.0 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,220 {txt}{c |} {res}   200 {txt}{c |} {res}  41  {txt}{c |} {res}     200  {txt}{c |} {res}    2.73  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 18. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Chev. Monza       {txt}{c |} {res} 3,667 {txt}{c |} {res} 24 {txt}{c |} {res}    2 {txt}{c |} {res}     2.0 {txt}{c |} {res}    7 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,750 {txt}{c |} {res}   179 {txt}{c |} {res}  40  {txt}{c |} {res}     151  {txt}{c |} {res}    2.73  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 19. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Chev. Nova        {txt}{c |} {res} 3,955 {txt}{c |} {res} 19 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   13 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,430 {txt}{c |} {res}   197 {txt}{c |} {res}  43  {txt}{c |} {res}     250  {txt}{c |} {res}    2.56  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 20. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Dodge Colt        {txt}{c |} {res} 3,984 {txt}{c |} {res} 30 {txt}{c |} {res}    5 {txt}{c |} {res}     2.0 {txt}{c |} {res}    8 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,120 {txt}{c |} {res}   163 {txt}{c |} {res}  35  {txt}{c |} {res}      98  {txt}{c |} {res}    3.54  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 21. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Dodge Diplomat    {txt}{c |} {res} 4,010 {txt}{c |} {res} 18 {txt}{c |} {res}    2 {txt}{c |} {res}     4.0 {txt}{c |} {res}   17 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,600 {txt}{c |} {res}   206 {txt}{c |} {res}  46  {txt}{c |} {res}     318  {txt}{c |} {res}    2.47  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 22. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Dodge Magnum      {txt}{c |} {res} 5,886 {txt}{c |} {res} 16 {txt}{c |} {res}    2 {txt}{c |} {res}     4.0 {txt}{c |} {res}   17 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,600 {txt}{c |} {res}   206 {txt}{c |} {res}  46  {txt}{c |} {res}     318  {txt}{c |} {res}    2.47  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 23. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Dodge St. Regis   {txt}{c |} {res} 6,342 {txt}{c |} {res} 17 {txt}{c |} {res}    2 {txt}{c |} {res}     4.5 {txt}{c |} {res}   21 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,740 {txt}{c |} {res}   220 {txt}{c |} {res}  46  {txt}{c |} {res}     225  {txt}{c |} {res}    2.94  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 24. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Ford Fiesta       {txt}{c |} {res} 4,389 {txt}{c |} {res} 28 {txt}{c |} {res}    4 {txt}{c |} {res}     1.5 {txt}{c |} {res}    9 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 1,800 {txt}{c |} {res}   147 {txt}{c |} {res}  33  {txt}{c |} {res}      98  {txt}{c |} {res}    3.15  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 25. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Ford Mustang      {txt}{c |} {res} 4,187 {txt}{c |} {res} 21 {txt}{c |} {res}    3 {txt}{c |} {res}     2.0 {txt}{c |} {res}   10 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,650 {txt}{c |} {res}   179 {txt}{c |} {res}  43  {txt}{c |} {res}     140  {txt}{c |} {res}    3.08  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 26. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Linc. Continental {txt}{c |} {res}11,497 {txt}{c |} {res} 12 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   22 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 4,840 {txt}{c |} {res}   233 {txt}{c |} {res}  51  {txt}{c |} {res}     400  {txt}{c |} {res}    2.47  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 27. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Linc. Mark V      {txt}{c |} {res}13,594 {txt}{c |} {res} 12 {txt}{c |} {res}    3 {txt}{c |} {res}     2.5 {txt}{c |} {res}   18 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 4,720 {txt}{c |} {res}   230 {txt}{c |} {res}  48  {txt}{c |} {res}     400  {txt}{c |} {res}    2.47  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 28. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Linc. Versailles  {txt}{c |} {res}13,466 {txt}{c |} {res} 14 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   15 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,830 {txt}{c |} {res}   201 {txt}{c |} {res}  41  {txt}{c |} {res}     302  {txt}{c |} {res}    2.47  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 29. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Merc. Bobcat      {txt}{c |} {res} 3,829 {txt}{c |} {res} 22 {txt}{c |} {res}    4 {txt}{c |} {res}     3.0 {txt}{c |} {res}    9 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,580 {txt}{c |} {res}   169 {txt}{c |} {res}  39  {txt}{c |} {res}     140  {txt}{c |} {res}    2.73  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 30. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Merc. Cougar      {txt}{c |} {res} 5,379 {txt}{c |} {res} 14 {txt}{c |} {res}    4 {txt}{c |} {res}     3.5 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 4,060 {txt}{c |} {res}   221 {txt}{c |} {res}  48  {txt}{c |} {res}     302  {txt}{c |} {res}    2.75  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 31. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Merc. Marquis     {txt}{c |} {res} 6,165 {txt}{c |} {res} 15 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   23 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,720 {txt}{c |} {res}   212 {txt}{c |} {res}  44  {txt}{c |} {res}     302  {txt}{c |} {res}    2.26  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 32. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Merc. Monarch     {txt}{c |} {res} 4,516 {txt}{c |} {res} 18 {txt}{c |} {res}    3 {txt}{c |} {res}     3.0 {txt}{c |} {res}   15 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,370 {txt}{c |} {res}   198 {txt}{c |} {res}  41  {txt}{c |} {res}     250  {txt}{c |} {res}    2.43  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 33. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Merc. XR-7        {txt}{c |} {res} 6,303 {txt}{c |} {res} 14 {txt}{c |} {res}    4 {txt}{c |} {res}     3.0 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 4,130 {txt}{c |} {res}   217 {txt}{c |} {res}  45  {txt}{c |} {res}     302  {txt}{c |} {res}    2.75  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 34. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Merc. Zephyr      {txt}{c |} {res} 3,291 {txt}{c |} {res} 20 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   17 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,830 {txt}{c |} {res}   195 {txt}{c |} {res}  43  {txt}{c |} {res}     140  {txt}{c |} {res}    3.08  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 35. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Olds 98           {txt}{c |} {res} 8,814 {txt}{c |} {res} 21 {txt}{c |} {res}    4 {txt}{c |} {res}     4.0 {txt}{c |} {res}   20 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 4,060 {txt}{c |} {res}   220 {txt}{c |} {res}  43  {txt}{c |} {res}     350  {txt}{c |} {res}    2.41  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 36. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Olds Cutl Supr    {txt}{c |} {res} 5,172 {txt}{c |} {res} 19 {txt}{c |} {res}    3 {txt}{c |} {res}     2.0 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,310 {txt}{c |} {res}   198 {txt}{c |} {res}  42  {txt}{c |} {res}     231  {txt}{c |} {res}    2.93  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 37. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Olds Cutlass      {txt}{c |} {res} 4,733 {txt}{c |} {res} 19 {txt}{c |} {res}    3 {txt}{c |} {res}     4.5 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,300 {txt}{c |} {res}   198 {txt}{c |} {res}  42  {txt}{c |} {res}     231  {txt}{c |} {res}    2.93  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 38. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Olds Delta 88     {txt}{c |} {res} 4,890 {txt}{c |} {res} 18 {txt}{c |} {res}    4 {txt}{c |} {res}     4.0 {txt}{c |} {res}   20 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,690 {txt}{c |} {res}   218 {txt}{c |} {res}  42  {txt}{c |} {res}     231  {txt}{c |} {res}    2.73  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 39. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Olds Omega        {txt}{c |} {res} 4,181 {txt}{c |} {res} 19 {txt}{c |} {res}    3 {txt}{c |} {res}     4.5 {txt}{c |} {res}   14 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,370 {txt}{c |} {res}   200 {txt}{c |} {res}  43  {txt}{c |} {res}     231  {txt}{c |} {res}    3.08  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 40. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Olds Starfire     {txt}{c |} {res} 4,195 {txt}{c |} {res} 24 {txt}{c |} {res}    1 {txt}{c |} {res}     2.0 {txt}{c |} {res}   10 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,730 {txt}{c |} {res}   180 {txt}{c |} {res}  40  {txt}{c |} {res}     151  {txt}{c |} {res}    2.73  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 41. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Olds Toronado     {txt}{c |} {res}10,371 {txt}{c |} {res} 16 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   17 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 4,030 {txt}{c |} {res}   206 {txt}{c |} {res}  43  {txt}{c |} {res}     350  {txt}{c |} {res}    2.41  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 42. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Plym. Arrow       {txt}{c |} {res} 4,647 {txt}{c |} {res} 28 {txt}{c |} {res}    3 {txt}{c |} {res}     2.0 {txt}{c |} {res}   11 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,260 {txt}{c |} {res}   170 {txt}{c |} {res}  37  {txt}{c |} {res}     156  {txt}{c |} {res}    3.05  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 43. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Plym. Champ       {txt}{c |} {res} 4,425 {txt}{c |} {res} 34 {txt}{c |} {res}    5 {txt}{c |} {res}     2.5 {txt}{c |} {res}   11 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 1,800 {txt}{c |} {res}   157 {txt}{c |} {res}  37  {txt}{c |} {res}      86  {txt}{c |} {res}    2.97  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 44. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Plym. Horizon     {txt}{c |} {res} 4,482 {txt}{c |} {res} 25 {txt}{c |} {res}    3 {txt}{c |} {res}     4.0 {txt}{c |} {res}   17 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,200 {txt}{c |} {res}   165 {txt}{c |} {res}  36  {txt}{c |} {res}     105  {txt}{c |} {res}    3.37  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 45. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Plym. Sapporo     {txt}{c |} {res} 6,486 {txt}{c |} {res} 26 {txt}{c |} {res}    . {txt}{c |} {res}     1.5 {txt}{c |} {res}    8 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,520 {txt}{c |} {res}   182 {txt}{c |} {res}  38  {txt}{c |} {res}     119  {txt}{c |} {res}    3.54  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 46. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Plym. Volare      {txt}{c |} {res} 4,060 {txt}{c |} {res} 18 {txt}{c |} {res}    2 {txt}{c |} {res}     5.0 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,330 {txt}{c |} {res}   201 {txt}{c |} {res}  44  {txt}{c |} {res}     225  {txt}{c |} {res}    3.23  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 47. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Pont. Catalina    {txt}{c |} {res} 5,798 {txt}{c |} {res} 18 {txt}{c |} {res}    4 {txt}{c |} {res}     4.0 {txt}{c |} {res}   20 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,700 {txt}{c |} {res}   214 {txt}{c |} {res}  42  {txt}{c |} {res}     231  {txt}{c |} {res}    2.73  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 48. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Pont. Firebird    {txt}{c |} {res} 4,934 {txt}{c |} {res} 18 {txt}{c |} {res}    1 {txt}{c |} {res}     1.5 {txt}{c |} {res}    7 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,470 {txt}{c |} {res}   198 {txt}{c |} {res}  42  {txt}{c |} {res}     231  {txt}{c |} {res}    3.08  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 49. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Pont. Grand Prix  {txt}{c |} {res} 5,222 {txt}{c |} {res} 19 {txt}{c |} {res}    3 {txt}{c |} {res}     2.0 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,210 {txt}{c |} {res}   201 {txt}{c |} {res}  45  {txt}{c |} {res}     231  {txt}{c |} {res}    2.93  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 50. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Pont. Le Mans     {txt}{c |} {res} 4,723 {txt}{c |} {res} 19 {txt}{c |} {res}    3 {txt}{c |} {res}     3.5 {txt}{c |} {res}   17 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,200 {txt}{c |} {res}   199 {txt}{c |} {res}  40  {txt}{c |} {res}     231  {txt}{c |} {res}    2.93  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 51. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Pont. Phoenix     {txt}{c |} {res} 4,424 {txt}{c |} {res} 19 {txt}{c |} {res}    . {txt}{c |} {res}     3.5 {txt}{c |} {res}   13 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,420 {txt}{c |} {res}   203 {txt}{c |} {res}  43  {txt}{c |} {res}     231  {txt}{c |} {res}    3.08  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 52. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Pont. Sunbird     {txt}{c |} {res} 4,172 {txt}{c |} {res} 24 {txt}{c |} {res}    2 {txt}{c |} {res}     2.0 {txt}{c |} {res}    7 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,690 {txt}{c |} {res}   179 {txt}{c |} {res}  41  {txt}{c |} {res}     151  {txt}{c |} {res}    2.73  {txt}{c |} {res}Domestic  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 53. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Audi 5000         {txt}{c |} {res} 9,690 {txt}{c |} {res} 17 {txt}{c |} {res}    5 {txt}{c |} {res}     3.0 {txt}{c |} {res}   15 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,830 {txt}{c |} {res}   189 {txt}{c |} {res}  37  {txt}{c |} {res}     131  {txt}{c |} {res}    3.20  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 54. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Audi Fox          {txt}{c |} {res} 6,295 {txt}{c |} {res} 23 {txt}{c |} {res}    3 {txt}{c |} {res}     2.5 {txt}{c |} {res}   11 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,070 {txt}{c |} {res}   174 {txt}{c |} {res}  36  {txt}{c |} {res}      97  {txt}{c |} {res}    3.70  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 55. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}BMW 320i          {txt}{c |} {res} 9,735 {txt}{c |} {res} 25 {txt}{c |} {res}    4 {txt}{c |} {res}     2.5 {txt}{c |} {res}   12 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,650 {txt}{c |} {res}   177 {txt}{c |} {res}  34  {txt}{c |} {res}     121  {txt}{c |} {res}    3.64  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 56. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Datsun 200        {txt}{c |} {res} 6,229 {txt}{c |} {res} 23 {txt}{c |} {res}    4 {txt}{c |} {res}     1.5 {txt}{c |} {res}    6 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,370 {txt}{c |} {res}   170 {txt}{c |} {res}  35  {txt}{c |} {res}     119  {txt}{c |} {res}    3.89  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 57. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Datsun 210        {txt}{c |} {res} 4,589 {txt}{c |} {res} 35 {txt}{c |} {res}    5 {txt}{c |} {res}     2.0 {txt}{c |} {res}    8 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,020 {txt}{c |} {res}   165 {txt}{c |} {res}  32  {txt}{c |} {res}      85  {txt}{c |} {res}    3.70  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 58. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Datsun 510        {txt}{c |} {res} 5,079 {txt}{c |} {res} 24 {txt}{c |} {res}    4 {txt}{c |} {res}     2.5 {txt}{c |} {res}    8 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,280 {txt}{c |} {res}   170 {txt}{c |} {res}  34  {txt}{c |} {res}     119  {txt}{c |} {res}    3.54  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 59. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Datsun 810        {txt}{c |} {res} 8,129 {txt}{c |} {res} 21 {txt}{c |} {res}    4 {txt}{c |} {res}     2.5 {txt}{c |} {res}    8 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,750 {txt}{c |} {res}   184 {txt}{c |} {res}  38  {txt}{c |} {res}     146  {txt}{c |} {res}    3.55  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 60. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Fiat Strada       {txt}{c |} {res} 4,296 {txt}{c |} {res} 21 {txt}{c |} {res}    3 {txt}{c |} {res}     2.5 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,130 {txt}{c |} {res}   161 {txt}{c |} {res}  36  {txt}{c |} {res}     105  {txt}{c |} {res}    3.37  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 61. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Honda Accord      {txt}{c |} {res} 5,799 {txt}{c |} {res} 25 {txt}{c |} {res}    5 {txt}{c |} {res}     3.0 {txt}{c |} {res}   10 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,240 {txt}{c |} {res}   172 {txt}{c |} {res}  36  {txt}{c |} {res}     107  {txt}{c |} {res}    3.05  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 62. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Honda Civic       {txt}{c |} {res} 4,499 {txt}{c |} {res} 28 {txt}{c |} {res}    4 {txt}{c |} {res}     2.5 {txt}{c |} {res}    5 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 1,760 {txt}{c |} {res}   149 {txt}{c |} {res}  34  {txt}{c |} {res}      91  {txt}{c |} {res}    3.30  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 63. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Mazda GLC         {txt}{c |} {res} 3,995 {txt}{c |} {res} 30 {txt}{c |} {res}    4 {txt}{c |} {res}     3.5 {txt}{c |} {res}   11 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 1,980 {txt}{c |} {res}   154 {txt}{c |} {res}  33  {txt}{c |} {res}      86  {txt}{c |} {res}    3.73  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 64. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Peugeot 604       {txt}{c |} {res}12,990 {txt}{c |} {res} 14 {txt}{c |} {res}    . {txt}{c |} {res}     3.5 {txt}{c |} {res}   14 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,420 {txt}{c |} {res}   192 {txt}{c |} {res}  38  {txt}{c |} {res}     163  {txt}{c |} {res}    3.58  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 65. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Renault Le Car    {txt}{c |} {res} 3,895 {txt}{c |} {res} 26 {txt}{c |} {res}    3 {txt}{c |} {res}     3.0 {txt}{c |} {res}   10 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 1,830 {txt}{c |} {res}   142 {txt}{c |} {res}  34  {txt}{c |} {res}      79  {txt}{c |} {res}    3.72  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 66. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Subaru            {txt}{c |} {res} 3,798 {txt}{c |} {res} 35 {txt}{c |} {res}    5 {txt}{c |} {res}     2.5 {txt}{c |} {res}   11 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,050 {txt}{c |} {res}   164 {txt}{c |} {res}  36  {txt}{c |} {res}      97  {txt}{c |} {res}    3.81  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 67. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Toyota Celica     {txt}{c |} {res} 5,899 {txt}{c |} {res} 18 {txt}{c |} {res}    5 {txt}{c |} {res}     2.5 {txt}{c |} {res}   14 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,410 {txt}{c |} {res}   174 {txt}{c |} {res}  36  {txt}{c |} {res}     134  {txt}{c |} {res}    3.06  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 68. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Toyota Corolla    {txt}{c |} {res} 3,748 {txt}{c |} {res} 31 {txt}{c |} {res}    5 {txt}{c |} {res}     3.0 {txt}{c |} {res}    9 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,200 {txt}{c |} {res}   165 {txt}{c |} {res}  35  {txt}{c |} {res}      97  {txt}{c |} {res}    3.21  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 69. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Toyota Corona     {txt}{c |} {res} 5,719 {txt}{c |} {res} 18 {txt}{c |} {res}    5 {txt}{c |} {res}     2.0 {txt}{c |} {res}   11 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,670 {txt}{c |} {res}   175 {txt}{c |} {res}  36  {txt}{c |} {res}     134  {txt}{c |} {res}    3.05  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 70. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}VW Dasher         {txt}{c |} {res} 7,140 {txt}{c |} {res} 23 {txt}{c |} {res}    4 {txt}{c |} {res}     2.5 {txt}{c |} {res}   12 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,160 {txt}{c |} {res}   172 {txt}{c |} {res}  36  {txt}{c |} {res}      97  {txt}{c |} {res}    3.74  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 71. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}VW Diesel         {txt}{c |} {res} 5,397 {txt}{c |} {res} 41 {txt}{c |} {res}    5 {txt}{c |} {res}     3.0 {txt}{c |} {res}   15 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 2,040 {txt}{c |} {res}   155 {txt}{c |} {res}  35  {txt}{c |} {res}      90  {txt}{c |} {res}    3.78  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 72. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}VW Rabbit         {txt}{c |} {res} 4,697 {txt}{c |} {res} 25 {txt}{c |} {res}    4 {txt}{c |} {res}     3.0 {txt}{c |} {res}   15 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 1,930 {txt}{c |} {res}   155 {txt}{c |} {res}  35  {txt}{c |} {res}      89  {txt}{c |} {res}    3.78  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 73. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}VW Scirocco       {txt}{c |} {res} 6,850 {txt}{c |} {res} 25 {txt}{c |} {res}    4 {txt}{c |} {res}     2.0 {txt}{c |} {res}   16 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 1,990 {txt}{c |} {res}   156 {txt}{c |} {res}  36  {txt}{c |} {res}      97  {txt}{c |} {res}    3.78  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+     {c TLC}{hline 19}{c TT}{hline 8}{c TT}{hline 5}{c TT}{hline 7}{c TT}{hline 10}{c TT}{hline 7}{c TRC}
+ 74. {c |} make              {c |}  price {c |} mpg {c |} rep78 {c |} headroom {c |} trunk {c |}
+     {c |} {res}Volvo 260         {txt}{c |} {res}11,995 {txt}{c |} {res} 17 {txt}{c |} {res}    5 {txt}{c |} {res}     2.5 {txt}{c |} {res}   14 {txt}{c |}
+     {c LT}{hline 8}{c TT}{hline 8}{c TT}{hline 1}{c BT}{hline 5}{c TT}{hline 2}{c BT}{hline 5}{c BT}{hline 2}{c TT}{hline 4}{c BT}{hline 6}{c TT}{hline 3}{c BT}{hline 7}{c RT}
+     {c |} weight {c |} length {c |} turn  {c |} displa~t  {c |} gear_r~o  {c |}  foreign  {c |}
+     {c |} {res} 3,170 {txt}{c |} {res}   193 {txt}{c |} {res}  37  {txt}{c |} {res}     163  {txt}{c |} {res}    2.98  {txt}{c |} {res} Foreign  {txt}{c |}
+     {c BLC}{hline 8}{c BT}{hline 8}{c BT}{hline 7}{c BT}{hline 11}{c BT}{hline 11}{c BT}{hline 11}{c BRC}
+
+{com}. gen repgood = rep78>=4
+
+. li repgood in 1/15
+{txt}
+     {c TLC}{hline 9}{c TRC}
+     {c |} {res}repgood {txt}{c |}
+     {c LT}{hline 9}{c RT}
+  1. {c |} {res}      0 {txt}{c |}
+  2. {c |} {res}      0 {txt}{c |}
+  3. {c |} {res}      1 {txt}{c |}
+  4. {c |} {res}      0 {txt}{c |}
+  5. {c |} {res}      1 {txt}{c |}
+     {c LT}{hline 9}{c RT}
+  6. {c |} {res}      0 {txt}{c |}
+  7. {c |} {res}      1 {txt}{c |}
+  8. {c |} {res}      0 {txt}{c |}
+  9. {c |} {res}      0 {txt}{c |}
+ 10. {c |} {res}      0 {txt}{c |}
+     {c LT}{hline 9}{c RT}
+ 11. {c |} {res}      0 {txt}{c |}
+ 12. {c |} {res}      0 {txt}{c |}
+ 13. {c |} {res}      0 {txt}{c |}
+ 14. {c |} {res}      0 {txt}{c |}
+ 15. {c |} {res}      1 {txt}{c |}
+     {c BLC}{hline 9}{c BRC}
+
+{com}. gen repgood = rep78>=4 if !missing(rep78)
+{err}variable {bf}repgood{sf} already defined
+{txt}{search r(110), local:r(110);}
+
+{com}. drop repgood
+
+. gen repgood = rep78>=4 if !missing(rep78)
+{txt}(5 missing values generated)
+
+{com}. list make rep* in 1/15
+{txt}
+     {c TLC}{hline 16}{c -}{hline 7}{c -}{hline 9}{c TRC}
+     {c |} {res}make             rep78   repgood {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 7}{c -}{hline 9}{c RT}
+  1. {c |} {res}AMC Concord          3         0 {txt}{c |}
+  2. {c |} {res}AMC Pacer            3         0 {txt}{c |}
+  3. {c |} {res}AMC Spirit           .         . {txt}{c |}
+  4. {c |} {res}Buick Century        3         0 {txt}{c |}
+  5. {c |} {res}Buick Electra        4         1 {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 7}{c -}{hline 9}{c RT}
+  6. {c |} {res}Buick LeSabre        3         0 {txt}{c |}
+  7. {c |} {res}Buick Opel           .         . {txt}{c |}
+  8. {c |} {res}Buick Regal          3         0 {txt}{c |}
+  9. {c |} {res}Buick Riviera        3         0 {txt}{c |}
+ 10. {c |} {res}Buick Skylark        3         0 {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 7}{c -}{hline 9}{c RT}
+ 11. {c |} {res}Cad. Deville         3         0 {txt}{c |}
+ 12. {c |} {res}Cad. Eldorado        2         0 {txt}{c |}
+ 13. {c |} {res}Cad. Seville         3         0 {txt}{c |}
+ 14. {c |} {res}Chev. Chevette       3         0 {txt}{c |}
+ 15. {c |} {res}Chev. Impala         4         1 {txt}{c |}
+     {c BLC}{hline 16}{c -}{hline 7}{c -}{hline 9}{c BRC}
+
+{com}. list make gear_ratio  in 1/15
+{txt}
+     {c TLC}{hline 16}{c -}{hline 10}{c TRC}
+     {c |} {res}make             gear_r~o {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 10}{c RT}
+  1. {c |} {res}AMC Concord          3.58 {txt}{c |}
+  2. {c |} {res}AMC Pacer            2.53 {txt}{c |}
+  3. {c |} {res}AMC Spirit           3.08 {txt}{c |}
+  4. {c |} {res}Buick Century        2.93 {txt}{c |}
+  5. {c |} {res}Buick Electra        2.41 {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 10}{c RT}
+  6. {c |} {res}Buick LeSabre        2.73 {txt}{c |}
+  7. {c |} {res}Buick Opel           2.87 {txt}{c |}
+  8. {c |} {res}Buick Regal          2.93 {txt}{c |}
+  9. {c |} {res}Buick Riviera        2.93 {txt}{c |}
+ 10. {c |} {res}Buick Skylark        3.08 {txt}{c |}
+     {c LT}{hline 16}{c -}{hline 10}{c RT}
+ 11. {c |} {res}Cad. Deville         2.28 {txt}{c |}
+ 12. {c |} {res}Cad. Eldorado        2.19 {txt}{c |}
+ 13. {c |} {res}Cad. Seville         2.24 {txt}{c |}
+ 14. {c |} {res}Chev. Chevette       2.93 {txt}{c |}
+ 15. {c |} {res}Chev. Impala         2.56 {txt}{c |}
+     {c BLC}{hline 16}{c -}{hline 10}{c BRC}
+
+{com}. list make gear_ratio if gear_ratio == 2.93
+
+. list make gear_ratio if float(gear_ratio) == float(2.93)
+{txt}
+     {c TLC}{hline 18}{c -}{hline 10}{c TRC}
+     {c |} {res}make               gear_r~o {txt}{c |}
+     {c LT}{hline 18}{c -}{hline 10}{c RT}
+  4. {c |} {res}Buick Century          2.93 {txt}{c |}
+  8. {c |} {res}Buick Regal            2.93 {txt}{c |}
+  9. {c |} {res}Buick Riviera          2.93 {txt}{c |}
+ 14. {c |} {res}Chev. Chevette         2.93 {txt}{c |}
+ 36. {c |} {res}Olds Cutl Supr         2.93 {txt}{c |}
+     {c LT}{hline 18}{c -}{hline 10}{c RT}
+ 37. {c |} {res}Olds Cutlass           2.93 {txt}{c |}
+ 49. {c |} {res}Pont. Grand Prix       2.93 {txt}{c |}
+ 50. {c |} {res}Pont. Le Mans          2.93 {txt}{c |}
+     {c BLC}{hline 18}{c -}{hline 10}{c BRC}
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\microtek\Desktop\stata_startup\dayone\makingdata\makingdata.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 9 Mar 2016, 08:50:27
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
