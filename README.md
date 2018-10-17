@@ -1,6 +1,6 @@
 ## All Stata Training Materials and notes
 
-This repository contains all stata training materials I collected for the past few years. 
+This repository contains all stata training materials I collected over the past few years. 
 
 ### Setup 
 ```
