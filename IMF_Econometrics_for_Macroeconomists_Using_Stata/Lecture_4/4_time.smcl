@@ -1,0 +1,1532 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\CHuang\Box Sync\IMF_Training_Courses\Stata\Lecture_4\4_time.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}18 Oct 2018, 10:58:22
+{txt}
+{com}. 
+.         *****************************
+.         *****  basic operations *****
+.         *****************************
+.         //There are a set of functions, described at help dates and times
+.         display daily("10sep2013","DMY")
+{res}19611
+{txt}
+{com}.         display daily("13aug1951","DMY")
+{res}-3063
+{txt}
+{com}.         display quarterly("2013Q3","YQ")
+{res}214
+{txt}
+{com}.         
+.         // business calender 
+.         sysuse sp500, clear
+{txt}(S&P 500)
+
+{com}.         bcal create sp500, from(date) generate(bdate)
+{res}{err}file {bf:sp500.stbcal} already exists; use {bf:replace} to overwrite
+{txt}{search r(602), local:r(602);}
+
+end of do-file
+
+{search r(602), local:r(602);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         bcuse usmacro1, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/usmacro1.dta
+{txt}  obs:{res}           207                          
+{txt} vars:{res}            56                          25 Jan 2011 09:13
+{txt} size:{res}        70,587                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:ccode          }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:year           }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:qtr            }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:cpi            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI{p_end}
+{p 0 48}{bind:dcpi           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI % CHANGE{p_end}
+{p 0 48}{bind:oilprice       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}PETROLEUM:AVERAGE CRUDE PRICE{p_end}
+{p 0 48}{bind:dgdpdef        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR % CHANGE{p_end}
+{p 0 48}{bind:mbase          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONETARY BASE, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:domcredit      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}DOMESTIC CREDIT{p_end}
+{p 0 48}{bind:money          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONEY, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M1             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M1 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M2             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M2 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:ffrate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FEDERAL FUNDS RATE{p_end}
+{p 0 48}{bind:cprate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}COMMERCIAL PAPER- 3 MONTH{p_end}
+{p 0 48}{bind:tb3rate        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}T-BILL RATE-3 MNTH CONS. MAT.{p_end}
+{p 0 48}{bind:libor3mo       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}3-MONTH US DEP. LONDON OFFER{p_end}
+{p 0 48}{bind:primerate      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}BANK PRIME LOAN RATE{p_end}
+{p 0 48}{bind:tr10yr         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 10 YEAR{p_end}
+{p 0 48}{bind:tr3yr          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 3 YEAR{p_end}
+{p 0 48}{bind:stockprice     }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}SHARE PRICES{p_end}
+{p 0 48}{bind:NASDAQindex    }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}NASDAQ COMPOSITE{p_end}
+{p 0 48}{bind:S_Pindex       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}S&P INDUSTRIALS{p_end}
+{p 0 48}{bind:wage           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:REER_RULC      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}REER BASED ON RULC{p_end}
+{p 0 48}{bind:ip             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}INDUSTRIAL PRODUCTION SA{p_end}
+{p 0 48}{bind:unemp          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}UNEMPLOYMENT RATE{p_end}
+{p 0 48}{bind:exports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}EXPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:govt           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVERNMENT CONSUMPTION EXPEND. SA{p_end}
+{p 0 48}{bind:grossinv       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS FIXED CAPITAL FORMATION SA{p_end}
+{p 0 48}{bind:dinventories   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CHANGES IN INVENTORIES SA{p_end}
+{p 0 48}{bind:consump        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}HOUSEH.CONS.EXPEND.,INCL.NPISHS SA{p_end}
+{p 0 48}{bind:imports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}IMPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:gdp            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS DOMESTIC PRODUCT SA{p_end}
+{p 0 48}{bind:gdpdefl        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR (2005=100){p_end}
+{p 0 48}{bind:yq             }{txt}{bind: float   }{bind:{txt}%tq       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:rexports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgovt          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:rgrossinv      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:rdinventories  }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL CHANGES IN INVENTORIES{p_end}
+{p 0 48}{bind:rconsump       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:rimports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgdp           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:rM1            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M1{p_end}
+{p 0 48}{bind:rM2            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M2{p_end}
+{p 0 48}{bind:rmbase         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL MONETARY BASE{p_end}
+{p 0 48}{bind:rwage          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:lrexports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgovt         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:lrgrossinv     }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:lrconsump      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:lrimports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgdp          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:lrmbase        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL MONETARY BASE{p_end}
+{p 0 48}{bind:lrM1           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M1{p_end}
+{p 0 48}{bind:lrM2           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M2{p_end}
+{p 0 48}{bind:lrwage         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{txt}{hline}
+Sorted by: {res}yq
+{txt}{col 9}time variable:  {res}{col 25}yq, 1959q1 to 2010q3
+{txt}{col 17}delta:  {res}1 quarter
+{txt}
+{com}.         tscollap dcpi (gmean) mbase (last) oilprice (mean) foilpr=oilprice (first), to(y) gen(yr)
+{err}command {bf}tscollap{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+end of do-file
+
+{search r(199), local:r(199);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         //tscollap -- similar to collapse but on time series - such as geometric mean 
+.         bcuse usmacro1, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/usmacro1.dta
+{txt}  obs:{res}           207                          
+{txt} vars:{res}            56                          25 Jan 2011 09:13
+{txt} size:{res}        70,587                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:ccode          }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:year           }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:qtr            }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:cpi            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI{p_end}
+{p 0 48}{bind:dcpi           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI % CHANGE{p_end}
+{p 0 48}{bind:oilprice       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}PETROLEUM:AVERAGE CRUDE PRICE{p_end}
+{p 0 48}{bind:dgdpdef        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR % CHANGE{p_end}
+{p 0 48}{bind:mbase          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONETARY BASE, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:domcredit      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}DOMESTIC CREDIT{p_end}
+{p 0 48}{bind:money          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONEY, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M1             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M1 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M2             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M2 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:ffrate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FEDERAL FUNDS RATE{p_end}
+{p 0 48}{bind:cprate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}COMMERCIAL PAPER- 3 MONTH{p_end}
+{p 0 48}{bind:tb3rate        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}T-BILL RATE-3 MNTH CONS. MAT.{p_end}
+{p 0 48}{bind:libor3mo       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}3-MONTH US DEP. LONDON OFFER{p_end}
+{p 0 48}{bind:primerate      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}BANK PRIME LOAN RATE{p_end}
+{p 0 48}{bind:tr10yr         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 10 YEAR{p_end}
+{p 0 48}{bind:tr3yr          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 3 YEAR{p_end}
+{p 0 48}{bind:stockprice     }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}SHARE PRICES{p_end}
+{p 0 48}{bind:NASDAQindex    }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}NASDAQ COMPOSITE{p_end}
+{p 0 48}{bind:S_Pindex       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}S&P INDUSTRIALS{p_end}
+{p 0 48}{bind:wage           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:REER_RULC      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}REER BASED ON RULC{p_end}
+{p 0 48}{bind:ip             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}INDUSTRIAL PRODUCTION SA{p_end}
+{p 0 48}{bind:unemp          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}UNEMPLOYMENT RATE{p_end}
+{p 0 48}{bind:exports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}EXPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:govt           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVERNMENT CONSUMPTION EXPEND. SA{p_end}
+{p 0 48}{bind:grossinv       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS FIXED CAPITAL FORMATION SA{p_end}
+{p 0 48}{bind:dinventories   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CHANGES IN INVENTORIES SA{p_end}
+{p 0 48}{bind:consump        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}HOUSEH.CONS.EXPEND.,INCL.NPISHS SA{p_end}
+{p 0 48}{bind:imports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}IMPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:gdp            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS DOMESTIC PRODUCT SA{p_end}
+{p 0 48}{bind:gdpdefl        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR (2005=100){p_end}
+{p 0 48}{bind:yq             }{txt}{bind: float   }{bind:{txt}%tq       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:rexports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgovt          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:rgrossinv      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:rdinventories  }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL CHANGES IN INVENTORIES{p_end}
+{p 0 48}{bind:rconsump       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:rimports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgdp           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:rM1            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M1{p_end}
+{p 0 48}{bind:rM2            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M2{p_end}
+{p 0 48}{bind:rmbase         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL MONETARY BASE{p_end}
+{p 0 48}{bind:rwage          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:lrexports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgovt         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:lrgrossinv     }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:lrconsump      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:lrimports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgdp          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:lrmbase        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL MONETARY BASE{p_end}
+{p 0 48}{bind:lrM1           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M1{p_end}
+{p 0 48}{bind:lrM2           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M2{p_end}
+{p 0 48}{bind:lrwage         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{txt}{hline}
+Sorted by: {res}yq
+{txt}{col 9}time variable:  {res}{col 25}yq, 1959q1 to 2010q3
+{txt}{col 17}delta:  {res}1 quarter
+{txt}
+{com}.         tscollap dcpi (gmean) mbase (last) oilprice (mean) foilpr=oilprice (first),/**/ to(y) gen(yr)
+{err}command {bf}tscollap{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+end of do-file
+
+{search r(199), local:r(199);}
+
+{com}. ssc install tscollpa
+{txt}{err}ssc install: "tscollpa" not found at SSC, type {stata search tscollpa}
+(To find all packages at SSC that start with t, type {stata ssc describe t})
+{txt}{search r(661), local:r(661);}
+
+{com}. ssc install tscollapse
+{txt}{err}ssc install: "tscollapse" not found at SSC, type {stata search tscollapse}
+(To find all packages at SSC that start with t, type {stata ssc describe t})
+{txt}{search r(661), local:r(661);}
+
+{com}. findit tscollpase
+
+. fingit tscollap
+{err}command {bf}fingit{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. findit collapse
+
+. ssc install tscollapse
+{txt}{err}ssc install: "tscollapse" not found at SSC, type {stata search tscollapse}
+(To find all packages at SSC that start with t, type {stata ssc describe t})
+{txt}{search r(661), local:r(661);}
+
+{com}. ssc install tscollap
+{txt}checking {hilite:tscollap} consistency and verifying not already installed...
+installing into c:\ado\plus\...
+installation complete.
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         bcuse usmacro1, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/usmacro1.dta
+{txt}  obs:{res}           207                          
+{txt} vars:{res}            56                          25 Jan 2011 09:13
+{txt} size:{res}        70,587                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:ccode          }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:year           }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:qtr            }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:cpi            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI{p_end}
+{p 0 48}{bind:dcpi           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI % CHANGE{p_end}
+{p 0 48}{bind:oilprice       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}PETROLEUM:AVERAGE CRUDE PRICE{p_end}
+{p 0 48}{bind:dgdpdef        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR % CHANGE{p_end}
+{p 0 48}{bind:mbase          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONETARY BASE, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:domcredit      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}DOMESTIC CREDIT{p_end}
+{p 0 48}{bind:money          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONEY, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M1             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M1 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M2             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M2 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:ffrate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FEDERAL FUNDS RATE{p_end}
+{p 0 48}{bind:cprate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}COMMERCIAL PAPER- 3 MONTH{p_end}
+{p 0 48}{bind:tb3rate        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}T-BILL RATE-3 MNTH CONS. MAT.{p_end}
+{p 0 48}{bind:libor3mo       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}3-MONTH US DEP. LONDON OFFER{p_end}
+{p 0 48}{bind:primerate      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}BANK PRIME LOAN RATE{p_end}
+{p 0 48}{bind:tr10yr         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 10 YEAR{p_end}
+{p 0 48}{bind:tr3yr          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 3 YEAR{p_end}
+{p 0 48}{bind:stockprice     }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}SHARE PRICES{p_end}
+{p 0 48}{bind:NASDAQindex    }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}NASDAQ COMPOSITE{p_end}
+{p 0 48}{bind:S_Pindex       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}S&P INDUSTRIALS{p_end}
+{p 0 48}{bind:wage           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:REER_RULC      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}REER BASED ON RULC{p_end}
+{p 0 48}{bind:ip             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}INDUSTRIAL PRODUCTION SA{p_end}
+{p 0 48}{bind:unemp          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}UNEMPLOYMENT RATE{p_end}
+{p 0 48}{bind:exports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}EXPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:govt           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVERNMENT CONSUMPTION EXPEND. SA{p_end}
+{p 0 48}{bind:grossinv       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS FIXED CAPITAL FORMATION SA{p_end}
+{p 0 48}{bind:dinventories   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CHANGES IN INVENTORIES SA{p_end}
+{p 0 48}{bind:consump        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}HOUSEH.CONS.EXPEND.,INCL.NPISHS SA{p_end}
+{p 0 48}{bind:imports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}IMPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:gdp            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS DOMESTIC PRODUCT SA{p_end}
+{p 0 48}{bind:gdpdefl        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR (2005=100){p_end}
+{p 0 48}{bind:yq             }{txt}{bind: float   }{bind:{txt}%tq       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:rexports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgovt          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:rgrossinv      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:rdinventories  }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL CHANGES IN INVENTORIES{p_end}
+{p 0 48}{bind:rconsump       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:rimports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgdp           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:rM1            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M1{p_end}
+{p 0 48}{bind:rM2            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M2{p_end}
+{p 0 48}{bind:rmbase         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL MONETARY BASE{p_end}
+{p 0 48}{bind:rwage          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:lrexports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgovt         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:lrgrossinv     }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:lrconsump      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:lrimports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgdp          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:lrmbase        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL MONETARY BASE{p_end}
+{p 0 48}{bind:lrM1           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M1{p_end}
+{p 0 48}{bind:lrM2           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M2{p_end}
+{p 0 48}{bind:lrwage         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{txt}{hline}
+Sorted by: {res}yq
+{txt}{col 9}time variable:  {res}{col 25}yq, 1959q1 to 2010q3
+{txt}{col 17}delta:  {res}1 quarter
+{txt}
+{com}.         tscollap dcpi (gmean) mbase (last) oilprice (mean) foilpr=oilprice (first),/**/ to(y) gen(yr)
+{res} 
+ 
+{txt}Converting from Q to Y
+{res} 
+{txt}{col 9}time variable:  {res}{col 25}yr, 1959 to 2009
+{txt}{col 17}delta:  {res}1 year
+{txt}
+{com}.         
+.         
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         //tscollap -- similar to collapse but on time series - such as geometric mean 
+.         bcuse usmacro1, clear
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/usmacro1.dta
+{txt}  obs:{res}           207                          
+{txt} vars:{res}            56                          25 Jan 2011 09:13
+{txt} size:{res}        70,587                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:ccode          }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:year           }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:qtr            }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:cpi            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI{p_end}
+{p 0 48}{bind:dcpi           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI % CHANGE{p_end}
+{p 0 48}{bind:oilprice       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}PETROLEUM:AVERAGE CRUDE PRICE{p_end}
+{p 0 48}{bind:dgdpdef        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR % CHANGE{p_end}
+{p 0 48}{bind:mbase          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONETARY BASE, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:domcredit      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}DOMESTIC CREDIT{p_end}
+{p 0 48}{bind:money          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONEY, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M1             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M1 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M2             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M2 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:ffrate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FEDERAL FUNDS RATE{p_end}
+{p 0 48}{bind:cprate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}COMMERCIAL PAPER- 3 MONTH{p_end}
+{p 0 48}{bind:tb3rate        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}T-BILL RATE-3 MNTH CONS. MAT.{p_end}
+{p 0 48}{bind:libor3mo       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}3-MONTH US DEP. LONDON OFFER{p_end}
+{p 0 48}{bind:primerate      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}BANK PRIME LOAN RATE{p_end}
+{p 0 48}{bind:tr10yr         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 10 YEAR{p_end}
+{p 0 48}{bind:tr3yr          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 3 YEAR{p_end}
+{p 0 48}{bind:stockprice     }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}SHARE PRICES{p_end}
+{p 0 48}{bind:NASDAQindex    }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}NASDAQ COMPOSITE{p_end}
+{p 0 48}{bind:S_Pindex       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}S&P INDUSTRIALS{p_end}
+{p 0 48}{bind:wage           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:REER_RULC      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}REER BASED ON RULC{p_end}
+{p 0 48}{bind:ip             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}INDUSTRIAL PRODUCTION SA{p_end}
+{p 0 48}{bind:unemp          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}UNEMPLOYMENT RATE{p_end}
+{p 0 48}{bind:exports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}EXPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:govt           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVERNMENT CONSUMPTION EXPEND. SA{p_end}
+{p 0 48}{bind:grossinv       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS FIXED CAPITAL FORMATION SA{p_end}
+{p 0 48}{bind:dinventories   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CHANGES IN INVENTORIES SA{p_end}
+{p 0 48}{bind:consump        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}HOUSEH.CONS.EXPEND.,INCL.NPISHS SA{p_end}
+{p 0 48}{bind:imports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}IMPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:gdp            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS DOMESTIC PRODUCT SA{p_end}
+{p 0 48}{bind:gdpdefl        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR (2005=100){p_end}
+{p 0 48}{bind:yq             }{txt}{bind: float   }{bind:{txt}%tq       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:rexports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgovt          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:rgrossinv      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:rdinventories  }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL CHANGES IN INVENTORIES{p_end}
+{p 0 48}{bind:rconsump       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:rimports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgdp           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:rM1            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M1{p_end}
+{p 0 48}{bind:rM2            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M2{p_end}
+{p 0 48}{bind:rmbase         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL MONETARY BASE{p_end}
+{p 0 48}{bind:rwage          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:lrexports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgovt         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:lrgrossinv     }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:lrconsump      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:lrimports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgdp          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:lrmbase        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL MONETARY BASE{p_end}
+{p 0 48}{bind:lrM1           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M1{p_end}
+{p 0 48}{bind:lrM2           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M2{p_end}
+{p 0 48}{bind:lrwage         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{txt}{hline}
+Sorted by: {res}yq
+{txt}{col 9}time variable:  {res}{col 25}yq, 1959q1 to 2010q3
+{txt}{col 17}delta:  {res}1 quarter
+{txt}
+{com}.         tscollap dcpi (gmean) mbase (last) oilprice (mean) foilpr=oilprice (first),to(y) gen(yr)
+{res} 
+ 
+{txt}Converting from Q to Y
+{res} 
+{txt}{col 9}time variable:  {res}{col 25}yr, 1959 to 2009
+{txt}{col 17}delta:  {res}1 year
+{txt}
+{com}.         
+.         
+.         
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         //Unobserved components models
+.         webuse unrate
+{err}no; data in memory would be lost
+{txt}{search r(4), local:r(4);}
+
+end of do-file
+
+{search r(4), local:r(4);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         webuse unrate，clear
+{err}no; data in memory would be lost
+{txt}{search r(4), local:r(4);}
+
+end of do-file
+
+{search r(4), local:r(4);}
+
+{com}. clear
+
+. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         webuse unrate，clear
+{err}host or {p 0 4 2}
+file http://www.stata-press.com/data/r15/unrate，clear.dta
+not found
+{p_end}
+{txt}{search r(661), local:r(661);}
+
+end of do-file
+
+{search r(661), local:r(661);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         webuse unrate
+{txt}
+{com}.     ucm unrate, cycle(1) nolog
+{res}
+{txt}Unobserved-components model
+Components: random walk, order 1 cycle
+
+{col 1}Sample: 1948m1 - 2011m1{col 49}Number of obs{col 67}= {res}       757
+{txt}{col 49}Wald chi2({res}2{txt}){col 67}= {res}  26650.81
+{txt}Log likelihood = {res} 118.88421{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OIM
+{col 1}      unrate{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}frequency {c |}{col 14}{res}{space 2} .0933466{col 26}{space 2} .0103609{col 37}{space 1}    9.01{col 46}{space 3}0.000{col 54}{space 4} .0730397{col 67}{space 3} .1136535
+{txt}{space 5}damping {c |}{col 14}{res}{space 2} .9820003{col 26}{space 2} .0061121{col 37}{space 1}  160.66{col 46}{space 3}0.000{col 54}{space 4} .9700207{col 67}{space 3} .9939798
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+   var(level){c |}{col 14}{res}{space 2} .0143786{col 26}{space 2} .0051392{col 37}{space 1}    2.80{col 46}{space 3}0.003{col 54}{space 4}  .004306{col 67}{space 3} .0244511
+{txt}  var(cycle1){c |}{col 14}{res}{space 2} .0270339{col 26}{space 2} .0054343{col 37}{space 1}    4.97{col 46}{space 3}0.000{col 54}{space 4} .0163829{col 67}{space 3} .0376848
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+Note: Model is not stationary.
+{p 0 6 2 78}
+Note: Tests of variances against zero are one sided, and the two-sided confidence intervals are truncated at zero.
+{p_end}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         clear
+{txt}
+{com}.         bcuse macro14, nodesc
+{res}{txt}{col 9}time variable:  {res}{col 25}yq, 1954q1 to 2014q4
+{txt}{col 17}delta:  {res}1 quarter
+{txt}
+{com}.         arima cpiaucsl, arima(1,1,1) nolog
+{res}
+{txt}ARIMA regression
+
+Sample:  {res}1954q2 - 2014q4                        {txt}Number of obs     = {res}       243
+                                                {txt}Wald chi2({res}2{txt})      =  {res}   330.75
+{txt}Log likelihood = {res}-259.7311                      {txt}Prob > chi2       =     {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}  D.cpiaucsl{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}cpiaucsl     {txt}{c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .8134891{col 26}{space 2} .3291271{col 37}{space 1}    2.47{col 46}{space 3}0.013{col 54}{space 4} .1684118{col 67}{space 3} 1.458566
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARMA         {txt}{c |}
+{space 10}ar {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .931381{col 26}{space 2} .0532187{col 37}{space 1}   17.50{col 46}{space 3}0.000{col 54}{space 4} .8270742{col 67}{space 3} 1.035688
+{txt}{space 12} {c |}
+{space 10}ma {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.7014376{col 26}{space 2} .0582227{col 37}{space 1}  -12.05{col 46}{space 3}0.000{col 54}{space 4}-.8155519{col 67}{space 3}-.5873233
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+      /sigma {c |}{col 14}{res}{space 2} .7037909{col 26}{space 2} .0160152{col 37}{space 1}   43.95{col 46}{space 3}0.000{col 54}{space 4} .6724018{col 67}{space 3} .7351801
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         bcuse macro14, clear nodesc
+{res}{txt}{col 9}time variable:  {res}{col 25}yq, 1954q1 to 2014q4
+{txt}{col 17}delta:  {res}1 quarter
+{txt}
+{com}.         arima D.cpiaucsl, ar(1 4) nolog
+{res}
+{txt}ARIMA regression
+
+Sample:  {res}1954q2 - 2014q4                        {txt}Number of obs     = {res}       243
+                                                {txt}Wald chi2({res}2{txt})      =  {res}    59.35
+{txt}Log likelihood = {res}-261.8755                      {txt}Prob > chi2       =     {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}  D.cpiaucsl{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}cpiaucsl     {txt}{c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .8494434{col 26}{space 2} .1501867{col 37}{space 1}    5.66{col 46}{space 3}0.000{col 54}{space 4}  .555083{col 67}{space 3} 1.143804
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARMA         {txt}{c |}
+{space 10}ar {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .4695209{col 26}{space 2} .0633586{col 37}{space 1}    7.41{col 46}{space 3}0.000{col 54}{space 4} .3453402{col 67}{space 3} .5937015
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .1132828{col 26}{space 2} .0568215{col 37}{space 1}    1.99{col 46}{space 3}0.046{col 54}{space 4} .0019147{col 67}{space 3}  .224651
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+      /sigma {c |}{col 14}{res}{space 2} .7103758{col 26}{space 2} .0176754{col 37}{space 1}   40.19{col 46}{space 3}0.000{col 54}{space 4} .6757326{col 67}{space 3}  .745019
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         arima d.cpiaucsl d.mcoilwtico if tin(,2007q3), ar(1) ma(1) nolog vsquish
+{res}
+{txt}ARIMA regression
+
+Sample:  {res}1959q2 - 2007q3                        {txt}Number of obs     = {res}       194
+                                                {txt}Wald chi2({res}3{txt})      =  {res}  1695.47
+{txt}Log likelihood = {res}-91.14007                      {txt}Prob > chi2       =     {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}  D.cpiaucsl{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}cpiaucsl     {txt}{c |}
+{space 2}mcoilwtico {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .0911746{col 26}{space 2} .0055546{col 37}{space 1}   16.41{col 46}{space 3}0.000{col 54}{space 4} .0802878{col 67}{space 3} .1020615
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .8333632{col 26}{space 2} .2807785{col 37}{space 1}    2.97{col 46}{space 3}0.003{col 54}{space 4} .2830475{col 67}{space 3} 1.383679
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARMA         {txt}{c |}
+{space 10}ar {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9594617{col 26}{space 2} .0252121{col 37}{space 1}   38.06{col 46}{space 3}0.000{col 54}{space 4} .9100469{col 67}{space 3} 1.008877
+{txt}{space 10}ma {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.6247632{col 26}{space 2} .0528421{col 37}{space 1}  -11.82{col 46}{space 3}0.000{col 54}{space 4}-.7283317{col 67}{space 3}-.5211947
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+      /sigma {c |}{col 14}{res}{space 2} .3858822{col 26}{space 2} .0138622{col 37}{space 1}   27.84{col 46}{space 3}0.000{col 54}{space 4} .3587128{col 67}{space 3} .4130516
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         arima d.cpiaucsl d.mcoilwtico if tin(,2007q3), ar(1) ma(1) nolog vsquish
+{res}
+{txt}ARIMA regression
+
+Sample:  {res}1959q2 - 2007q3                        {txt}Number of obs     = {res}       194
+                                                {txt}Wald chi2({res}3{txt})      =  {res}  1695.47
+{txt}Log likelihood = {res}-91.14007                      {txt}Prob > chi2       =     {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}  D.cpiaucsl{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}cpiaucsl     {txt}{c |}
+{space 2}mcoilwtico {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .0911746{col 26}{space 2} .0055546{col 37}{space 1}   16.41{col 46}{space 3}0.000{col 54}{space 4} .0802878{col 67}{space 3} .1020615
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .8333632{col 26}{space 2} .2807785{col 37}{space 1}    2.97{col 46}{space 3}0.003{col 54}{space 4} .2830475{col 67}{space 3} 1.383679
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARMA         {txt}{c |}
+{space 10}ar {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9594617{col 26}{space 2} .0252121{col 37}{space 1}   38.06{col 46}{space 3}0.000{col 54}{space 4} .9100469{col 67}{space 3} 1.008877
+{txt}{space 10}ma {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.6247632{col 26}{space 2} .0528421{col 37}{space 1}  -11.82{col 46}{space 3}0.000{col 54}{space 4}-.7283317{col 67}{space 3}-.5211947
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+      /sigma {c |}{col 14}{res}{space 2} .3858822{col 26}{space 2} .0138622{col 37}{space 1}   27.84{col 46}{space 3}0.000{col 54}{space 4} .3587128{col 67}{space 3} .4130516
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         qui predict double cpihat_s if tin(2006q1,), y
+{txt}
+{com}.     label var cpihat_s "Static forecast"
+{txt}
+{com}.     qui predict double cpihat_d if tin(2006q1,), dynamic(tq(2007q3)) y
+{txt}
+{com}.     label var cpihat_d "Dynamic forecast"
+{txt}
+{com}.     tw (tsline cpihat_s cpihat_d if !mi(cpihat_s)) ///
+>      (scatter cpiaucsl yq if !mi(cpihat_s), c(i) ///
+>      ti("Static and dynamic forecasts of US CPI") ///
+>      t2("Forecast horizon: 2007q3-2014q4") legend(size(small)) ///
+>      ylab(,angle(0) labs(small)) xti("") xlab(,labs(small)))
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.          bcuse barclaymonthly, clear nodesc
+{res}{txt}{col 9}time variable:  {res}{col 25}month, 1984m12 to 1998m12
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.      dmariano bbjpysp L.bbjpy1f L2.bbjpy2f, max(6)
+{err}command {bf}dmariano{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+end of do-file
+
+{search r(199), local:r(199);}
+
+{com}. ssc install dmariano
+{txt}checking {hilite:dmariano} consistency and verifying not already installed...
+installing into c:\ado\plus\...
+installation complete.
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.      dmariano bbjpysp L.bbjpy1f L2.bbjpy2f, max(6)
+{res}
+Diebold-Mariano forecast comparison test for actual : {res:bbjpysp}
+Competing forecasts:  {res:L.bbjpy1f} versus {res:L2.bbjpy2f}
+Criterion: MSE over 167 observations
+{txt}Maxlag = 6   Kernel : uniform
+
+Series{col 24}MSE
+______________________________
+{res}{res:L.bbjpy1f}{col 20}{txt}    27.56
+{res}{res:L2.bbjpy2f}{col 20}{txt}    56.87
+Difference{col 20}   -29.31
+
+By this criterion, {res:L.bbjpy1f} is the better forecast
+H0: Forecast accuracy is equal.
+S(1) =    -4.081  p-value = 0.0000
+
+
+
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         dmariano bbjpysp L.bbjpy1f L2.bbjpy2f, max(6) kernel(bartlett) crit(mape)
+{res}
+Diebold-Mariano forecast comparison test for actual : {res:bbjpysp}
+Competing forecasts:  {res:L.bbjpy1f} versus {res:L2.bbjpy2f}
+Criterion: MAPE over 167 observations
+{txt}Maxlag = 6   Kernel : bartlett
+
+Series{col 24}MAPE
+______________________________
+{res}{res:L.bbjpy1f}{col 20}{txt}   .02879
+{res}{res:L2.bbjpy2f}{col 20}{txt}   .04399
+Difference{col 20}   -.0152
+
+By this criterion, {res:L.bbjpy1f} is the better forecast
+H0: Forecast accuracy is equal.
+S(1) =    -7.842  p-value = 0.0000
+
+
+
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         arima bbjpysp, arima(2,1,1) nolog
+{res}
+{txt}ARIMA regression
+
+Sample:  {res}1985m1 - 1998m12                       {txt}Number of obs     = {res}       168
+                                                {txt}Wald chi2({res}3{txt})      =  {res}    13.23
+{txt}Log likelihood = {res}-511.8448                      {txt}Prob > chi2       =     {res}0.0042
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}   D.bbjpysp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}bbjpysp      {txt}{c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.8287808{col 26}{space 2} .5895949{col 37}{space 1}   -1.41{col 46}{space 3}0.160{col 54}{space 4}-1.984366{col 67}{space 3} .3268039
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARMA         {txt}{c |}
+{space 10}ar {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .309928{col 26}{space 2} .3237227{col 37}{space 1}    0.96{col 46}{space 3}0.338{col 54}{space 4}-.3245568{col 67}{space 3} .9444128
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .186342{col 26}{space 2} .0715153{col 37}{space 1}    2.61{col 46}{space 3}0.009{col 54}{space 4} .0461745{col 67}{space 3} .3265094
+{txt}{space 12} {c |}
+{space 10}ma {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.3077743{col 26}{space 2} .3255738{col 37}{space 1}   -0.95{col 46}{space 3}0.344{col 54}{space 4}-.9458872{col 67}{space 3} .3303386
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+      /sigma {c |}{col 14}{res}{space 2} 5.091067{col 26}{space 2} .2412995{col 37}{space 1}   21.10{col 46}{space 3}0.000{col 54}{space 4} 4.618128{col 67}{space 3} 5.564005
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         arima bbjpysp, arima(2,1,1) nolog
+{res}
+{txt}ARIMA regression
+
+Sample:  {res}1985m1 - 1998m12                       {txt}Number of obs     = {res}       168
+                                                {txt}Wald chi2({res}3{txt})      =  {res}    13.23
+{txt}Log likelihood = {res}-511.8448                      {txt}Prob > chi2       =     {res}0.0042
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}   D.bbjpysp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}bbjpysp      {txt}{c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.8287808{col 26}{space 2} .5895949{col 37}{space 1}   -1.41{col 46}{space 3}0.160{col 54}{space 4}-1.984366{col 67}{space 3} .3268039
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARMA         {txt}{c |}
+{space 10}ar {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .309928{col 26}{space 2} .3237227{col 37}{space 1}    0.96{col 46}{space 3}0.338{col 54}{space 4}-.3245568{col 67}{space 3} .9444128
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .186342{col 26}{space 2} .0715153{col 37}{space 1}    2.61{col 46}{space 3}0.009{col 54}{space 4} .0461745{col 67}{space 3} .3265094
+{txt}{space 12} {c |}
+{space 10}ma {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.3077743{col 26}{space 2} .3255738{col 37}{space 1}   -0.95{col 46}{space 3}0.344{col 54}{space 4}-.9458872{col 67}{space 3} .3303386
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+      /sigma {c |}{col 14}{res}{space 2} 5.091067{col 26}{space 2} .2412995{col 37}{space 1}   21.10{col 46}{space 3}0.000{col 54}{space 4} 4.618128{col 67}{space 3} 5.564005
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}.         reg bbjpysp L(1/3).bbjpysp
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       166
+{txt}{hline 13}{c +}{hline 34}   F(3, 162)       = {res}  2320.72
+{txt}       Model {c |} {res} 165408.288         3  55136.0959   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 3848.82392       162  23.7581724   {txt}R-squared       ={res}    0.9773
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9768
+{txt}       Total {c |} {res} 169257.112       165  1025.80068   {txt}Root MSE        =   {res} 4.8742
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     bbjpysp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}bbjpysp {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8987353{col 26}{space 2}  .077176{col 37}{space 1}   11.65{col 46}{space 3}0.000{col 54}{space 4} .7463346{col 67}{space 3} 1.051136
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .2005905{col 26}{space 2} .1055989{col 37}{space 1}    1.90{col 46}{space 3}0.059{col 54}{space 4}-.0079373{col 67}{space 3} .4091183
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1510395{col 26}{space 2} .0743511{col 37}{space 1}   -2.03{col 46}{space 3}0.044{col 54}{space 4}-.2978617{col 67}{space 3}-.0042173
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 6.133964{col 26}{space 2} 1.589804{col 37}{space 1}    3.86{col 46}{space 3}0.000{col 54}{space 4} 2.994553{col 67}{space 3} 9.273375
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.         dmariano bbjpysp jpyarima jpyols, max(6) kernel(bartlett)
+{err}variable {bf}jpyarima{sf} not found
+{txt}{search r(111), local:r(111);}
+
+end of do-file
+
+{search r(111), local:r(111);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         //ssc install dmariano
+.         bcuse barclaymonthly, clear nodesc
+{res}{txt}{col 9}time variable:  {res}{col 25}month, 1984m12 to 1998m12
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}.         //consider one-month and two-month futures as predictors of spot rate
+.     dmariano bbjpysp L.bbjpy1f L2.bbjpy2f, max(6)
+{res}
+Diebold-Mariano forecast comparison test for actual : {res:bbjpysp}
+Competing forecasts:  {res:L.bbjpy1f} versus {res:L2.bbjpy2f}
+Criterion: MSE over 167 observations
+{txt}Maxlag = 6   Kernel : uniform
+
+Series{col 24}MSE
+______________________________
+{res}{res:L.bbjpy1f}{col 20}{txt}    27.56
+{res}{res:L2.bbjpy2f}{col 20}{txt}    56.87
+Difference{col 20}   -29.31
+
+By this criterion, {res:L.bbjpy1f} is the better forecast
+H0: Forecast accuracy is equal.
+S(1) =    -4.081  p-value = 0.0000
+
+
+
+
+{com}.         dmariano bbjpysp L.bbjpy1f L2.bbjpy2f, max(6) kernel(bartlett) crit(mape)  // with mape criteria
+{res}
+Diebold-Mariano forecast comparison test for actual : {res:bbjpysp}
+Competing forecasts:  {res:L.bbjpy1f} versus {res:L2.bbjpy2f}
+Criterion: MAPE over 167 observations
+{txt}Maxlag = 6   Kernel : bartlett
+
+Series{col 24}MAPE
+______________________________
+{res}{res:L.bbjpy1f}{col 20}{txt}   .02879
+{res}{res:L2.bbjpy2f}{col 20}{txt}   .04399
+Difference{col 20}   -.0152
+
+By this criterion, {res:L.bbjpy1f} is the better forecast
+H0: Forecast accuracy is equal.
+S(1) =    -7.842  p-value = 0.0000
+
+
+
+
+{com}.         // Consider an ARIMA model of the Japanese yen spot rate, with the specification ARIMA(2,1,1):
+.         arima bbjpysp, arima(2,1,1) nolog
+{res}
+{txt}ARIMA regression
+
+Sample:  {res}1985m1 - 1998m12                       {txt}Number of obs     = {res}       168
+                                                {txt}Wald chi2({res}3{txt})      =  {res}    13.23
+{txt}Log likelihood = {res}-511.8448                      {txt}Prob > chi2       =     {res}0.0042
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}   D.bbjpysp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}bbjpysp      {txt}{c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.8287808{col 26}{space 2} .5895949{col 37}{space 1}   -1.41{col 46}{space 3}0.160{col 54}{space 4}-1.984366{col 67}{space 3} .3268039
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARMA         {txt}{c |}
+{space 10}ar {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .309928{col 26}{space 2} .3237227{col 37}{space 1}    0.96{col 46}{space 3}0.338{col 54}{space 4}-.3245568{col 67}{space 3} .9444128
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .186342{col 26}{space 2} .0715153{col 37}{space 1}    2.61{col 46}{space 3}0.009{col 54}{space 4} .0461745{col 67}{space 3} .3265094
+{txt}{space 12} {c |}
+{space 10}ma {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.3077743{col 26}{space 2} .3255738{col 37}{space 1}   -0.95{col 46}{space 3}0.344{col 54}{space 4}-.9458872{col 67}{space 3} .3303386
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+      /sigma {c |}{col 14}{res}{space 2} 5.091067{col 26}{space 2} .2412995{col 37}{space 1}   21.10{col 46}{space 3}0.000{col 54}{space 4} 4.618128{col 67}{space 3} 5.564005
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}.         reg bbjpysp L(1/3).bbjpysp
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       166
+{txt}{hline 13}{c +}{hline 34}   F(3, 162)       = {res}  2320.72
+{txt}       Model {c |} {res} 165408.288         3  55136.0959   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 3848.82392       162  23.7581724   {txt}R-squared       ={res}    0.9773
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9768
+{txt}       Total {c |} {res} 169257.112       165  1025.80068   {txt}Root MSE        =   {res} 4.8742
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     bbjpysp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}bbjpysp {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8987353{col 26}{space 2}  .077176{col 37}{space 1}   11.65{col 46}{space 3}0.000{col 54}{space 4} .7463346{col 67}{space 3} 1.051136
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .2005905{col 26}{space 2} .1055989{col 37}{space 1}    1.90{col 46}{space 3}0.059{col 54}{space 4}-.0079373{col 67}{space 3} .4091183
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1510395{col 26}{space 2} .0743511{col 37}{space 1}   -2.03{col 46}{space 3}0.044{col 54}{space 4}-.2978617{col 67}{space 3}-.0042173
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 6.133964{col 26}{space 2} 1.589804{col 37}{space 1}    3.86{col 46}{space 3}0.000{col 54}{space 4} 2.994553{col 67}{space 3} 9.273375
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}.         predict jpyarima, y
+{err}option {bf:y} not allowed
+{txt}{search r(198), local:r(198);}
+
+end of do-file
+
+{search r(198), local:r(198);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         //To estimate an ARCH model, you give the arch varname command
+.         arch cpi wage, arch(1) garch(1)
+{err}variable {bf}cpi{sf} not found
+{txt}{search r(111), local:r(111);}
+
+end of do-file
+
+{search r(111), local:r(111);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         webuse urates, clear
+{txt}
+{com}.         arch cpi wage, arch(1) garch(1)
+{err}variable {bf}cpi{sf} not found
+{txt}{search r(111), local:r(111);}
+
+end of do-file
+
+{search r(111), local:r(111);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         webuse urates, clear
+{txt}
+{com}.     qui reg D.tenn LD.tenn
+{txt}
+{com}.     estat archlm, lags(3)
+{txt}LM test for autoregressive conditional heteroskedasticity (ARCH)
+{hline 13}{c TT}{hline 61}
+{col 5}lags({it:p}){col 14}{c |}{col 25}chi2{col 44}df{col 63}Prob > chi2
+{hline 13}{c +}{hline 61}
+{col 6}  3{col 14}{c |}{res}{col 20}    11.195{col 43}  3{col 63}  0.0107
+{txt}{hline 13}{c BT}{hline 61}
+{col 10}H0: no ARCH effects{col 35}{it:vs.}{col 40}H1: ARCH({it:p}) disturbance
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         arch D.tenn LD.tenn, arch(1) garch(1) nolog vsquish
+
+{txt}ARCH family regression
+
+Sample: {res}1978m3 - 2003m12                          {txt}Number of obs   = {res}       310
+{txt}Distribution: {res}Gaussian                            {txt}Wald chi2({res}1{txt})    =  {res}     9.39
+{txt}Log likelihood = {res} 127.4172                        {txt}Prob > chi2     =     {res}0.0022
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}      D.tenn{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}tenn         {txt}{c |}
+{space 8}tenn {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .2129528{col 26}{space 2} .0694996{col 37}{space 1}    3.06{col 46}{space 3}0.002{col 54}{space 4}  .076736{col 67}{space 3} .3491695
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-.0155809{col 26}{space 2} .0085746{col 37}{space 1}   -1.82{col 46}{space 3}0.069{col 54}{space 4}-.0323868{col 67}{space 3} .0012251
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARCH         {txt}{c |}
+{space 8}arch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1929262{col 26}{space 2} .0675544{col 37}{space 1}    2.86{col 46}{space 3}0.004{col 54}{space 4} .0605219{col 67}{space 3} .3253305
+{txt}{space 7}garch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7138542{col 26}{space 2} .0923551{col 37}{space 1}    7.73{col 46}{space 3}0.000{col 54}{space 4} .5328415{col 67}{space 3}  .894867
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0028566{col 26}{space 2} .0016481{col 37}{space 1}    1.73{col 46}{space 3}0.083{col 54}{space 4}-.0003736{col 67}{space 3} .0060868
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         arch D.tenn LD.tenn LD.indiana LD.arkansas, arch(1) garch(1) nolog vsquish
+
+{txt}ARCH family regression
+
+Sample: {res}1978m3 - 2003m12                          {txt}Number of obs   = {res}       310
+{txt}Distribution: {res}Gaussian                            {txt}Wald chi2({res}3{txt})    =  {res}    41.31
+{txt}Log likelihood = {res} 135.1611                        {txt}Prob > chi2     =     {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}      D.tenn{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}tenn         {txt}{c |}
+{space 8}tenn {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1459972{col 26}{space 2} .0723994{col 37}{space 1}    2.02{col 46}{space 3}0.044{col 54}{space 4}  .004097{col 67}{space 3} .2878974
+{txt}{space 5}indiana {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1751591{col 26}{space 2}  .047494{col 37}{space 1}    3.69{col 46}{space 3}0.000{col 54}{space 4} .0820727{col 67}{space 3} .2682455
+{txt}{space 4}arkansas {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1170958{col 26}{space 2} .0757688{col 37}{space 1}    1.55{col 46}{space 3}0.122{col 54}{space 4}-.0314083{col 67}{space 3} .2655999
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-.0078106{col 26}{space 2} .0087075{col 37}{space 1}   -0.90{col 46}{space 3}0.370{col 54}{space 4}-.0248769{col 67}{space 3} .0092558
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARCH         {txt}{c |}
+{space 8}arch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1627143{col 26}{space 2} .0712808{col 37}{space 1}    2.28{col 46}{space 3}0.022{col 54}{space 4} .0230064{col 67}{space 3} .3024221
+{txt}{space 7}garch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .6793291{col 26}{space 2} .1388493{col 37}{space 1}    4.89{col 46}{space 3}0.000{col 54}{space 4} .4071896{col 67}{space 3} .9514687
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0042064{col 26}{space 2} .0026923{col 37}{space 1}    1.56{col 46}{space 3}0.118{col 54}{space 4}-.0010704{col 67}{space 3} .0094832
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         test [ARCH]L.arch + [ARCH]L.garch == 1
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}[ARCH]L.arch + [ARCH]L.garch = 1{p_end}
+
+{txt}{col 12}chi2(  1) ={res}    2.30
+{txt}{col 10}Prob > chi2 =  {res}  0.1297
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         
+.         webuse stocks, clear
+{txt}(Data from Yahoo! Finance)
+
+{com}.         mgarch ccc (toyota honda = L.toyota L.honda), arch(1) garch(1) nolog vsquish 
+{res}
+{txt}Constant conditional correlation MGARCH model
+
+{txt}Sample: {res}2 - 2015 {col 51}{txt}Number of obs{col 67}={res}{col 69}     2,014
+{txt}Distribution: {res}Gaussian{col 51}{txt}Wald chi2({res}4{txt}){res}{col 67}{txt}={res}{col 70}     4.34
+{txt}Log likelihood = {res} 11602.61{col 51}{txt}Prob > chi2{col 67}={res}{col 73}0.3620
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}toyota       {txt}{c |}
+{space 6}toyota {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  -.03374{col 26}{space 2}  .032697{col 37}{space 1}   -1.03{col 46}{space 3}0.302{col 54}{space 4} -.097825{col 67}{space 3}  .030345
+{txt}{space 7}honda {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} -.005188{col 26}{space 2} .0288975{col 37}{space 1}   -0.18{col 46}{space 3}0.858{col 54}{space 4}-.0618261{col 67}{space 3} .0514502
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0004523{col 26}{space 2} .0003094{col 37}{space 1}    1.46{col 46}{space 3}0.144{col 54}{space 4}-.0001542{col 67}{space 3} .0010587
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARCH_toyota  {txt}{c |}
+{space 8}arch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0661046{col 26}{space 2} .0095018{col 37}{space 1}    6.96{col 46}{space 3}0.000{col 54}{space 4} .0474814{col 67}{space 3} .0847279
+{txt}{space 7}garch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .916793{col 26}{space 2} .0117942{col 37}{space 1}   77.73{col 46}{space 3}0.000{col 54}{space 4} .8936769{col 67}{space 3} .9399092
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 4.50e-06{col 26}{space 2} 1.19e-06{col 37}{space 1}    3.78{col 46}{space 3}0.000{col 54}{space 4} 2.17e-06{col 67}{space 3} 6.83e-06
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}honda        {txt}{c |}
+{space 6}toyota {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0066352{col 26}{space 2} .0343028{col 37}{space 1}   -0.19{col 46}{space 3}0.847{col 54}{space 4}-.0738675{col 67}{space 3} .0605971
+{txt}{space 7}honda {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0332976{col 26}{space 2} .0316213{col 37}{space 1}   -1.05{col 46}{space 3}0.292{col 54}{space 4}-.0952743{col 67}{space 3}  .028679
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0006128{col 26}{space 2} .0003394{col 37}{space 1}    1.81{col 46}{space 3}0.071{col 54}{space 4}-.0000524{col 67}{space 3} .0012781
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARCH_honda   {txt}{c |}
+{space 8}arch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0498417{col 26}{space 2} .0080311{col 37}{space 1}    6.21{col 46}{space 3}0.000{col 54}{space 4} .0341009{col 67}{space 3} .0655824
+{txt}{space 7}garch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9321435{col 26}{space 2} .0111601{col 37}{space 1}   83.52{col 46}{space 3}0.000{col 54}{space 4} .9102701{col 67}{space 3} .9540168
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 5.26e-06{col 26}{space 2} 1.41e-06{col 37}{space 1}    3.73{col 46}{space 3}0.000{col 54}{space 4} 2.50e-06{col 67}{space 3} 8.02e-06
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+ corr(toyota,{c |}
+       honda){c |}{col 14}{res}{space 2} .7176095{col 26}{space 2} .0108477{col 37}{space 1}   66.15{col 46}{space 3}0.000{col 54}{space 4} .6963483{col 67}{space 3} .7388707
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         webuse stocks, clear
+{txt}(Data from Yahoo! Finance)
+
+{com}.         mgarch ccc (toyota honda = L.toyota L.honda), arch(1) garch(1) nolog vsquish 
+{res}
+{txt}Constant conditional correlation MGARCH model
+
+{txt}Sample: {res}2 - 2015 {col 51}{txt}Number of obs{col 67}={res}{col 69}     2,014
+{txt}Distribution: {res}Gaussian{col 51}{txt}Wald chi2({res}4{txt}){res}{col 67}{txt}={res}{col 70}     4.34
+{txt}Log likelihood = {res} 11602.61{col 51}{txt}Prob > chi2{col 67}={res}{col 73}0.3620
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}toyota       {txt}{c |}
+{space 6}toyota {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  -.03374{col 26}{space 2}  .032697{col 37}{space 1}   -1.03{col 46}{space 3}0.302{col 54}{space 4} -.097825{col 67}{space 3}  .030345
+{txt}{space 7}honda {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} -.005188{col 26}{space 2} .0288975{col 37}{space 1}   -0.18{col 46}{space 3}0.858{col 54}{space 4}-.0618261{col 67}{space 3} .0514502
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0004523{col 26}{space 2} .0003094{col 37}{space 1}    1.46{col 46}{space 3}0.144{col 54}{space 4}-.0001542{col 67}{space 3} .0010587
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARCH_toyota  {txt}{c |}
+{space 8}arch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0661046{col 26}{space 2} .0095018{col 37}{space 1}    6.96{col 46}{space 3}0.000{col 54}{space 4} .0474814{col 67}{space 3} .0847279
+{txt}{space 7}garch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .916793{col 26}{space 2} .0117942{col 37}{space 1}   77.73{col 46}{space 3}0.000{col 54}{space 4} .8936769{col 67}{space 3} .9399092
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 4.50e-06{col 26}{space 2} 1.19e-06{col 37}{space 1}    3.78{col 46}{space 3}0.000{col 54}{space 4} 2.17e-06{col 67}{space 3} 6.83e-06
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}honda        {txt}{c |}
+{space 6}toyota {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0066352{col 26}{space 2} .0343028{col 37}{space 1}   -0.19{col 46}{space 3}0.847{col 54}{space 4}-.0738675{col 67}{space 3} .0605971
+{txt}{space 7}honda {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0332976{col 26}{space 2} .0316213{col 37}{space 1}   -1.05{col 46}{space 3}0.292{col 54}{space 4}-.0952743{col 67}{space 3}  .028679
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0006128{col 26}{space 2} .0003394{col 37}{space 1}    1.81{col 46}{space 3}0.071{col 54}{space 4}-.0000524{col 67}{space 3} .0012781
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARCH_honda   {txt}{c |}
+{space 8}arch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0498417{col 26}{space 2} .0080311{col 37}{space 1}    6.21{col 46}{space 3}0.000{col 54}{space 4} .0341009{col 67}{space 3} .0655824
+{txt}{space 7}garch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9321435{col 26}{space 2} .0111601{col 37}{space 1}   83.52{col 46}{space 3}0.000{col 54}{space 4} .9102701{col 67}{space 3} .9540168
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 5.26e-06{col 26}{space 2} 1.41e-06{col 37}{space 1}    3.73{col 46}{space 3}0.000{col 54}{space 4} 2.50e-06{col 67}{space 3} 8.02e-06
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+ corr(toyota,{c |}
+       honda){c |}{col 14}{res}{space 2} .7176095{col 26}{space 2} .0108477{col 37}{space 1}   66.15{col 46}{space 3}0.000{col 54}{space 4} .6963483{col 67}{space 3} .7388707
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}.         mgarch dcc (toyota honda = L.toyota L.honda), arch(1) garch(1) nolog vsquish
+{res}
+{txt}Dynamic conditional correlation MGARCH model
+
+{txt}Sample: {res}2 - 2015 {col 51}{txt}Number of obs{col 67}={res}{col 69}     2,014
+{txt}Distribution: {res}Gaussian{col 51}{txt}Wald chi2({res}4{txt}){res}{col 67}{txt}={res}{col 70}     4.81
+{txt}Log likelihood = {res} 11624.54{col 51}{txt}Prob > chi2{col 67}={res}{col 73}0.3074
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}toyota       {txt}{c |}
+{space 6}toyota {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0346653{col 26}{space 2} .0319267{col 37}{space 1}   -1.09{col 46}{space 3}0.278{col 54}{space 4}-.0972404{col 67}{space 3} .0279098
+{txt}{space 7}honda {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0069742{col 26}{space 2} .0284872{col 37}{space 1}   -0.24{col 46}{space 3}0.807{col 54}{space 4}-.0628081{col 67}{space 3} .0488597
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  .000373{col 26}{space 2} .0003108{col 37}{space 1}    1.20{col 46}{space 3}0.230{col 54}{space 4}-.0002362{col 67}{space 3} .0009821
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARCH_toyota  {txt}{c |}
+{space 8}arch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0629146{col 26}{space 2} .0093309{col 37}{space 1}    6.74{col 46}{space 3}0.000{col 54}{space 4} .0446263{col 67}{space 3} .0812029
+{txt}{space 7}garch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9208039{col 26}{space 2} .0116908{col 37}{space 1}   78.76{col 46}{space 3}0.000{col 54}{space 4} .8978903{col 67}{space 3} .9437175
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 4.32e-06{col 26}{space 2} 1.16e-06{col 37}{space 1}    3.72{col 46}{space 3}0.000{col 54}{space 4} 2.04e-06{col 67}{space 3} 6.60e-06
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}honda        {txt}{c |}
+{space 6}toyota {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0030378{col 26}{space 2} .0339118{col 37}{space 1}    0.09{col 46}{space 3}0.929{col 54}{space 4}-.0634281{col 67}{space 3} .0695036
+{txt}{space 7}honda {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0367691{col 26}{space 2} .0316091{col 37}{space 1}   -1.16{col 46}{space 3}0.245{col 54}{space 4}-.0987219{col 67}{space 3} .0251836
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0005624{col 26}{space 2}  .000341{col 37}{space 1}    1.65{col 46}{space 3}0.099{col 54}{space 4}-.0001059{col 67}{space 3} .0012307
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARCH_honda   {txt}{c |}
+{space 8}arch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0536899{col 26}{space 2}  .008511{col 37}{space 1}    6.31{col 46}{space 3}0.000{col 54}{space 4} .0370087{col 67}{space 3} .0703711
+{txt}{space 7}garch {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .928433{col 26}{space 2} .0115932{col 37}{space 1}   80.08{col 46}{space 3}0.000{col 54}{space 4} .9057107{col 67}{space 3} .9511554
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 5.43e-06{col 26}{space 2} 1.44e-06{col 37}{space 1}    3.77{col 46}{space 3}0.000{col 54}{space 4} 2.61e-06{col 67}{space 3} 8.26e-06
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+ corr(toyota,{c |}
+       honda){c |}{col 14}{res}{space 2} .7264858{col 26}{space 2} .0132659{col 37}{space 1}   54.76{col 46}{space 3}0.000{col 54}{space 4} .7004852{col 67}{space 3} .7524864
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}Adjustment   {txt}{c |}
+{space 5}lambda1 {c |}{col 14}{res}{space 2} .0528653{col 26}{space 2}  .014217{col 37}{space 1}    3.72{col 46}{space 3}0.000{col 54}{space 4} .0250005{col 67}{space 3} .0807301
+{txt}{space 5}lambda2 {c |}{col 14}{res}{space 2}  .746622{col 26}{space 2} .0746374{col 37}{space 1}   10.00{col 46}{space 3}0.000{col 54}{space 4} .6003354{col 67}{space 3} .8929085
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}.         
+.         
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         // varbasic  -- dummy version of running a var
+.         bcuse usmacro1
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/usmacro1.dta
+{txt}  obs:{res}           207                          
+{txt} vars:{res}            56                          25 Jan 2011 09:13
+{txt} size:{res}        70,587                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:ccode          }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:year           }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:qtr            }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:cpi            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI{p_end}
+{p 0 48}{bind:dcpi           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CPI % CHANGE{p_end}
+{p 0 48}{bind:oilprice       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}PETROLEUM:AVERAGE CRUDE PRICE{p_end}
+{p 0 48}{bind:dgdpdef        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR % CHANGE{p_end}
+{p 0 48}{bind:mbase          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONETARY BASE, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:domcredit      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}DOMESTIC CREDIT{p_end}
+{p 0 48}{bind:money          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}MONEY, SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M1             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M1 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:M2             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}M2 SEASONALLY ADJUSTED{p_end}
+{p 0 48}{bind:ffrate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FEDERAL FUNDS RATE{p_end}
+{p 0 48}{bind:cprate         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}COMMERCIAL PAPER- 3 MONTH{p_end}
+{p 0 48}{bind:tb3rate        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}T-BILL RATE-3 MNTH CONS. MAT.{p_end}
+{p 0 48}{bind:libor3mo       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}3-MONTH US DEP. LONDON OFFER{p_end}
+{p 0 48}{bind:primerate      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}BANK PRIME LOAN RATE{p_end}
+{p 0 48}{bind:tr10yr         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 10 YEAR{p_end}
+{p 0 48}{bind:tr3yr          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVT BOND YIELD: 3 YEAR{p_end}
+{p 0 48}{bind:stockprice     }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}SHARE PRICES{p_end}
+{p 0 48}{bind:NASDAQindex    }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}NASDAQ COMPOSITE{p_end}
+{p 0 48}{bind:S_Pindex       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}S&P INDUSTRIALS{p_end}
+{p 0 48}{bind:wage           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:REER_RULC      }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}REER BASED ON RULC{p_end}
+{p 0 48}{bind:ip             }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}INDUSTRIAL PRODUCTION SA{p_end}
+{p 0 48}{bind:unemp          }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}UNEMPLOYMENT RATE{p_end}
+{p 0 48}{bind:exports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}EXPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:govt           }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GOVERNMENT CONSUMPTION EXPEND. SA{p_end}
+{p 0 48}{bind:grossinv       }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS FIXED CAPITAL FORMATION SA{p_end}
+{p 0 48}{bind:dinventories   }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}CHANGES IN INVENTORIES SA{p_end}
+{p 0 48}{bind:consump        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}HOUSEH.CONS.EXPEND.,INCL.NPISHS SA{p_end}
+{p 0 48}{bind:imports        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}IMPORTS OF GOODS AND SERVICES SA{p_end}
+{p 0 48}{bind:gdp            }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GROSS DOMESTIC PRODUCT SA{p_end}
+{p 0 48}{bind:gdpdefl        }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}GDP DEFLATOR (2005=100){p_end}
+{p 0 48}{bind:yq             }{txt}{bind: float   }{bind:{txt}%tq       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:rexports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgovt          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:rgrossinv      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:rdinventories  }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL CHANGES IN INVENTORIES{p_end}
+{p 0 48}{bind:rconsump       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:rimports       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:rgdp           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:rM1            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M1{p_end}
+{p 0 48}{bind:rM2            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL M2{p_end}
+{p 0 48}{bind:rmbase         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL MONETARY BASE{p_end}
+{p 0 48}{bind:rwage          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{p 0 48}{bind:lrexports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL EXPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgovt         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GOVERNMENT CONSUMPTION EXPEND.{p_end}
+{p 0 48}{bind:lrgrossinv     }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS FIXED CAPITAL FORMATION{p_end}
+{p 0 48}{bind:lrconsump      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL HOUSEH.CONS.EXPEND.,INCL.NPISHS{p_end}
+{p 0 48}{bind:lrimports      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL IMPORTS OF GOODS AND SERVICES{p_end}
+{p 0 48}{bind:lrgdp          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL GROSS DOMESTIC PRODUCT{p_end}
+{p 0 48}{bind:lrmbase        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL MONETARY BASE{p_end}
+{p 0 48}{bind:lrM1           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M1{p_end}
+{p 0 48}{bind:lrM2           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL M2{p_end}
+{p 0 48}{bind:lrwage         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LOG REAL WAGES: HOURLY EARNINGS, MFG{p_end}
+{txt}{hline}
+Sorted by: {res}yq
+{txt}{col 9}time variable:  {res}{col 25}yq, 1959q1 to 2010q3
+{txt}{col 17}delta:  {res}1 quarter
+{txt}
+{com}.         varbasic D.lrgrossinv D.lrconsump D.lrgdp if tin(,2005q4)  // ordering matter when you look at impulse response
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}1959q4 - 2005q4 {txt}{col 49}Number of obs{col 67}= {res}       185
+{txt}Log likelihood =  {res} 1905.169{txt}{col 38}{col 49}AIC{col 67}=  {res} -20.3694
+{txt}FPE{col 16}=  {res} 2.86e-13{txt}{col 49}HQIC{col 67}=  {res}-20.22125
+{txt}Det(Sigma_ml){col 16}=  {res} 2.28e-13{txt}{col 49}SBIC{col 67}=  {res}-20.00385
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}D_lrgrossinv    {col 18}{result}     7{col 26}{space 2} .017503{col 37}{space 1} 0.2030{col 47} 47.12655{col 58} 0.0000
+{col 1}{text}D_lrconsump     {col 18}{result}     7{col 26}{space 2} .006579{col 37}{space 1} 0.0994{col 47} 20.42492{col 58} 0.0023
+{col 1}{text}D_lrgdp         {col 18}{result}     7{col 26}{space 2} .007722{col 37}{space 1} 0.2157{col 47} 50.88832{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D_lrgrossinv {txt}{c |}
+{space 2}lrgrossinv {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1948761{col 26}{space 2} .0977977{col 37}{space 1}    1.99{col 46}{space 3}0.046{col 54}{space 4} .0031962{col 67}{space 3} .3865561
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .1271815{col 26}{space 2} .0981167{col 37}{space 1}    1.30{col 46}{space 3}0.195{col 54}{space 4}-.0651237{col 67}{space 3} .3194868
+{txt}{space 12} {c |}
+{space 3}lrconsump {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .5667047{col 26}{space 2} .2556723{col 37}{space 1}    2.22{col 46}{space 3}0.027{col 54}{space 4} .0655963{col 67}{space 3} 1.067813
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .1771756{col 26}{space 2} .2567412{col 37}{space 1}    0.69{col 46}{space 3}0.490{col 54}{space 4} -.326028{col 67}{space 3} .6803791
+{txt}{space 12} {c |}
+{space 7}lrgdp {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1051089{col 26}{space 2} .2399165{col 37}{space 1}    0.44{col 46}{space 3}0.661{col 54}{space 4}-.3651189{col 67}{space 3} .5753367
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.1210883{col 26}{space 2} .2349968{col 37}{space 1}   -0.52{col 46}{space 3}0.606{col 54}{space 4}-.5816736{col 67}{space 3} .3394969
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0009508{col 26}{space 2} .0027881{col 37}{space 1}   -0.34{col 46}{space 3}0.733{col 54}{space 4}-.0064153{col 67}{space 3} .0045138
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D_lrconsump  {txt}{c |}
+{space 2}lrgrossinv {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .0106853{col 26}{space 2} .0367601{col 37}{space 1}    0.29{col 46}{space 3}0.771{col 54}{space 4}-.0613631{col 67}{space 3} .0827338
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.0448372{col 26}{space 2}   .03688{col 37}{space 1}   -1.22{col 46}{space 3}0.224{col 54}{space 4}-.1171207{col 67}{space 3} .0274463
+{txt}{space 12} {c |}
+{space 3}lrconsump {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.0328597{col 26}{space 2} .0961018{col 37}{space 1}   -0.34{col 46}{space 3}0.732{col 54}{space 4}-.2212158{col 67}{space 3} .1554964
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .1113313{col 26}{space 2} .0965036{col 37}{space 1}    1.15{col 46}{space 3}0.249{col 54}{space 4}-.0778123{col 67}{space 3}  .300475
+{txt}{space 12} {c |}
+{space 7}lrgdp {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1887531{col 26}{space 2} .0901796{col 37}{space 1}    2.09{col 46}{space 3}0.036{col 54}{space 4} .0120043{col 67}{space 3} .3655018
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .1113505{col 26}{space 2} .0883304{col 37}{space 1}    1.26{col 46}{space 3}0.207{col 54}{space 4}-.0617738{col 67}{space 3} .2844748
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0058867{col 26}{space 2}  .001048{col 37}{space 1}    5.62{col 46}{space 3}0.000{col 54}{space 4} .0038326{col 67}{space 3} .0079407
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D_lrgdp      {txt}{c |}
+{space 2}lrgrossinv {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1239506{col 26}{space 2} .0431482{col 37}{space 1}    2.87{col 46}{space 3}0.004{col 54}{space 4} .0393818{col 67}{space 3} .2085195
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}  .043157{col 26}{space 2} .0432889{col 37}{space 1}    1.00{col 46}{space 3}0.319{col 54}{space 4}-.0416878{col 67}{space 3} .1280017
+{txt}{space 12} {c |}
+{space 3}lrconsump {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .4077815{col 26}{space 2} .1128022{col 37}{space 1}    3.62{col 46}{space 3}0.000{col 54}{space 4} .1866933{col 67}{space 3} .6288696
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .2374275{col 26}{space 2} .1132738{col 37}{space 1}    2.10{col 46}{space 3}0.036{col 54}{space 4} .0154149{col 67}{space 3}   .45944
+{txt}{space 12} {c |}
+{space 7}lrgdp {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.2095935{col 26}{space 2} .1058508{col 37}{space 1}   -1.98{col 46}{space 3}0.048{col 54}{space 4}-.4170572{col 67}{space 3}-.0021298
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.1141997{col 26}{space 2} .1036802{col 37}{space 1}   -1.10{col 46}{space 3}0.271{col 54}{space 4}-.3174091{col 67}{space 3} .0890097
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0038423{col 26}{space 2} .0012301{col 37}{space 1}    3.12{col 46}{space 3}0.002{col 54}{space 4} .0014314{col 67}{space 3} .0062533
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. irf graph fevd, lstep(1)
+{res}
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         // var with exorgenous variables
+.         var D.lrgrossinv D.lrconsump D.lrgdp if tin(,2005q4), lags(1/4) exog(D.lrmbase)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}1960q2 - 2005q4 {txt}{col 49}Number of obs{col 67}= {res}       183
+{txt}Log likelihood =  {res} 1907.061{txt}{col 38}{col 49}AIC{col 67}=  {res}-20.38318
+{txt}FPE{col 16}=  {res} 2.82e-13{txt}{col 49}HQIC{col 67}=  {res} -20.0846
+{txt}Det(Sigma_ml){col 16}=  {res} 1.78e-13{txt}{col 49}SBIC{col 67}=  {res}-19.64658
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}D_lrgrossinv    {col 18}{result}    14{col 26}{space 2} .017331{col 37}{space 1} 0.2426{col 47} 58.60225{col 58} 0.0000
+{col 1}{text}D_lrconsump     {col 18}{result}    14{col 26}{space 2} .006487{col 37}{space 1} 0.1640{col 47} 35.90802{col 58} 0.0006
+{col 1}{text}D_lrgdp         {col 18}{result}    14{col 26}{space 2} .007433{col 37}{space 1} 0.2989{col 47} 78.02177{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D_lrgrossinv {txt}{c |}
+{space 2}lrgrossinv {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .2337044{col 26}{space 2} .0970048{col 37}{space 1}    2.41{col 46}{space 3}0.016{col 54}{space 4} .0435785{col 67}{space 3} .4238303
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .0746063{col 26}{space 2} .0997035{col 37}{space 1}    0.75{col 46}{space 3}0.454{col 54}{space 4}-.1208089{col 67}{space 3} .2700215
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.1986633{col 26}{space 2} .1011362{col 37}{space 1}   -1.96{col 46}{space 3}0.049{col 54}{space 4}-.3968866{col 67}{space 3}-.0004401
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2} .1517106{col 26}{space 2} .1004397{col 37}{space 1}    1.51{col 46}{space 3}0.131{col 54}{space 4}-.0451476{col 67}{space 3} .3485688
+{txt}{space 12} {c |}
+{space 3}lrconsump {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .4716336{col 26}{space 2} .2613373{col 37}{space 1}    1.80{col 46}{space 3}0.071{col 54}{space 4} -.040578{col 67}{space 3} .9838452
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .1322693{col 26}{space 2} .2758129{col 37}{space 1}    0.48{col 46}{space 3}0.632{col 54}{space 4} -.408314{col 67}{space 3} .6728527
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .2471462{col 26}{space 2} .2697096{col 37}{space 1}    0.92{col 46}{space 3}0.359{col 54}{space 4} -.281475{col 67}{space 3} .7757673
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2}-.0177416{col 26}{space 2} .2558472{col 37}{space 1}   -0.07{col 46}{space 3}0.945{col 54}{space 4}-.5191928{col 67}{space 3} .4837097
+{txt}{space 12} {c |}
+{space 7}lrgdp {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1354875{col 26}{space 2} .2455182{col 37}{space 1}    0.55{col 46}{space 3}0.581{col 54}{space 4}-.3457193{col 67}{space 3} .6166942
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .0414686{col 26}{space 2}  .254353{col 37}{space 1}    0.16{col 46}{space 3}0.870{col 54}{space 4}-.4570541{col 67}{space 3} .5399914
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .1304675{col 26}{space 2} .2523745{col 37}{space 1}    0.52{col 46}{space 3}0.605{col 54}{space 4}-.3641774{col 67}{space 3} .6251124
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2} -.135457{col 26}{space 2} .2366945{col 37}{space 1}   -0.57{col 46}{space 3}0.567{col 54}{space 4}-.5993698{col 67}{space 3} .3284558
+{txt}{space 12} {c |}
+{space 5}lrmbase {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .0396035{col 26}{space 2} .1209596{col 37}{space 1}    0.33{col 46}{space 3}0.743{col 54}{space 4}-.1974729{col 67}{space 3} .2766799
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0030005{col 26}{space 2}  .003383{col 37}{space 1}   -0.89{col 46}{space 3}0.375{col 54}{space 4}-.0096311{col 67}{space 3} .0036302
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D_lrconsump  {txt}{c |}
+{space 2}lrgrossinv {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .0217782{col 26}{space 2} .0363098{col 37}{space 1}    0.60{col 46}{space 3}0.549{col 54}{space 4}-.0493876{col 67}{space 3}  .092944
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.0523122{col 26}{space 2} .0373199{col 37}{space 1}   -1.40{col 46}{space 3}0.161{col 54}{space 4}-.1254578{col 67}{space 3} .0208335
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.0286832{col 26}{space 2} .0378562{col 37}{space 1}   -0.76{col 46}{space 3}0.449{col 54}{space 4}-.1028799{col 67}{space 3} .0455136
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2} .0750044{col 26}{space 2} .0375955{col 37}{space 1}    2.00{col 46}{space 3}0.046{col 54}{space 4} .0013186{col 67}{space 3} .1486902
+{txt}{space 12} {c |}
+{space 3}lrconsump {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.0891814{col 26}{space 2} .0978209{col 37}{space 1}   -0.91{col 46}{space 3}0.362{col 54}{space 4}-.2809068{col 67}{space 3}  .102544
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}  .131353{col 26}{space 2} .1032392{col 37}{space 1}    1.27{col 46}{space 3}0.203{col 54}{space 4}-.0709922{col 67}{space 3} .3336982
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .1927974{col 26}{space 2} .1009547{col 37}{space 1}    1.91{col 46}{space 3}0.056{col 54}{space 4}-.0050702{col 67}{space 3} .3906651
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2} .0101163{col 26}{space 2} .0957659{col 37}{space 1}    0.11{col 46}{space 3}0.916{col 54}{space 4}-.1775814{col 67}{space 3} .1978139
+{txt}{space 12} {c |}
+{space 7}lrgdp {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .2010624{col 26}{space 2} .0918997{col 37}{space 1}    2.19{col 46}{space 3}0.029{col 54}{space 4} .0209424{col 67}{space 3} .3811825
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .0947972{col 26}{space 2} .0952066{col 37}{space 1}    1.00{col 46}{space 3}0.319{col 54}{space 4}-.0918043{col 67}{space 3} .2813987
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.0969827{col 26}{space 2}  .094466{col 37}{space 1}   -1.03{col 46}{space 3}0.305{col 54}{space 4}-.2821327{col 67}{space 3} .0881673
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2}-.1210815{col 26}{space 2} .0885969{col 37}{space 1}   -1.37{col 46}{space 3}0.172{col 54}{space 4}-.2947282{col 67}{space 3} .0525652
+{txt}{space 12} {c |}
+{space 5}lrmbase {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .1071698{col 26}{space 2} .0452763{col 37}{space 1}    2.37{col 46}{space 3}0.018{col 54}{space 4}   .01843{col 67}{space 3} .1959097
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0051542{col 26}{space 2} .0012663{col 37}{space 1}    4.07{col 46}{space 3}0.000{col 54}{space 4} .0026723{col 67}{space 3} .0076361
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D_lrgdp      {txt}{c |}
+{space 2}lrgrossinv {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1547249{col 26}{space 2} .0416013{col 37}{space 1}    3.72{col 46}{space 3}0.000{col 54}{space 4} .0731878{col 67}{space 3} .2362619
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .0488007{col 26}{space 2} .0427587{col 37}{space 1}    1.14{col 46}{space 3}0.254{col 54}{space 4}-.0350048{col 67}{space 3} .1326061
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.1157621{col 26}{space 2} .0433731{col 37}{space 1}   -2.67{col 46}{space 3}0.008{col 54}{space 4}-.2007718{col 67}{space 3}-.0307524
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2} .0321552{col 26}{space 2} .0430744{col 37}{space 1}    0.75{col 46}{space 3}0.455{col 54}{space 4} -.052269{col 67}{space 3} .1165795
+{txt}{space 12} {c |}
+{space 3}lrconsump {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .3234787{col 26}{space 2} .1120767{col 37}{space 1}    2.89{col 46}{space 3}0.004{col 54}{space 4} .1038125{col 67}{space 3} .5431449
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .1546979{col 26}{space 2} .1182847{col 37}{space 1}    1.31{col 46}{space 3}0.191{col 54}{space 4}-.0771358{col 67}{space 3} .3865315
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .1368512{col 26}{space 2} .1156672{col 37}{space 1}    1.18{col 46}{space 3}0.237{col 54}{space 4}-.0898524{col 67}{space 3} .3635548
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2} .1352606{col 26}{space 2} .1097222{col 37}{space 1}    1.23{col 46}{space 3}0.218{col 54}{space 4}-.0797909{col 67}{space 3} .3503121
+{txt}{space 12} {c |}
+{space 7}lrgdp {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.1872008{col 26}{space 2} .1052925{col 37}{space 1}   -1.78{col 46}{space 3}0.075{col 54}{space 4}-.3935703{col 67}{space 3} .0191687
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.0301044{col 26}{space 2} .1090814{col 37}{space 1}   -0.28{col 46}{space 3}0.783{col 54}{space 4}   -.2439{col 67}{space 3} .1836912
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.0461081{col 26}{space 2} .1082329{col 37}{space 1}   -0.43{col 46}{space 3}0.670{col 54}{space 4}-.2582407{col 67}{space 3} .1660244
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2}-.0820566{col 26}{space 2} .1015084{col 37}{space 1}   -0.81{col 46}{space 3}0.419{col 54}{space 4}-.2810095{col 67}{space 3} .1168962
+{txt}{space 12} {c |}
+{space 5}lrmbase {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .0979823{col 26}{space 2} .0518745{col 37}{space 1}    1.89{col 46}{space 3}0.059{col 54}{space 4}-.0036898{col 67}{space 3} .1996545
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0027223{col 26}{space 2} .0014508{col 37}{space 1}    1.88{col 46}{space 3}0.061{col 54}{space 4}-.0001213{col 67}{space 3} .0055659
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}.         
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         testparm D.lrmbase
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}[D_lrgrossinv]D.lrmbase = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} [D_lrconsump]D.lrmbase = 0{p_end}
+{p 0 7}{space 1}{text:( 3)}{space 1} [D_lrgdp]D.lrmbase = 0{p_end}
+
+{txt}{col 12}chi2(  3) ={res}    7.95
+{txt}{col 10}Prob > chi2 =  {res}  0.0471
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         vargranger
+
+{txt}{col 4}Granger causality Wald tests
+{res}{col 3}{text}{c TLC}{hline 19}{hline 19}{c TT}{hline 9}{hline 6}{hline 12}{c TRC}
+{col 3}{text}{c |}          Equation{col 23}          Excluded{col 42}{c |}   chi2 {col 52}   df{col 58}Prob > chi2{col 70}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}      D_lrgrossinv{col 23}       D.lrconsump{col 42}{c |}{result}{space 1} 4.2531{col 52}    4{col 58}{space 2} 0.373{col 70}{text}{c |}
+{res}{col 3}{text}{c |}      D_lrgrossinv{col 23}           D.lrgdp{col 42}{c |}{result}{space 1} 1.0999{col 52}    4{col 58}{space 2} 0.894{col 70}{text}{c |}
+{res}{col 3}{text}{c |}      D_lrgrossinv{col 23}               ALL{col 42}{c |}{result}{space 1}  10.34{col 52}    8{col 58}{space 2} 0.242{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}       D_lrconsump{col 23}      D.lrgrossinv{col 42}{c |}{result}{space 1} 5.8806{col 52}    4{col 58}{space 2} 0.208{col 70}{text}{c |}
+{res}{col 3}{text}{c |}       D_lrconsump{col 23}           D.lrgdp{col 42}{c |}{result}{space 1} 8.1826{col 52}    4{col 58}{space 2} 0.085{col 70}{text}{c |}
+{res}{col 3}{text}{c |}       D_lrconsump{col 23}               ALL{col 42}{c |}{result}{space 1} 12.647{col 52}    8{col 58}{space 2} 0.125{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           D_lrgdp{col 23}      D.lrgrossinv{col 42}{c |}{result}{space 1} 22.204{col 52}    4{col 58}{space 2} 0.000{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           D_lrgdp{col 23}       D.lrconsump{col 42}{c |}{result}{space 1} 11.349{col 52}    4{col 58}{space 2} 0.023{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           D_lrgdp{col 23}               ALL{col 42}{c |}{result}{space 1}  42.98{col 52}    8{col 58}{space 2} 0.000{col 70}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 19}{hline 19}{c BT}{hline 9}{hline 6}{hline 12}{c BRC}
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         varsoc
+
+{txt}{col 4}Selection-order criteria
+{col 4}Sample:  {res}1960q2 - 2005q4 {txt}{col 49}Number of obs {col 68}= {res}      183
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{res}{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1} 1851.22{col 18}{col 27}{col 32}{col 39} 3.5e-13{col 48}{space 1}-20.1663{col 58}{space 1}-20.1237{col 68}{space 1}-20.0611{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1} 1887.29{col 18}{space 1} 72.138{col 26}*{col 27}   9{col 32} 0.000{col 39} 2.6e-13{col 47}*{col 48}{space 1}-20.4622{col 57}*{col 58}{space 1}-20.3555{col 67}*{col 68}{space 1}-20.1991{col 77}*{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1} 1894.14{col 18}{space 1} 13.716{col 27}   9{col 32} 0.133{col 39} 2.7e-13{col 48}{space 1}-20.4387{col 58}{space 1}-20.2681{col 68}{space 1}-20.0178{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1} 1902.58{col 18}{space 1} 16.866{col 27}   9{col 32} 0.051{col 39} 2.7e-13{col 48}{space 1}-20.4325{col 58}{space 1}-20.1979{col 68}{space 1}-19.8538{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1} 1907.06{col 18}{space 1} 8.9665{col 27}   9{col 32} 0.440{col 39} 2.8e-13{col 48}{space 1}-20.3832{col 58}{space 1}-20.0846{col 68}{space 1}-19.6466{col 79}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{res}{txt}{space 3}Endogenous:  D.lrgrossinv D.lrconsump D.lrgdp
+{space 3} Exogenous:  D.lrmbase  _cons
+
+{com}.         varstable
+{res}
+{txt}{col 4}Eigenvalue stability condition
+{col 3}{text}{c TLC}{hline 26}{c TT}{hline 13}{c TRC}
+{col 3}{text}{c |}        Eigenvalue       {col 30}{c |}   Modulus  {col 44}{c |}
+{res}{col 3}{text}{c LT}{hline 26}{c +}{hline 13}{c RT}
+{col 3}{text}{c |}{result}{space 1}  .6916791{col 30}{text}{c |}{result}{space 2} .691679{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1} -.5793137{col 16}+  .1840599{it:i}{col 30}{text}{c |}{result}{space 2} .607851{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1} -.5793137{col 16}-  .1840599{it:i}{col 30}{text}{c |}{result}{space 2} .607851{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1} -.3792302{col 16}+  .4714717{it:i}{col 30}{text}{c |}{result}{space 2} .605063{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1} -.3792302{col 16}-  .4714717{it:i}{col 30}{text}{c |}{result}{space 2} .605063{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1}  .1193592{col 16}+  .5921967{it:i}{col 30}{text}{c |}{result}{space 2} .604106{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1}  .1193592{col 16}-  .5921967{it:i}{col 30}{text}{c |}{result}{space 2} .604106{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1}  .5317127{col 16}+  .2672997{it:i}{col 30}{text}{c |}{result}{space 2}  .59512{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1}  .5317127{col 16}-  .2672997{it:i}{col 30}{text}{c |}{result}{space 2}  .59512{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1} -.4579249{col 30}{text}{c |}{result}{space 2} .457925{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1}  .1692559{col 16}+  .3870966{it:i}{col 30}{text}{c |}{result}{space 2} .422482{col 44}{text}{c |}
+{res}{col 3}{text}{c |}{result}{space 1}  .1692559{col 16}-  .3870966{it:i}{col 30}{text}{c |}{result}{space 2} .422482{col 44}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 26}{c BT}{hline 13}{c BRC}
+{res}{txt}{col 4}All the eigenvalues lie inside the unit circle.
+{col 4}VAR satisfies stability condition.
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         //As the estimated VAR appears stable, we can produce IRFs and FEVDs in tabular or graphical form:
+.     irf create icy, step(8) set(res1)
+{txt}(file res1.irf created)
+(file res1.irf now active)
+{res}{txt}(file res1.irf updated)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         irf table oirf coirf, impulse(D.lrgrossinv) response(D.lrconsump) noci stderr or
+{err}option {bf:or} not allowed
+{txt}{search r(198), local:r(198);}
+
+end of do-file
+
+{search r(198), local:r(198);}
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         irf graph oirf coirf, impulse(D.lrgrossinv) response(D.lrconsump) lstep(1) scheme(s2mono)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\CHuang\AppData\Local\Temp\1\STD3194_000000.tmp"
+{txt}
+{com}.         irf table oirf coirf, impulse(D.lrgrossinv) response(D.lrconsump) noci stderr 
+
+{txt}{col 21}Results from icy
+
+{c TLC}{hline 8}{c TT}{hline 11}{c -}{hline 11}{c TT}{hline 11}{c -}{hline 11}{c TRC}
+{c |}{col 10}{c |}{col 15}(1){col 27}(1){col 34}{c |}{col 39}(1){col 51}(1){col 58}{c |}
+{c |}{col 4}step{col 10}{c |}{col 14}oirf{col 26}S.E.{col 34}{c |}{col 37}coirf{col 50}S.E.{col 58}{c |}
+{c LT}{hline 8}{c +}{hline 11}{c -}{hline 11}{c +}{hline 11}{c -}{hline 11}{c RT}
+{c |}{col 2}0     {col 10}{c |}{res}{col 12}.003334 {col 24}.000427 {txt}{col 34}{c |}{res}{col 36}.003334 {col 48}.000427 {txt}{col 58}{c |}
+{c |}{col 2}1     {col 10}{c |}{res}{col 12}.000981 {col 24}.000465 {txt}{col 34}{c |}{res}{col 36}.004315 {col 48}.000648 {txt}{col 58}{c |}
+{c |}{col 2}2     {col 10}{c |}{res}{col 12}.000607 {col 24}.000468 {txt}{col 34}{c |}{res}{col 36}.004922 {col 48}.000882 {txt}{col 58}{c |}
+{c |}{col 2}3     {col 10}{c |}{res}{col 12}.000223 {col 24}.000471 {txt}{col 34}{c |}{res}{col 36}.005145 {col 48}.001101 {txt}{col 58}{c |}
+{c |}{col 2}4     {col 10}{c |}{res}{col 12}.000338 {col 24}.000431 {txt}{col 34}{c |}{res}{col 36}.005483 {col 48}.001258 {txt}{col 58}{c |}
+{c |}{col 2}5     {col 10}{c |}{res}{col 12}-.000034{col 24}.000289 {txt}{col 34}{c |}{res}{col 36}.005449 {col 48}.001428 {txt}{col 58}{c |}
+{c |}{col 2}6     {col 10}{c |}{res}{col 12}.000209 {col 24}.000244 {txt}{col 34}{c |}{res}{col 36}.005658 {col 48}.001571 {txt}{col 58}{c |}
+{c |}{col 2}7     {col 10}{c |}{res}{col 12}.000115 {col 24}.000161 {txt}{col 34}{c |}{res}{col 36}.005773 {col 48}.001674 {txt}{col 58}{c |}
+{c |}{col 2}8     {col 10}{c |}{res}{col 12}.000092 {col 24}.00012  {txt}{col 34}{c |}{res}{col 36}.005865 {col 48}.001757 {txt}{col 58}{c |}
+{c BLC}{hline 8}{c BT}{hline 11}{c -}{hline 11}{c BT}{hline 11}{c -}{hline 11}{c BRC}
+{p 0 4 4}(1) irfname = icy, impulse = D.lrgrossinv, and response = D.lrconsump{p_end}
+
+{com}. 
+{txt}end of do-file
+
+{com}. exit, clear

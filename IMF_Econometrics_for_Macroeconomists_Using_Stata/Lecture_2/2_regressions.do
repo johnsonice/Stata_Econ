@@ -101,21 +101,59 @@ log using 2_basicdo, replace
 	list i.group
 	summarize i.group
 	regress y i.group
+	regress y i.group c.age i.group#c.age
+	regress y i.group##c.age                // this one is the same as the one above 
+	//This also applies to the definition of interactions of continuous variables, 
+	//and powers of continuous variables, such as c.age#c.age.
 	// you can also use b. to indicate base level 
 	
 	
+	// use margins 
+	webuse margex
+    regress y i.group  // for instance you want to get means for each group
+	margins i.group    // get the mean for each group
+	
+	*********** margins **************************
+	// get marginal effects for specific variable 
+	regress y i.group c.age c.age#c.age
+	margins i.group, at(age=(30 40 50 ))  // marginal effect of group at a specific age
+	marginsplot, legend(rows(1)) ylab(,angle(0)) saving(margins4a, replace)   // graph marginal effects 
+	
+	margins, dydx(_all) // by default, when there is nonlinear relationship, it calculate average marginal effects 
+	margins, eyex(age) at(age=(20(10)60))  // electicity
+	marginsplot, ylab(,angle(0)) ti("Elasticity of y vs age") yline(0) saving(margins6a, replace)
+	// when one of the thing is already in log, you can use dyex or eydx 
+	
+	// some example 
+	margins, eyex(age) over(group treatment)
+	marginsplot, ylab(,angle(0)) saving(margins7a, replace)
+	// further examples 
+	bcuse macro14, nodesc clear
+	reg altsales frprime L2.fsdebt L.(gdprdot ur) c.frprime#c.L.ur
+	margins, dydx(frprime L.ur)
+	margins, dydx(frprime) at(L.ur=(0.04(0.01)0.1))
 	
 	
+	// IV
+	bcuse macro14, clear nodesc
+	// if assuming iid
+	local eq1 	ivreg2 lcsz l.lcsz cnst2 ag1 ag2 ag3 l.laaz lydz ///
+	(rsa = t l.lydz l.rsa l.(lodhm limz lpimz lynlz pcpd rb lyz lvz ur) ljhgsz lcogsz ltrgsz l2.rs) if tin(1959q1,2007q3)
+	di "`eq1'"
+	`eq1'
+	
+	//Tests of overidentifying restrictions  --- Sargan–Hansen test
+	local eq2 `eq1' , robust bw(auto) gmm2s orthog(l.lydz)
+	di "`eq2'"
+	`eq2'
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	// for following topic, refer back to the presentation
+	// The weak instruments problem 
+	// Testing for i.i.d. errors in IV 
 	
 log close
 translate 0_basicdo.smcl dofilename.pdf, replace
+
+
 
